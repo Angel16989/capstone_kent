@@ -1,0 +1,100 @@
+/* --- L9 Fitness Login Styles --- */
+:root {
+  --l9-primary: #6C5CE7;      /* energetic purple */
+  --l9-accent:  #00E5A8;      /* mint accent */
+  --l9-dark:    #0f1020;
+}
+
+.l9-auth-wrap {
+  min-height: 100vh;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(108,92,231,.25), transparent 60%),
+              radial-gradient(1000px 500px at 90% 90%, rgba(0,229,168,.18), transparent 60%),
+              linear-gradient(135deg, #0b0c1a 0%, #151734 50%, #0b0c1a 100%);
+  display: grid;
+  place-items: center;
+  padding: 32px 16px;
+}
+
+.l9-card {
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  overflow: hidden;
+  max-width: 980px;
+  width: 100%;
+  color: #e9ecff;
+}
+
+.l9-left {
+  background:
+    radial-gradient(800px 300px at -10% -10%, rgba(0,229,168,.25), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+  padding: 40px;
+}
+
+.l9-badge {
+  display: inline-flex; gap: 8px; align-items: center;
+  background: rgba(0,229,168,.18);
+  border: 1px solid rgba(0,229,168,.35);
+  color: #ccffe9;
+  padding: 6px 10px; border-radius: 999px; font-size: 12px;
+}
+
+.l9-title { font-weight: 800; line-height: 1.1; letter-spacing: -.5px; }
+.l9-sub { color: #cdd3ff; opacity: .9; }
+
+.l9-right { padding: 40px; background: rgba(9,10,25,.45); }
+
+.form-control, .form-select {
+  background: rgba(255,255,255,.08) !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+  color: #f3f5ff !important;
+}
+
+.form-control:focus {
+  border-color: var(--l9-accent) !important;
+  box-shadow: 0 0 0 .25rem rgba(0,229,168,.15) !important;
+}
+
+.form-label { color: #dfe3ff; }
+
+.btn-l9 {
+  background: linear-gradient(90deg, var(--l9-primary), #5dd8ff);
+  border: none; color: white; font-weight: 700;
+  box-shadow: 0 10px 24px rgba(108,92,231,.35);
+}
+
+.btn-l9:hover { transform: translateY(-1px); filter: brightness(1.05); }
+.btn-l9:active { transform: translateY(0); }
+
+.link-muted { color: #bfc5ff; }
+.link-muted:hover { color: #fff; }
+
+.input-group-text {
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.18);
+  color: #dfe3ff;
+  cursor: pointer;
+}
+
+.brand-mark {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: conic-gradient(from 120deg, var(--l9-accent), var(--l9-primary));
+  box-shadow: 0 8px 24px rgba(0,229,168,.25);
+}
+
+.l9-cta-points li { margin-bottom: .35rem; }
+
+.l9-kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.18);
+  padding: 2px 6px; border-radius: 6px; font-size: 12px; color: #e7ebff;
+}
+
+@media (max-width: 991px) {
+  .l9-left { padding-bottom: 16px; }
+  .l9-right { padding-top: 16px; }
+}

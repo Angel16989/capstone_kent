@@ -1,24 +1,168 @@
-<?php require_once __DIR__ . '/../config/config.php'; require_once __DIR__ . '/../app/helpers/validator.php'; require_once __DIR__ . '/../app/helpers/csrf.php'; verify_csrf(); ?>
 <?php
-$error='';
-if($_SERVER['REQUEST_METHOD']==='POST'){
-  $email=trim($_POST['email']??''); $pass=$_POST['password']??'';
-  if(!email_valid($email)||!not_empty($pass)){ $error='Enter a valid email and password.'; }
-  else {
-    $stmt=$pdo->prepare('SELECT * FROM users WHERE email=? LIMIT 1'); $stmt->execute([$email]); $u=$stmt->fetch();
-    if($u && password_verify($pass,$u['password_hash'])){ require_once __DIR__.'/../app/helpers/auth.php'; login_user($u); header('Location: dashboard.php'); exit; }
-    $error='Invalid credentials.';
-  }
+// login.php
+declare(strict_types=1);
+
+require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../app/helpers/validator.php';
+require_once __DIR__ . '/../app/helpers/csrf.php';
+
+$pageTitle = "Login";
+$pageCSS   = "/../../../public/assets/css/login.css"; // this will be loaded in header.php
+
+$error = '';
+$email = '';
+
+// Handle POST (verify CSRF only for POST)xx`1
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    try {
+        verify_csrf();
+
+        $email = trim($_POST['email'] ?? '');
+        $pass  = $_POST['password'] ?? '';
+
+        if (!email_valid($email) || !not_empty($pass)) {
+            $error = 'Enter a valid email and password.';
+        } else {
+            $stmt = $pdo->prepare('SELECT id, email, password_hash, full_name FROM users WHERE email = ? LIMIT 1');
+            $stmt->execute([$email]);
+            $u = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($u && password_verify($pass, $u['password_hash'])) {
+                require_once __DIR__ . '/../app/helpers/auth.php';
+                login_user($u);
+                header('Location: /dashboard.php');
+                exit;
+            }
+            $error = 'Invalid credentials.';
+        }
+    } catch (Throwable $e) {
+        $error = 'Something went wrong. Please try again.';
+        // error_log($e); // Uncomment for debugging
+    }
 }
+
+include __DIR__ . '/../app/views/layouts/header.php';
 ?>
-<?php include __DIR__ . '/../app/views/layouts/header.php'; ?>
-<div class="container py-5" style="max-width:520px;">
-  <h1 class="h3 mb-3">Login</h1>
-  <?php if($error): ?><div class="alert alert-danger"><?php echo htmlspecialchars($error); ?></div><?php endif; ?>
-  <form method="post"><?php echo csrf_field(); ?>
-    <div class="mb-3"><label class="form-label">Email</label><input class="form-control" type="email" name="email" required></div>
-    <div class="mb-3"><label class="form-label">Password</label><input class="form-control" type="password" name="password" required></div>
-    <button class="btn btn-primary">Login</button> <a class="btn btn-link" href="register.php">Create account</a>
-  </form>
+
+<div class="l9-auth-wrap">
+  <div class="l9-card row g-0">
+    <!-- Left / Promo -->
+    <div class="col-lg-6 l9-left">
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <div class="brand-mark"></div>
+        <strong>L9 Fitness Gym</strong>
+      </div>
+
+      <span class="l9-badge mb-3">
+        <svg width="16" height="16" fill="currentColor" class="bi bi-bolt-fill"><path d="M5.5 0h6L7.5 6h4L3.5 16l2-7H3L5.5 0z"/></svg>
+        No lock-in • 24/7 access
+      </span>
+
+      <h1 class="display-6 l9-title mb-2">Stronger every day.</h1>
+      <p class="l9-sub mb-4">Log in to book classes, track workouts, and manage your membership.</p>
+
+      <ul class="l9-cta-points list-unstyled small text-light">
+        <li>• Smart class waitlists</li>
+        <li>• Personal bests & progress charts</li>
+        <li>• Member-only offers & events</li>
+      </ul>
+      <div class="mt-4 small text-secondary">
+        Tip: Press <span class="l9-kbd">/</span> to focus email, <span class="l9-kbd">Enter</span> to submit.
+      </div>
+    </div>
+
+    <!-- Right / Form -->
+    <div class="col-lg-6 l9-right">
+      <h2 class="h4 fw-bold mb-3">Member Login</h2>
+
+      <?php if (!empty($error)): ?>
+        <div class="alert alert-danger py-2"><?= htmlspecialchars($error) ?></div>
+      <?php endif; ?>
+
+      <form method="post" class="needs-validation" novalidate>
+        <?= csrf_field(); ?>
+
+        <div class="mb-3">
+          <label class="form-label" for="email">Email address</label>
+          <input id="email" class="form-control form-control-lg" type="email" name="email"
+                 value="<?= htmlspecialchars($email) ?>" autocomplete="username" required>
+          <div class="invalid-feedback">Please enter a valid email.</div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="password">Password</label>
+          <div class="input-group input-group-lg">
+            <input id="password" class="form-control" type="password" name="password"
+                   autocomplete="current-password" required>
+            <span class="input-group-text" id="togglePass" title="Show/Hide password">
+              <i class="bi bi-eye" aria-hidden="true"></i>
+            </span>
+            <div class="invalid-feedback">Password is required.</div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="remember">
+            <label class="form-check-label" for="remember">Remember me</label>
+          </div>
+          <a href="forgot-password.php" class="link-muted">Forgot password?</a>
+        </div>
+
+        <button class="btn btn-l9 btn-lg w-100 mb-3" id="loginBtn">
+          <span class="btn-text">Login</span>
+          <span class="spinner-border spinner-border-sm ms-2 d-none" role="status" aria-hidden="true"></span>
+        </button>
+
+        <p class="text-center text-secondary mb-0">
+          New to L9? <a class="link-light text-decoration-underline" href="register.php">Create an account</a>
+        </p>
+      </form>
+
+      <hr class="border-secondary my-4 opacity-25">
+      <div class="small text-secondary">
+        By continuing, you agree to our <a href="terms.php" class="link-muted">Terms</a> and
+        <a href="privacy.php" class="link-muted">Privacy Policy</a>.
+      </div>
+    </div>
+  </div>
 </div>
+
+<script>
+  // Bootstrap validation + loading state
+  (function () {
+    const form = document.querySelector('.needs-validation');
+    form.addEventListener('submit', function (e) {
+      if (!form.checkValidity()) {
+        e.preventDefault();
+        e.stopPropagation();
+      } else {
+        const btn = document.getElementById('loginBtn');
+        btn.disabled = true;
+        btn.querySelector('.btn-text').textContent = 'Signing in...';
+        btn.querySelector('.spinner-border').classList.remove('d-none');
+      }
+      form.classList.add('was-validated');
+    }, false);
+  })();
+
+  // Password toggle
+  const toggle = document.getElementById('togglePass');
+  const pwd = document.getElementById('password');
+  toggle?.addEventListener('click', () => {
+    const isPwd = pwd.type === 'password';
+    pwd.type = isPwd ? 'text' : 'password';
+    toggle.innerHTML = isPwd ? '<i class="bi bi-eye-slash" aria-hidden="true"></i>' :
+                               '<i class="bi bi-eye" aria-hidden="true"></i>';
+  });
+
+  // Keyboard shortcut: "/" focuses email
+  window.addEventListener('keydown', (e) => {
+    if (e.key === '/' && !e.target.closest('input, textarea')) {
+      e.preventDefault();
+      document.getElementById('email').focus();
+    }
+  });
+</script>
+
 <?php include __DIR__ . '/../app/views/layouts/footer.php'; ?>
