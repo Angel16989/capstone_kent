@@ -129,7 +129,7 @@ include __DIR__ . '/../app/views/layouts/header.php';
 </div>
 
 <script>
-  // Bootstrap validation + loading state
+  // Bootstrap validation + loading state ..
   (function () {
     const form = document.querySelector('.needs-validation');
     form.addEventListener('submit', function (e) {
