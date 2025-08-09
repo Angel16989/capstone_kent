@@ -1,0 +1,2 @@
+:root { --hero-grad: linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.35)); }
+.card-img-top { height: 180px; object-fit: contain; background: #f7f7f9; }
