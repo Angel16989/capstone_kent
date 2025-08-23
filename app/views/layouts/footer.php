@@ -1,5 +1,5 @@
 </main>
-<footer class="bg-dark text-light py-4 mt-5">
+<footer class="bg-dark text-light py-4 ">
   <div class="container d-flex justify-content-between">
     <div>&copy; <?php echo date('Y'); ?> L9 Fitness Gym</div>
     <div><a class="link-light" href="<?php echo BASE_URL; ?>/admin.php">Admin</a></div>

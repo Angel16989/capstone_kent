@@ -5,21 +5,32 @@ error_reporting(E_ALL);
 // go up 3 dirs to reach project root from /app/views/layouts/
 require_once dirname(__DIR__, 3) . '/config/config.php';
 ?>
+<?php if (!empty($pageCSS)): ?>
+  <link rel="stylesheet" href="<?= htmlspecialchars($pageCSS) ?>">
+<?php endif; ?>
+<!doctype html>
+<html lang="en">
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title><?php echo APP_NAME; ?></title>
+
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-  <!-- Use BASE_URL so paths work on every page -->
-  <link href="<?php echo BASE_URL; ?>/assets/css/main.css" rel="stylesheet">
-  <!-- Optional page-specific CSS (you mentioned login.css) -->
-  <?php if (basename($_SERVER['PHP_SELF']) === 'login.php'): ?>
-    <link href="<?php echo BASE_URL; ?>/assets/css/login.css" rel="stylesheet">
+
+  <!-- Global CSS -->
+  <link href="<?php echo BASE_URL; ?>assets/css/main.css" rel="stylesheet">
+
+  <!-- Optional page-specific CSS -->
+  <?php if (!empty($pageCSS)): ?>
+    <link rel="stylesheet" href="<?= htmlspecialchars($pageCSS) ?>">
   <?php endif; ?>
 </head>
+
 <body class="d-flex flex-column min-vh-100">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">

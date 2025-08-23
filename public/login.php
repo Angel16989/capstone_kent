@@ -6,8 +6,8 @@ require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../app/helpers/validator.php';
 require_once __DIR__ . '/../app/helpers/csrf.php';
 
-$pageTitle = "Login";
-$pageCSS   = "/../../../public/assets/css/login.css"; // this will be loaded in header.php
+$pageTitle = "Register";
+$pageCSS   = "/CAPSTONE/public/assets/css/login.css"; // fixed path
 
 $error = '';
 $email = '';
