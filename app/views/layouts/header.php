@@ -15,7 +15,11 @@ require_once dirname(__DIR__, 3) . '/config/config.php';
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
   <!-- Use BASE_URL so paths work on every page -->
   <link href="<?php echo BASE_URL; ?>/assets/css/main.css" rel="stylesheet">
-  <!-- Optional page-specific CSS (you mentioned login.css) -->
+  <!-- Page-specific CSS -->
+  <?php if (isset($pageCSS) && $pageCSS): ?>
+    <link href="<?php echo BASE_URL . $pageCSS; ?>" rel="stylesheet">
+  <?php endif; ?>
+  <!-- Optional page-specific CSS for login -->
   <?php if (basename($_SERVER['PHP_SELF']) === 'login.php'): ?>
     <link href="<?php echo BASE_URL; ?>/assets/css/login.css" rel="stylesheet">
   <?php endif; ?>

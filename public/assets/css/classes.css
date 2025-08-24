@@ -1,0 +1,469 @@
+/* --- L9 Fitness Classes Styles --- */
+:root {
+  --l9-primary: #6C5CE7;
+  --l9-accent: #00E5A8;
+  --l9-dark: #0f1020;
+  --l9-card-bg: rgba(255,255,255,.08);
+  --l9-border: rgba(255,255,255,.12);
+  
+  /* Class type colors */
+  --strength-color: #ff6b6b;
+  --cardio-color: #4ecdc4;
+  --yoga-color: #95e1d3;
+  --dance-color: #f38ba8;
+}
+
+body {
+  background: linear-gradient(135deg, #0b0c1a 0%, #151734 50%, #0b0c1a 100%);
+  color: #e9ecff;
+  min-height: 100vh;
+}
+
+.classes-hero {
+  background: 
+    radial-gradient(1200px 600px at 30% 0%, rgba(108,92,231,.12), transparent 60%),
+    radial-gradient(800px 400px at 70% 100%, rgba(0,229,168,.08), transparent 60%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-badge {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  background: rgba(0,229,168,.15);
+  border: 1px solid rgba(0,229,168,.3);
+  color: #ccffe9;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, var(--l9-primary), var(--l9-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Class Filters */
+.class-filters {
+  background: var(--l9-card-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--l9-border);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.filter-btn {
+  background: transparent !important;
+  border: 1px solid var(--l9-border) !important;
+  color: #cdd3ff !important;
+  padding: 12px 24px !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  margin: 0 8px !important;
+  transition: all 0.3s ease !important;
+  text-decoration: none !important;
+}
+
+.filter-btn:hover {
+  border-color: var(--l9-accent) !important;
+  color: var(--l9-accent) !important;
+  transform: translateY(-2px);
+}
+
+.filter-btn.active {
+  background: linear-gradient(90deg, var(--l9-primary), var(--l9-accent)) !important;
+  border-color: transparent !important;
+  color: white !important;
+  box-shadow: 0 8px 24px rgba(0,229,168,.3);
+}
+
+/* Class Cards */
+.class-card {
+  background: var(--l9-card-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--l9-border);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  height: 100%;
+  position: relative;
+}
+
+.class-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,.25);
+}
+
+.class-card.strength-class {
+  border-color: rgba(255,107,107,.3);
+}
+
+.class-card.cardio-class {
+  border-color: rgba(78,205,196,.3);
+}
+
+.class-card.yoga-class {
+  border-color: rgba(149,225,211,.3);
+}
+
+.class-card.dance-class {
+  border-color: rgba(243,139,168,.3);
+}
+
+.class-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px 0;
+}
+
+.class-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.strength-class .class-type-badge {
+  background: rgba(255,107,107,.15);
+  color: var(--strength-color);
+  border: 1px solid rgba(255,107,107,.3);
+}
+
+.cardio-class .class-type-badge {
+  background: rgba(78,205,196,.15);
+  color: var(--cardio-color);
+  border: 1px solid rgba(78,205,196,.3);
+}
+
+.yoga-class .class-type-badge {
+  background: rgba(149,225,211,.15);
+  color: var(--yoga-color);
+  border: 1px solid rgba(149,225,211,.3);
+}
+
+.dance-class .class-type-badge {
+  background: rgba(243,139,168,.15);
+  color: var(--dance-color);
+  border: 1px solid rgba(243,139,168,.3);
+}
+
+.urgency-badge {
+  background: linear-gradient(90deg, #ff6b6b, #ff8787);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.class-body {
+  padding: 20px;
+}
+
+.class-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 20px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.strength-class .class-icon {
+  background: linear-gradient(135deg, var(--strength-color), #ff8787);
+}
+
+.cardio-class .class-icon {
+  background: linear-gradient(135deg, var(--cardio-color), #81e6d9);
+}
+
+.yoga-class .class-icon {
+  background: linear-gradient(135deg, var(--yoga-color), #c6f7ed);
+  color: #2d3748;
+}
+
+.dance-class .class-icon {
+  background: linear-gradient(135deg, var(--dance-color), #f687b3);
+}
+
+.class-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #f3f5ff;
+  text-align: center;
+}
+
+.class-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: #bfc5ff;
+}
+
+.meta-item i {
+  font-size: 0.9rem;
+  color: var(--l9-accent);
+  width: 14px;
+}
+
+.class-description {
+  color: #cdd3ff;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.trainer-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 12px;
+  background: rgba(255,255,255,.05);
+  border-radius: 12px;
+}
+
+.trainer-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--l9-primary), var(--l9-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.trainer-name {
+  font-weight: 600;
+  color: #f3f5ff;
+  font-size: 0.9rem;
+}
+
+.trainer-title {
+  font-size: 0.8rem;
+  color: #a8b3ff;
+}
+
+.class-capacity {
+  margin-bottom: 20px;
+}
+
+.capacity-bar {
+  height: 6px;
+  background: rgba(255,255,255,.1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.capacity-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--l9-accent), #00b894);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.capacity-text {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+}
+
+.spots-left {
+  color: var(--l9-accent);
+  font-weight: 600;
+}
+
+.total-capacity {
+  color: #8892b0;
+}
+
+.btn-book-class {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(90deg, var(--l9-primary), #5dd8ff);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-book-class:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(108,92,231,.4);
+}
+
+.btn-book-class.booked {
+  background: linear-gradient(90deg, #00b894, var(--l9-accent));
+}
+
+/* Class Types Section */
+.class-types-section {
+  background: rgba(255,255,255,.02);
+  margin-top: 80px;
+}
+
+.category-card {
+  background: var(--l9-card-bg);
+  border: 1px solid var(--l9-border);
+  border-radius: 20px;
+  padding: 30px 25px;
+  text-align: center;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.category-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,.2);
+}
+
+.strength-category:hover {
+  border-color: rgba(255,107,107,.4);
+}
+
+.cardio-category:hover {
+  border-color: rgba(78,205,196,.4);
+}
+
+.yoga-category:hover {
+  border-color: rgba(149,225,211,.4);
+}
+
+.dance-category:hover {
+  border-color: rgba(243,139,168,.4);
+}
+
+.category-icon {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 20px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+}
+
+.strength-category .category-icon {
+  background: linear-gradient(135deg, var(--strength-color), #ff8787);
+}
+
+.cardio-category .category-icon {
+  background: linear-gradient(135deg, var(--cardio-color), #81e6d9);
+}
+
+.yoga-category .category-icon {
+  background: linear-gradient(135deg, var(--yoga-color), #c6f7ed);
+  color: #2d3748;
+}
+
+.dance-category .category-icon {
+  background: linear-gradient(135deg, var(--dance-color), #f687b3);
+}
+
+.category-card h4 {
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #f3f5ff;
+}
+
+.category-card p {
+  color: #cdd3ff;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.category-features {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+.category-features li {
+  padding: 6px 0;
+  color: #bfc5ff;
+  font-size: 0.9rem;
+  position: relative;
+  padding-left: 20px;
+}
+
+.category-features li:before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--l9-accent);
+  font-weight: bold;
+}
+
+.empty-state {
+  padding: 60px 20px;
+}
+
+.empty-state .bi {
+  color: #6c757d;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .class-meta {
+    grid-template-columns: 1fr;
+  }
+  
+  .filter-btn {
+    margin: 4px !important;
+    padding: 10px 16px !important;
+    font-size: 0.9rem !important;
+  }
+  
+  .class-body {
+    padding: 16px;
+  }
+  
+  .class-header {
+    padding: 16px 16px 0;
+  }
+}
