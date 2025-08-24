@@ -1,0 +1,7 @@
+/* L9 Fitness Gym — Register Page
+   Match the login page styles 1:1 by reusing its CSS. */
+@import url("./login.css");
+
+/* Optional tiny tweaks for the register screen (can delete if not needed) */
+.l9-right h2 { margin-bottom: 1rem; }           /* consistent spacing */
+.l9-title { color: inherit; }                   /* same heading color as login */
