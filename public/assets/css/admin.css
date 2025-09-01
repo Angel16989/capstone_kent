@@ -1,0 +1,329 @@
+/* --- L9 Fitness Admin Styles — HARDCORE MODE --- */
+:root {
+  --l9-primary: #FF4444;
+  --l9-accent: #FFD700;
+  --l9-secondary: #00CCFF;
+  --l9-dark: #0a0a0a;
+  --l9-surface: rgba(255,255,255,.03);
+  --l9-border: rgba(255,68,68,.08);
+  --l9-text-primary: #ffffff;
+  --l9-text-secondary: #e0e0e0;
+  --l9-text-muted: #b0b0b0;
+  --l9-warning: #ff9f43;
+  --l9-danger: #ff6b6b;
+  --l9-success: #FFD700;
+  --l9-glow-red: rgba(255,68,68,.6);
+}
+
+/* Admin Hero */
+.admin-hero {
+  background: 
+    radial-gradient(1000px 600px at 30% 0%, rgba(255,155,67,.12), transparent 60%),
+    radial-gradient(800px 400px at 70% 100%, rgba(108,92,231,.08), transparent 60%);
+  color: var(--l9-text-primary);
+}
+
+.admin-badge {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  background: rgba(255,155,67,.15);
+  border: 1px solid rgba(255,155,67,.3);
+  color: #ffd8b3;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--l9-warning), var(--l9-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Admin Cards */
+.admin-card {
+  background: var(--l9-surface);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--l9-border);
+  border-radius: 20px;
+  padding: 30px;
+  transition: all 0.4s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.05), transparent);
+  transition: left 0.6s;
+}
+
+.admin-card:hover::before {
+  left: 100%;
+}
+
+.admin-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,.25);
+}
+
+.users-card:hover {
+  border-color: rgba(255,107,107,.3);
+}
+
+.memberships-card:hover {
+  border-color: rgba(108,92,231,.3);
+}
+
+.classes-card:hover {
+  border-color: rgba(78,205,196,.3);
+}
+
+.reports-card:hover {
+  border-color: rgba(255,159,67,.3);
+}
+
+.settings-card:hover {
+  border-color: rgba(149,225,211,.3);
+}
+
+.actions-card:hover {
+  border-color: rgba(0,229,168,.3);
+}
+
+.card-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.users-card .card-icon {
+  background: linear-gradient(135deg, #ff6b6b, #ff8787);
+}
+
+.memberships-card .card-icon {
+  background: linear-gradient(135deg, var(--l9-primary), #8b7cf6);
+}
+
+.classes-card .card-icon {
+  background: linear-gradient(135deg, #4ecdc4, #81e6d9);
+}
+
+.reports-card .card-icon {
+  background: linear-gradient(135deg, var(--l9-warning), #ffcc70);
+}
+
+.settings-card .card-icon {
+  background: linear-gradient(135deg, #95e1d3, #c6f7ed);
+  color: #2d3748;
+}
+
+.actions-card .card-icon {
+  background: linear-gradient(135deg, var(--l9-accent), #33f5c4);
+}
+
+.card-content {
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.card-title {
+  color: var(--l9-text-primary);
+  font-weight: 700;
+  margin-bottom: 12px;
+  font-size: 1.25rem;
+}
+
+.card-description {
+  color: var(--l9-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+.card-stats {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 12px 0;
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--l9-accent);
+}
+
+.stat-label {
+  color: var(--l9-text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.btn-admin {
+  width: 100%;
+  padding: 12px 20px;
+  background: linear-gradient(90deg, var(--l9-primary), var(--l9-warning));
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-admin:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255,159,67,.3);
+  color: white;
+}
+
+/* Admin Activity Section */
+.admin-activity-section {
+  background: var(--l9-surface);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--l9-border);
+  border-radius: 20px;
+  padding: 40px;
+}
+
+.section-title {
+  color: var(--l9-text-primary);
+  font-weight: 700;
+  margin-bottom: 30px;
+  font-size: 1.5rem;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.activity-item {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: all 0.3s ease;
+}
+
+.activity-item:hover {
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,159,67,.2);
+  transform: translateX(4px);
+}
+
+.activity-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--l9-warning), #ffcc70);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.activity-content {
+  flex: 1;
+}
+
+.activity-content h6 {
+  color: var(--l9-text-primary);
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 1rem;
+}
+
+.activity-content p {
+  color: var(--l9-text-secondary);
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.activity-time {
+  color: var(--l9-text-muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .admin-hero {
+    padding-top: 40px;
+  }
+  
+  .display-4 {
+    font-size: 2.5rem;
+  }
+  
+  .admin-card {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .display-4 {
+    font-size: 2rem;
+  }
+  
+  .admin-activity-section {
+    padding: 30px 24px;
+  }
+  
+  .activity-item {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .display-4 {
+    font-size: 1.75rem;
+  }
+  
+  .admin-card {
+    padding: 20px;
+  }
+  
+  .admin-activity-section {
+    padding: 24px 20px;
+  }
+  
+  .card-title {
+    font-size: 1.1rem;
+  }
+  
+  .card-description {
+    font-size: 0.9rem;
+  }
+}

@@ -12,10 +12,10 @@ $pageCSS = "/assets/css/classes.css";
         <path d="M1.475 9C2.702 10.84 4.779 12.871 8 15.09c3.221-2.219 5.298-4.25 6.525-6.09a4.5 4.5 0 0 0-.187-6.075 3.5 3.5 0 0 0-4.76.025L8 4.705 6.422 2.95a3.5 3.5 0 0 0-4.76-.025A4.5 4.5 0 0 0 1.475 9z"/>
         <path d="M8 6a.5.5 0 0 1 .5.5v1.716l.802.267c.112.037.233.077.349.145.11.063.17.138.192.235a.5.5 0 0 1-.293.605l-.755-.252V7.5A.5.5 0 0 1 8 6z"/>
       </svg>
-      Energize Your Day
+      Beast Training Zones
     </div>
-    <h1 class="display-4 fw-bold mb-3">Fitness<br><span class="text-gradient">Classes</span></h1>
-    <p class="lead mb-4">Join our expert-led classes designed to challenge, inspire, and transform your fitness journey</p>
+    <h1 class="display-4 fw-bold mb-3">Warrior<br><span class="text-gradient">Sessions</span></h1>
+    <p class="lead mb-4">Join hardcore training sessions designed to forge champions and break limits</p>
   </div>
 </div>
 

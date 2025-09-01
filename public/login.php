@@ -6,13 +6,13 @@ require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../app/helpers/validator.php';
 require_once __DIR__ . '/../app/helpers/csrf.php';
 
-$pageTitle = "Register";
-$pageCSS   = "/CAPSTONE/public/assets/css/login.css"; // fixed path
+$pageTitle = "Login";
+$pageCSS   = "assets/css/login.css";
 
 $error = '';
 $email = '';
 
-// Handle POST (verify CSRF only for POST)xx`1
+// Handle POST (verify CSRF only for POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         verify_csrf();
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($u && password_verify($pass, $u['password_hash'])) {
                 require_once __DIR__ . '/../app/helpers/auth.php';
                 login_user($u);
-                header('Location: /dashboard.php');
+                header('Location: dashboard.php');
                 exit;
             }
             $error = 'Invalid credentials.';
@@ -55,16 +55,16 @@ include __DIR__ . '/../app/views/layouts/header.php';
 
       <span class="l9-badge mb-3">
         <svg width="16" height="16" fill="currentColor" class="bi bi-bolt-fill"><path d="M5.5 0h6L7.5 6h4L3.5 16l2-7H3L5.5 0z"/></svg>
-        No lock-in • 24/7 access
+        Beast Mode • No Excuses
       </span>
 
-      <h1 class="display-6 l9-title mb-2">Stronger every day.</h1>
-      <p class="l9-sub mb-4">Log in to book classes, track workouts, and manage your membership.</p>
+      <h1 class="display-6 l9-title mb-2">Unleash the Beast.</h1>
+      <p class="l9-sub mb-4">Access your warrior dashboard. Track your dominance. Push your limits.</p>
 
       <ul class="l9-cta-points list-unstyled small text-light">
-        <li>• Smart class waitlists</li>
-        <li>• Personal bests & progress charts</li>
-        <li>• Member-only offers & events</li>
+        <li>• Elite training protocols</li>
+        <li>• Beast mode progress tracking</li>
+        <li>• Hardcore member challenges</li>
       </ul>
       <div class="mt-4 small text-secondary">
         Tip: Press <span class="l9-kbd">/</span> to focus email, <span class="l9-kbd">Enter</span> to submit.
@@ -73,7 +73,7 @@ include __DIR__ . '/../app/views/layouts/header.php';
 
     <!-- Right / Form -->
     <div class="col-lg-6 l9-right">
-      <h2 class="h4 fw-bold mb-3">Member Login</h2>
+      <h2 class="h4 fw-bold mb-3">Beast Login</h2>
 
       <?php if (!empty($error)): ?>
         <div class="alert alert-danger py-2"><?= htmlspecialchars($error) ?></div>

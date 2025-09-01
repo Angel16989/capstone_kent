@@ -7,7 +7,7 @@ require_once __DIR__ . '/../app/helpers/validator.php';
 require_once __DIR__ . '/../app/helpers/csrf.php';
 
 $pageTitle = "Register";
-$pageCSS   = "/CAPSTONE/public/assets/css/register.css"; // fixed path
+$pageCSS   = "/assets/css/register.css";
 
 
 $errors = [];

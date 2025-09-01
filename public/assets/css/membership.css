@@ -1,10 +1,16 @@
-/* --- L9 Fitness Membership Styles --- */
+/* --- L9 Fitness Memberships — HARDCORE MODE --- */
 :root {
-  --l9-primary: #6C5CE7;
-  --l9-accent: #00E5A8;
-  --l9-dark: #0f1020;
-  --l9-card-bg: rgba(255,255,255,.08);
-  --l9-border: rgba(255,255,255,.12);
+  --l9-primary: #FF4444;
+  --l9-accent: #FFD700;
+  --l9-secondary: #00CCFF;
+  --l9-dark: #0a0a0a;
+  --l9-surface: rgba(255,255,255,.03);
+  --l9-border: rgba(255,68,68,.08);
+  --l9-text-primary: #ffffff;
+  --l9-text-secondary: #e0e0e0;
+  --l9-text-muted: #b0b0b0;
+  --l9-glow-red: rgba(255,68,68,.6);
+  --l9-glow-gold: rgba(255,215,0,.5);
 }
 
 body {

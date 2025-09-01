@@ -1,50 +1,69 @@
 /* --- L9 Fitness Global Styles --- */
 :root { 
-  --hero-grad: linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.35)); 
-  --l9-primary: #6C5CE7;
-  --l9-accent: #00E5A8;
-  --l9-dark: #0f1020;
-  --l9-surface: rgba(255,255,255,.08);
-  --l9-border: rgba(255,255,255,.12);
-  --l9-text-primary: #f3f5ff;
-  --l9-text-secondary: #cdd3ff;
-  --l9-text-muted: #a8b3ff;
+  --hero-grad: linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.6)); 
+  /* Hardcore gym color palette */
+  --l9-primary: #FF4444;        /* Aggressive red */
+  --l9-accent: #FFD700;         /* Victory gold */
+  --l9-secondary: #00CCFF;      /* Electric blue */
+  --l9-dark: #0a0a0a;           /* Deep black */
+  --l9-darker: #050505;         /* Pitch black */
+  --l9-surface: rgba(255,255,255,.03);
+  --l9-surface-strong: rgba(255,68,68,.06);
+  --l9-border: rgba(255,255,255,.08);
+  --l9-border-strong: rgba(255,68,68,.12);
+  --l9-text-primary: #ffffff;
+  --l9-text-secondary: #e0e0e0;
+  --l9-text-muted: #b0b0b0;
+  --l9-shadow: rgba(0,0,0,.6);
+  --l9-glow-red: rgba(255,68,68,.5);
+  --l9-glow-gold: rgba(255,215,0,.4);
 }
 
 /* Global Dark Theme */
 body {
-  background: linear-gradient(135deg, #0b0c1a 0%, #151734 50%, #0b0c1a 100%);
+  background: 
+    radial-gradient(circle at 20% 10%, rgba(255,68,68,.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 90%, rgba(255,215,0,.05) 0%, transparent 50%),
+    linear-gradient(135deg, var(--l9-darker) 0%, #111111 25%, #0a0a0a 50%, #050505 100%);
   color: var(--l9-text-primary);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 500;
   line-height: 1.6;
+  min-height: 100vh;
 }
 
-/* Enhanced Navigation */
+/* Enhanced Navigation - Hardcore Style */
 .navbar-dark {
-  background: rgba(15,16,32,.95) !important;
+  background: rgba(5,5,5,.98) !important;
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--l9-border);
+  border-bottom: 2px solid var(--l9-border-strong);
   transition: all 0.3s ease;
+  box-shadow: 0 2px 20px var(--l9-shadow);
 }
 
 .navbar-dark.scrolled {
-  background: rgba(15,16,32,.98) !important;
-  box-shadow: 0 8px 32px rgba(0,0,0,.3);
+  background: rgba(0,0,0,.99) !important;
+  box-shadow: 0 8px 32px rgba(255,68,68,.15);
+  border-bottom-color: var(--l9-primary);
 }
 
 .navbar-brand {
-  font-weight: 800 !important;
+  font-weight: 900 !important;
   background: linear-gradient(90deg, var(--l9-primary), var(--l9-accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  letter-spacing: -0.5px;
+  letter-spacing: -1px;
+  text-shadow: 0 0 20px var(--l9-glow-red);
+  font-size: 1.5rem !important;
 }
 
 .navbar-nav .nav-link {
-  font-weight: 500;
+  font-weight: 600;
   transition: all 0.3s ease;
   position: relative;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   padding: 8px 16px !important;
   border-radius: 8px;
 }
@@ -324,4 +343,138 @@ footer {
 
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #7c6ce8, #00f5b8);
+}
+
+/* --- HARDCORE TYPING ANIMATIONS --- */
+/* Dangerous input field effects */
+input[type="text"], 
+input[type="email"], 
+input[type="password"], 
+input[type="number"],
+textarea {
+  position: relative;
+  background: rgba(5,5,5,0.9) !important;
+  border: 2px solid rgba(255,68,68,0.3) !important;
+  color: var(--l9-text-primary) !important;
+  transition: all 0.3s ease;
+  font-family: 'Courier New', monospace !important;
+  font-weight: 600;
+  text-shadow: 0 0 5px rgba(255,68,68,0.3);
+}
+
+/* Typing effect animation */
+@keyframes dangerousTyping {
+  0% { 
+    border-color: rgba(255,68,68,0.3);
+    box-shadow: 0 0 5px rgba(255,68,68,0.2);
+    background: rgba(5,5,5,0.9);
+  }
+  25% { 
+    border-color: rgba(255,215,0,0.6);
+    box-shadow: 0 0 15px rgba(255,215,0,0.4), inset 0 0 10px rgba(255,68,68,0.1);
+    background: rgba(10,5,5,0.95);
+  }
+  50% { 
+    border-color: rgba(255,68,68,0.8);
+    box-shadow: 0 0 25px rgba(255,68,68,0.6), inset 0 0 15px rgba(255,215,0,0.1);
+    background: rgba(15,5,5,0.98);
+  }
+  75% { 
+    border-color: rgba(0,204,255,0.7);
+    box-shadow: 0 0 20px rgba(0,204,255,0.5), inset 0 0 12px rgba(255,68,68,0.2);
+    background: rgba(5,10,15,0.96);
+  }
+  100% { 
+    border-color: rgba(255,68,68,0.9);
+    box-shadow: 0 0 30px rgba(255,68,68,0.7), inset 0 0 20px rgba(255,215,0,0.15);
+    background: rgba(20,5,5,1);
+  }
+}
+
+/* Activated when typing */
+input[type="text"]:focus, 
+input[type="email"]:focus, 
+input[type="password"]:focus, 
+input[type="number"]:focus,
+textarea:focus {
+  animation: dangerousTyping 0.8s ease-in-out infinite alternate !important;
+  outline: none !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px !important;
+  text-shadow: 
+    0 0 5px rgba(255,68,68,0.8), 
+    0 0 10px rgba(255,215,0,0.5),
+    0 0 15px rgba(0,204,255,0.3) !important;
+}
+
+/* Hardcore glitch effect on placeholder */
+input::placeholder, textarea::placeholder {
+  color: rgba(255,68,68,0.6) !important;
+  font-family: 'Courier New', monospace !important;
+  font-weight: 600;
+  text-shadow: 0 0 3px rgba(255,68,68,0.4);
+}
+
+/* Matrix-style cursor blink */
+@keyframes matrixCursor {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+input:focus::after, textarea:focus::after {
+  content: '█';
+  color: var(--l9-primary);
+  animation: matrixCursor 1s infinite;
+  text-shadow: 0 0 10px rgba(255,68,68,0.8);
+}
+
+/* Dangerous button hover effects */
+.btn:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 
+    0 0 20px rgba(255,68,68,0.6), 
+    0 0 40px rgba(255,215,0,0.4) !important;
+  text-shadow: 
+    0 0 5px rgba(255,255,255,0.8), 
+    0 0 10px rgba(255,68,68,0.6) !important;
+}
+
+/* Screen flicker effect when interacting */
+@keyframes screenFlicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.98; }
+}
+
+body:active {
+  animation: screenFlicker 0.1s ease-in-out;
+}
+
+/* Hardcore form validation effects */
+input:invalid {
+  border-color: rgba(255,0,0,0.8) !important;
+  box-shadow: 0 0 15px rgba(255,0,0,0.5) !important;
+  background: rgba(20,0,0,0.9) !important;
+}
+
+input:valid {
+  border-color: rgba(0,255,0,0.6) !important;
+  box-shadow: 0 0 10px rgba(0,255,0,0.3) !important;
+}
+
+/* Terminal-style text appearance */
+.form-control, .form-select {
+  font-family: 'Courier New', 'Consolas', monospace !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+}
+
+/* Danger zone input effects */
+input[type="password"]:focus {
+  border-color: rgba(255,0,0,1) !important;
+  box-shadow: 
+    0 0 5px rgba(255,0,0,0.5),
+    0 0 15px rgba(255,0,0,0.3),
+    0 0 25px rgba(255,0,0,0.2),
+    inset 0 0 10px rgba(255,0,0,0.1) !important;
+  background: rgba(25,0,0,0.95) !important;
 }

@@ -127,8 +127,7 @@ CREATE TABLE payments (
   paid_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (member_id) REFERENCES users(id),
   FOREIGN KEY (membership_id) REFERENCES memberships(id),
-  FOREIGN KEY (booking_id) REFERENCES bookings(id),
-  CHECK ((membership_id IS NOT NULL) OR (booking_id IS NOT NULL))
+  FOREIGN KEY (booking_id) REFERENCES bookings(id)
 ) ENGINE=InnoDB;
 
 -- Workout & Nutrition Plans
@@ -170,7 +169,7 @@ CREATE TABLE feedback (
   member_id INT UNSIGNED NOT NULL,
   trainer_id INT UNSIGNED NULL,
   class_id INT UNSIGNED NULL,
-  rating TINYINT UNSIGNED CHECK (rating BETWEEN 1 AND 5),
+  rating TINYINT UNSIGNED,
   comments TEXT,
   reply_text TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

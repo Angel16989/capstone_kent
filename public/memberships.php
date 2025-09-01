@@ -11,10 +11,10 @@ $pageCSS = "/assets/css/membership.css";
       <svg width="20" height="20" fill="currentColor" class="bi bi-trophy-fill">
         <path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33.076 33.076 0 0 1 2.5.5zm.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935z"/>
       </svg>
-      Premium Fitness Plans
+      WARRIOR MEMBERSHIPS
     </div>
-    <h1 class="display-4 fw-bold mb-3">Choose Your<br><span class="text-gradient">Fitness Journey</span></h1>
-    <p class="lead mb-4">Unlock your potential with our flexible membership plans designed for every fitness goal</p>
+    <h1 class="display-4 fw-bold mb-3">CHOOSE YOUR<br><span class="text-gradient">BATTLE PLAN</span></h1>
+    <p class="lead mb-4">Select your weapon for total domination. Every warrior needs the right gear for victory.</p>
   </div>
 </div>
 
@@ -27,7 +27,7 @@ $pageCSS = "/assets/css/membership.css";
         <div class="col-lg-4 col-md-6">
           <div class="membership-card <?php echo $index === 1 ? 'featured' : ''; ?>">
             <?php if($index === 1): ?>
-              <div class="popular-badge">Most Popular</div>
+              <div class="popular-badge">MOST BRUTAL</div>
             <?php endif; ?>
             
             <div class="card-header">
@@ -61,34 +61,34 @@ $pageCSS = "/assets/css/membership.css";
               
               <ul class="feature-list">
                 <?php if($p['name'] === 'Monthly'): ?>
-                  <li><i class="bi bi-check-circle-fill"></i> Full gym access</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Group fitness classes</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Locker room access</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Basic equipment</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Full battle ground access</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Beast training sessions</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Warrior locker room</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Essential weapons</li>
                 <?php elseif($p['name'] === 'Quarterly'): ?>
                   <li><i class="bi bi-check-circle-fill"></i> Everything in Monthly</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Premium equipment access</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Sauna & steam room</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Nutrition consultation</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Guest passes (2/month)</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Premium war machines</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Recovery chambers</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Nutrition warfare plan</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Bring your squad (2/month)</li>
                 <?php else: ?>
                   <li><i class="bi bi-check-circle-fill"></i> Everything in Quarterly</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Personal trainer session</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Unlimited guest passes</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Priority class booking</li>
-                  <li><i class="bi bi-check-circle-fill"></i> 24/7 gym access</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Massage therapy discount</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Personal destroyer coaching</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Unlimited army passes</li>
+                  <li><i class="bi bi-check-circle-fill"></i> VIP battle priority</li>
+                  <li><i class="bi bi-check-circle-fill"></i> 24/7 beast mode access</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Recovery warrior discount</li>
                 <?php endif; ?>
               </ul>
 
               <button class="btn-membership <?php echo $index === 1 ? 'btn-featured' : ''; ?>">
-                <span class="btn-text">Choose Plan</span>
+                <span class="btn-text">CLAIM POWER</span>
                 <i class="bi bi-arrow-right"></i>
               </button>
               
               <div class="money-back">
                 <i class="bi bi-shield-check"></i>
-                30-day money back guarantee
+                30-day BEAST GUARANTEE
               </div>
             </div>
           </div>
@@ -98,8 +98,8 @@ $pageCSS = "/assets/css/membership.css";
       <div class="col-12 text-center">
         <div class="empty-state">
           <i class="bi bi-exclamation-triangle display-1 text-muted mb-3"></i>
-          <h3>No Plans Available</h3>
-          <p class="text-muted">No active membership plans found. Please check back later.</p>
+          <h3>NO WARRIORS FOUND</h3>
+          <p class="text-muted">No battle plans available. The gym awaits your return.</p>
         </div>
       </div>
     <?php endif; ?>
@@ -111,8 +111,8 @@ $pageCSS = "/assets/css/membership.css";
   <div class="container py-5">
     <div class="row text-center mb-5">
       <div class="col-12">
-        <h2 class="display-5 fw-bold mb-3">Why Choose L9 Fitness?</h2>
-        <p class="lead">Experience the difference with our premium facilities and expert guidance</p>
+        <h2 class="display-5 fw-bold mb-3">WHY CHOOSE THE BEAST PIT?</h2>
+        <p class="lead">Experience raw power with our hardcore facilities and savage training protocols</p>
       </div>
     </div>
     
@@ -122,8 +122,8 @@ $pageCSS = "/assets/css/membership.css";
           <div class="benefit-icon">
             <i class="bi bi-clock-history"></i>
           </div>
-          <h4>24/7 Access</h4>
-          <p>Train on your schedule with round-the-clock gym access</p>
+          <h4>24/7 WAR ZONE</h4>
+          <p>Battle never sleeps. Train whenever the beast awakens</p>
         </div>
       </div>
       <div class="col-lg-3 col-md-6">
@@ -131,8 +131,8 @@ $pageCSS = "/assets/css/membership.css";
           <div class="benefit-icon">
             <i class="bi bi-people"></i>
           </div>
-          <h4>Expert Trainers</h4>
-          <p>Certified professionals to guide your fitness journey</p>
+          <h4>BEAST MASTERS</h4>
+          <p>Elite warriors who forge champions from the weak</p>
         </div>
       </div>
       <div class="col-lg-3 col-md-6">
@@ -140,8 +140,8 @@ $pageCSS = "/assets/css/membership.css";
           <div class="benefit-icon">
             <i class="bi bi-gear-wide-connected"></i>
           </div>
-          <h4>Modern Equipment</h4>
-          <p>State-of-the-art machines and free weights</p>
+          <h4>WAR MACHINES</h4>
+          <p>Brutal equipment designed to destroy your limits</p>
         </div>
       </div>
       <div class="col-lg-3 col-md-6">
@@ -149,8 +149,8 @@ $pageCSS = "/assets/css/membership.css";
           <div class="benefit-icon">
             <i class="bi bi-heart-pulse"></i>
           </div>
-          <h4>Group Classes</h4>
-          <p>Dynamic classes from yoga to HIIT training</p>
+          <h4>BATTLE GROUPS</h4>
+          <p>Savage sessions from warrior yoga to annihilation HIIT</p>
         </div>
       </div>
     </div>

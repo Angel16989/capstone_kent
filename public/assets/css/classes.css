@@ -1,16 +1,17 @@
-/* --- L9 Fitness Classes Styles --- */
+/* --- L9 Fitness Classes Styles — HARDCORE MODE --- */
 :root {
-  --l9-primary: #6C5CE7;
-  --l9-accent: #00E5A8;
-  --l9-dark: #0f1020;
-  --l9-card-bg: rgba(255,255,255,.08);
-  --l9-border: rgba(255,255,255,.12);
+  --l9-primary: #FF4444;
+  --l9-accent: #FFD700;
+  --l9-secondary: #00CCFF;
+  --l9-dark: #0a0a0a;
+  --l9-card-bg: rgba(255,255,255,.03);
+  --l9-border: rgba(255,68,68,.08);
   
-  /* Class type colors */
-  --strength-color: #ff6b6b;
-  --cardio-color: #4ecdc4;
-  --yoga-color: #95e1d3;
-  --dance-color: #f38ba8;
+  /* Class type colors - HARDCORE */
+  --strength-color: #ff4444;
+  --cardio-color: #00ccff;
+  --yoga-color: #ffd700;
+  --dance-color: #ff6b6b;
 }
 
 body {
