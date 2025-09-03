@@ -17,6 +17,12 @@ require_once dirname(__DIR__, 3) . '/config/config.php';
   <!-- Global CSS -->
   <link href="<?php echo BASE_URL; ?>assets/css/main.css" rel="stylesheet">
   
+  <!-- Page Transitions CSS -->
+  <link href="<?php echo BASE_URL; ?>assets/css/page-transitions.css" rel="stylesheet">
+  
+  <!-- Dynamic Effects JavaScript -->
+  <script src="<?php echo BASE_URL; ?>assets/js/dynamic-effects.js"></script>
+  
   <!-- Page-specific CSS -->
   <?php if (isset($pageCSS) && $pageCSS): ?>
     <link href="<?php echo BASE_URL . $pageCSS; ?>" rel="stylesheet">
@@ -30,7 +36,17 @@ require_once dirname(__DIR__, 3) . '/config/config.php';
     'dashboard' => 'assets/css/dashboard.css',
     'profile' => 'assets/css/profile.css',
     'admin' => 'assets/css/admin.css',
-    'index' => 'assets/css/home.css'
+    'index' => 'assets/css/home.css',
+    'memberships' => 'assets/css/membership.css',
+    'classes' => 'assets/css/classes.css',
+    'register' => 'assets/css/register.css',
+    'checkout' => 'assets/css/checkout.css',
+    'checkout-success' => 'assets/css/checkout-success.css',
+    'forgot-password' => 'assets/css/legal.css',
+    'reset-password' => 'assets/css/legal.css',
+    'terms' => 'assets/css/legal.css',
+    'privacy' => 'assets/css/legal.css',
+    'contact' => 'assets/css/contact.css'
   ];
   
   if (isset($css_files[$current_page])):
