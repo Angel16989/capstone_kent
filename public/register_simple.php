@@ -1,14 +1,12 @@
 <?php
-// register.php - Working Registration System
+// register_simple.php - Working Registration System
 declare(strict_types=1);
 
-// Enable error reporting for debugging
+// Enable error reporting
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 require_once __DIR__ . '/../config/config.php';
-
-$debug = [];
 
 $pageTitle = "Register";
 $pageCSS = "assets/css/register.css";
@@ -18,12 +16,10 @@ $success = false;
 $old = ['full_name' => '', 'email' => ''];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-        $debug[] = 'Form data: ' . json_encode(['full_name' => $old['full_name'], 'email' => $old['email'], 'password_len' => strlen($password), 'accept_terms' => $accept]);
     try {
         // Get form data
         $old['full_name'] = trim($_POST['full_name'] ?? '');
-        $old['email'] = strtolower(trim($_POST['email'] ?? ''));
+        $old['email'] = trim($_POST['email'] ?? '');
         $password = $_POST['password'] ?? '';
         $confirm = $_POST['confirm_password'] ?? '';
         $accept = isset($_POST['accept_terms']);
@@ -41,8 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors['password'] = 'Password must be at least 8 characters.';
         }
         
-
-        $debug[] = 'Validation errors: ' . json_encode($errors);
         if ($password !== $confirm) {
             $errors['confirm_password'] = 'Passwords do not match.';
         }
@@ -50,18 +44,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$accept) {
             $errors['accept_terms'] = 'You must accept the terms.';
         }
-                $debug[] = 'Email already exists.';
 
         // Check if email exists
         if (!$errors) {
             $stmt = $pdo->prepare('SELECT id FROM users WHERE email = ?');
             $stmt->execute([$old['email']]);
             if ($stmt->fetch()) {
-                $errors['email'] = 'An account with this email already exists.';
+                $errors['email'] = 'Email already exists.';
             }
         }
-
-            $debug[] = 'Attempting DB insert: ' . json_encode([$first_name, $last_name, $old['email'], '[hash]']);
 
         // Create account
         if (!$errors) {
@@ -69,23 +60,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name_parts = explode(' ', $old['full_name'], 2);
             $first_name = $name_parts[0];
             $last_name = $name_parts[1] ?? '';
-                $debug[] = 'Account created successfully.';
 
             $stmt = $pdo->prepare('INSERT INTO users (role_id, first_name, last_name, email, password_hash, created_at) VALUES (4, ?, ?, ?, ?, NOW())');
-                $debug[] = 'DB insert failed: ' . json_encode($stmt->errorInfo());
             $result = $stmt->execute([$first_name, $last_name, $old['email'], $hash]);
             
             if ($result) {
                 $success = true;
                 $old = ['full_name' => '', 'email' => ''];
             } else {
-        $debug[] = 'Exception: ' . $e->getMessage();
-                $errors['general'] = 'Failed to create account. Please try again.';
+                $errors['general'] = 'Failed to create account.';
             }
         }
         
     } catch (Exception $e) {
-        $errors['general'] = 'System error: ' . $e->getMessage();
+        $errors['general'] = 'Database error: ' . $e->getMessage();
         error_log("Registration error: " . $e->getMessage());
     }
 }
@@ -113,13 +101,6 @@ include __DIR__ . '/../app/views/layouts/header.php';
       <ul class="l9-cta-points list-unstyled small text-light">
         <li>• Personalized programs & PB tracking</li>
         <li>• Class reminders & waitlist auto-join</li>
-
-      <?php if (!empty($debug)): ?>
-        <div class="alert alert-warning small" style="white-space: pre-wrap;">
-          <strong>Debug Info:</strong><br>
-          <?= htmlspecialchars(implode("\n", $debug)) ?>
-        </div>
-      <?php endif; ?>
         <li>• Exclusive challenges & rewards</li>
       </ul>
     </div>
@@ -164,7 +145,6 @@ include __DIR__ . '/../app/views/layouts/header.php';
         <div class="mb-3">
           <label class="form-label" for="password">Password</label>
           <input id="password" class="form-control form-control-lg" type="password" name="password" minlength="8" required>
-          <div class="form-text">Must be at least 8 characters long</div>
           <?php if (!empty($errors['password'])): ?>
             <div class="text-danger small mt-1"><?= htmlspecialchars($errors['password']) ?></div>
           <?php endif; ?>

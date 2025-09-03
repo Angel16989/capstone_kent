@@ -1,7 +1,78 @@
 <?php 
 require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../app/helpers/auth.php';
+
 $pageTitle = "Membership Plans";
 $pageCSS = "/assets/css/membership.css";
+
+// Handle membership purchase
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Verify CSRF token
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die('CSRF token mismatch');
+    }
+    
+    if (!is_logged_in()) {
+        echo json_encode(['success' => false, 'message' => 'Please log in to purchase membership']);
+        exit;
+    }
+    
+    $action = $_POST['action'] ?? '';
+    $plan_id = (int)($_POST['plan_id'] ?? 0);
+    $user_id = $_SESSION['user']['id'];
+    
+    try {
+        if ($action === 'purchase') {
+            // Get plan details
+            $stmt = $pdo->prepare("SELECT * FROM membership_plans WHERE id = ? AND is_active = 1");
+            $stmt->execute([$plan_id]);
+            $plan = $stmt->fetch();
+            
+            if (!$plan) {
+                echo json_encode(['success' => false, 'message' => 'Invalid membership plan']);
+                exit;
+            }
+            
+            // Check if user has active membership
+            $stmt = $pdo->prepare("SELECT * FROM memberships WHERE member_id = ? AND status = 'active' AND end_date > NOW()");
+            $stmt->execute([$user_id]);
+            $existing = $stmt->fetch();
+            
+            if ($existing) {
+                // Extend existing membership
+                $start_date = max(new DateTime(), new DateTime($existing['end_date']));
+            } else {
+                $start_date = new DateTime();
+            }
+            
+            $end_date = clone $start_date;
+            $end_date->add(new DateInterval('P' . $plan['duration_days'] . 'D'));
+            
+            // Create membership record
+            if ($existing) {
+                $stmt = $pdo->prepare("UPDATE memberships SET plan_id = ?, end_date = ?, status = 'active' WHERE member_id = ? AND status = 'active'");
+                $stmt->execute([$plan_id, $end_date->format('Y-m-d H:i:s'), $user_id]);
+            } else {
+                $stmt = $pdo->prepare("INSERT INTO memberships (member_id, plan_id, start_date, end_date, status) VALUES (?, ?, ?, ?, 'active')");
+                $stmt->execute([$user_id, $plan_id, $start_date->format('Y-m-d H:i:s'), $end_date->format('Y-m-d H:i:s')]);
+            }
+            
+            // Create payment record (simulated)
+            $stmt = $pdo->prepare("INSERT INTO payments (user_id, amount, type, description, status, payment_date) VALUES (?, ?, 'membership', ?, 'completed', NOW())");
+            $stmt->execute([$user_id, $plan['price'], $plan['name'] . ' membership purchase']);
+            
+            echo json_encode([
+                'success' => true, 
+                'message' => 'Membership activated successfully! Welcome to the Beast Pit!',
+                'end_date' => $end_date->format('M d, Y')
+            ]);
+            exit;
+        }
+    } catch (Exception $e) {
+        echo json_encode(['success' => false, 'message' => 'An error occurred. Please try again.']);
+        exit;
+    }
+}
 ?>
 <?php include __DIR__ . '/../app/views/layouts/header.php'; ?>
 
@@ -19,7 +90,29 @@ $pageCSS = "/assets/css/membership.css";
 </div>
 
 <div class="container py-5">
-  <?php $plans = $pdo->query('SELECT * FROM membership_plans WHERE is_active=1 ORDER BY price ASC')->fetchAll(); ?>
+  <?php 
+  // Get user's current membership if logged in
+  $current_membership = null;
+  if (is_logged_in()) {
+      $stmt = $pdo->prepare('SELECT m.*, mp.name as plan_name FROM memberships m JOIN membership_plans mp ON m.plan_id = mp.id WHERE m.member_id = ? AND m.status = "active" AND m.end_date > NOW()');
+      $stmt->execute([$_SESSION['user']['id']]);
+      $current_membership = $stmt->fetch();
+  }
+  
+  $plans = $pdo->query('SELECT * FROM membership_plans WHERE is_active=1 ORDER BY price ASC')->fetchAll(); 
+  ?>
+  
+  <?php if ($current_membership): ?>
+    <div class="alert alert-success text-center mb-5">
+      <div class="d-flex align-items-center justify-content-center">
+        <i class="bi bi-trophy-fill me-2"></i>
+        <div>
+          <strong>Active Beast Mode:</strong> <?php echo htmlspecialchars($current_membership['plan_name']); ?> 
+          <span class="ms-2">Expires: <?php echo date('M d, Y', strtotime($current_membership['end_date'])); ?></span>
+        </div>
+      </div>
+    </div>
+  <?php endif; ?>
   
   <div class="row g-4 justify-content-center">
     <?php if(!empty($plans)): ?>
@@ -81,10 +174,22 @@ $pageCSS = "/assets/css/membership.css";
                 <?php endif; ?>
               </ul>
 
-              <button class="btn-membership <?php echo $index === 1 ? 'btn-featured' : ''; ?>">
-                <span class="btn-text">CLAIM POWER</span>
-                <i class="bi bi-arrow-right"></i>
-              </button>
+              <?php if (is_logged_in()): ?>
+                <button class="btn-membership <?php echo $index === 1 ? 'btn-featured' : ''; ?>" 
+                        data-plan-id="<?php echo $p['id']; ?>" 
+                        data-plan-name="<?php echo htmlspecialchars($p['name']); ?>"
+                        data-plan-price="<?php echo $p['price']; ?>">
+                  <span class="btn-text">
+                    <?php echo $current_membership ? 'UPGRADE POWER' : 'CLAIM POWER'; ?>
+                  </span>
+                  <i class="bi bi-arrow-right"></i>
+                </button>
+              <?php else: ?>
+                <a href="<?php echo BASE_URL; ?>login.php" class="btn-membership <?php echo $index === 1 ? 'btn-featured' : ''; ?>">
+                  <span class="btn-text">LOGIN TO CLAIM</span>
+                  <i class="bi bi-box-arrow-in-right"></i>
+                </a>
+              <?php endif; ?>
               
               <div class="money-back">
                 <i class="bi bi-shield-check"></i>
@@ -156,5 +261,114 @@ $pageCSS = "/assets/css/membership.css";
     </div>
   </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Membership purchase functionality
+  document.querySelectorAll('.btn-membership[data-plan-id]').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const planId = this.dataset.planId;
+      const planName = this.dataset.planName;
+      const planPrice = this.dataset.planPrice;
+      
+      // Show confirmation modal
+      if (confirm(`Purchase ${planName} membership for $${planPrice}?`)) {
+        // Show loading state
+        const originalContent = this.innerHTML;
+        this.innerHTML = '<span class="btn-text">Processing...</span><i class="bi bi-arrow-clockwise spin"></i>';
+        this.disabled = true;
+        
+        // Create form data
+        const formData = new FormData();
+        formData.append('plan_id', planId);
+        formData.append('action', 'purchase');
+        formData.append('csrf_token', '<?php echo $_SESSION['csrf_token'] ?? ''; ?>');
+        
+        // Send request
+        fetch(window.location.href, {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            showMessage(data.message, 'success');
+            
+            // Redirect to dashboard after 2 seconds
+            setTimeout(() => {
+              window.location.href = '<?php echo BASE_URL; ?>dashboard.php';
+            }, 2000);
+            
+          } else {
+            showMessage(data.message, 'error');
+            this.innerHTML = originalContent;
+            this.disabled = false;
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          showMessage('An error occurred. Please try again.', 'error');
+          this.innerHTML = originalContent;
+          this.disabled = false;
+        });
+      }
+    });
+  });
+  
+  // Message display function
+  function showMessage(message, type) {
+    // Remove existing messages
+    document.querySelectorAll('.membership-message').forEach(msg => msg.remove());
+    
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `alert alert-${type === 'success' ? 'success' : 'danger'} membership-message position-fixed`;
+    messageDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; max-width: 350px;';
+    messageDiv.innerHTML = `
+      <div class="d-flex align-items-center">
+        <i class="bi bi-${type === 'success' ? 'check-circle-fill' : 'exclamation-triangle-fill'} me-2"></i>
+        ${message}
+      </div>
+    `;
+    
+    document.body.appendChild(messageDiv);
+    
+    // Auto-hide after 4 seconds
+    setTimeout(() => {
+      messageDiv.remove();
+    }, 4000);
+  }
+});
+</script>
+
+<style>
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+.btn-membership:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.membership-message {
+  animation: slideInRight 0.3s ease;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+</style>
 
 <?php include __DIR__ . '/../app/views/layouts/footer.php'; ?>

@@ -1,48 +1,51 @@
 <?php
-// login.php
-declare(strict_types=1);
-
+// --- L9 Fitness Login Page ---
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../app/helpers/validator.php';
-require_once __DIR__ . '/../app/helpers/csrf.php';
 
 $pageTitle = "Login";
-$pageCSS   = "assets/css/login.css";
+$pageCSS = "assets/css/login.css";
 
 $error = '';
 $email = '';
 
-// Handle POST (verify CSRF only for POST)
+$loggedInMessage = '';
+if (isset($_GET['registered']) && $_GET['registered'] === '1') {
+    $loggedInMessage = 'Account created successfully! You can now log in.';
+}
+
+// Handle POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        verify_csrf();
+        // Verify CSRF token
+        if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+            throw new Exception('Invalid CSRF token');
+        }
 
         $email = trim($_POST['email'] ?? '');
-        $pass  = $_POST['password'] ?? '';
+        $pass = $_POST['password'] ?? '';
 
         if (!email_valid($email) || !not_empty($pass)) {
             $error = 'Enter a valid email and password.';
         } else {
-            $stmt = $pdo->prepare('SELECT id, email, password_hash, full_name FROM users WHERE email = ? LIMIT 1');
+            $stmt = $pdo->prepare('SELECT id, email, password_hash, first_name, last_name, role_id, phone, address, created_at FROM users WHERE email = ? LIMIT 1');
             $stmt->execute([$email]);
             $u = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($u && password_verify($pass, $u['password_hash'])) {
                 require_once __DIR__ . '/../app/helpers/auth.php';
                 login_user($u);
-                header('Location: dashboard.php');
+                header('Location: index.php');
                 exit;
             }
             $error = 'Invalid credentials.';
         }
     } catch (Throwable $e) {
         $error = 'Something went wrong. Please try again.';
-        // error_log($e); // Uncomment for debugging
     }
 }
-
-include __DIR__ . '/../app/views/layouts/header.php';
 ?>
+<?php include __DIR__ . '/../app/views/layouts/header.php'; ?>
 
 <div class="l9-auth-wrap">
   <div class="l9-card row g-0">
@@ -75,12 +78,15 @@ include __DIR__ . '/../app/views/layouts/header.php';
     <div class="col-lg-6 l9-right">
       <h2 class="h4 fw-bold mb-3">Beast Login</h2>
 
+      <?php if (!empty($loggedInMessage)): ?>
+        <div class="alert alert-success py-2"><?= htmlspecialchars($loggedInMessage) ?></div>
+      <?php endif; ?>
       <?php if (!empty($error)): ?>
         <div class="alert alert-danger py-2"><?= htmlspecialchars($error) ?></div>
       <?php endif; ?>
 
       <form method="post" class="needs-validation" novalidate>
-        <?= csrf_field(); ?>
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
 
         <div class="mb-3">
           <label class="form-label" for="email">Email address</label>
@@ -94,7 +100,8 @@ include __DIR__ . '/../app/views/layouts/header.php';
           <div class="input-group input-group-lg">
             <input id="password" class="form-control" type="password" name="password"
                    autocomplete="current-password" required>
-            <span class="input-group-text" id="togglePass" title="Show/Hide password">
+            <span class="input-group-text" id="togglePass" 
+                  title="Click to show or hide your password for easier typing">
               <i class="bi bi-eye" aria-hidden="true"></i>
             </span>
             <div class="invalid-feedback">Password is required.</div>
@@ -103,19 +110,27 @@ include __DIR__ . '/../app/views/layouts/header.php';
 
         <div class="d-flex justify-content-between align-items-center mb-4">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="remember">
-            <label class="form-check-label" for="remember">Remember me</label>
+            <input class="form-check-input" type="checkbox" id="remember" 
+                   title="Keep me signed in for faster access next time">
+            <label class="form-check-label" for="remember">🔒 Remember me</label>
           </div>
-          <a href="forgot-password.php" class="link-muted">Forgot password?</a>
+          <a href="forgot-password.php" class="link-muted" 
+             title="Reset your password via email if you've forgotten it">
+            🔑 Forgot password?
+          </a>
         </div>
 
-        <button class="btn btn-l9 btn-lg w-100 mb-3" id="loginBtn">
-          <span class="btn-text">Login</span>
+        <button class="btn btn-l9 btn-lg w-100 mb-3" id="loginBtn" 
+                title="Sign in to access your dashboard, book classes, and track your fitness journey">
+          <span class="btn-text">🚀 Login to Dashboard</span>
           <span class="spinner-border spinner-border-sm ms-2 d-none" role="status" aria-hidden="true"></span>
         </button>
 
         <p class="text-center text-secondary mb-0">
-          New to L9? <a class="link-light text-decoration-underline" href="register.php">Create an account</a>
+          New to L9? <a class="link-light text-decoration-underline" href="register.php" 
+                        title="Create a free account to join our fitness community and access all features">
+            ✨ Create an account
+          </a>
         </p>
       </form>
 
