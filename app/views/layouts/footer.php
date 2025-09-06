@@ -21,5 +21,18 @@
 <script src="<?php echo BASE_URL; ?>assets/js/app.js"></script>
 <script src="<?php echo BASE_URL; ?>assets/js/page-transitions.js"></script>
 
+<!-- Chatbot Scripts -->
+<script>
+  // Pass user info to chatbot if logged in
+  <?php if (isset($_SESSION['user'])): ?>
+  window.userInfo = {
+    id: <?php echo $_SESSION['user']['id']; ?>,
+    name: "<?php echo htmlspecialchars($_SESSION['user']['name']); ?>",
+    email: "<?php echo htmlspecialchars($_SESSION['user']['email']); ?>"
+  };
+  <?php endif; ?>
+</script>
+<script src="<?php echo BASE_URL; ?>assets/js/chatbot.js"></script>
+
 </body>
 </html>

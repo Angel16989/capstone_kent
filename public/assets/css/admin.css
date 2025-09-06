@@ -140,6 +140,17 @@
   background: linear-gradient(135deg, var(--l9-accent), #33f5c4);
 }
 
+.chatbot-card:hover {
+  border-color: rgba(138, 43, 226, 0.6);
+  box-shadow: 0 0 30px rgba(138, 43, 226, 0.3);
+  background: linear-gradient(135deg, #e6e6fa, #f8f8ff);
+  color: #2d3748;
+}
+
+.chatbot-card .card-icon {
+  background: linear-gradient(135deg, #8a2be2, #9370db);
+}
+
 .card-content {
   flex: 1;
   margin-bottom: 20px;

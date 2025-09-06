@@ -202,6 +202,27 @@ try {
         </a>
       </div>
     </div>
+    
+    <!-- Chatbot Management -->
+    <div class="col-lg-4 col-md-6">
+      <div class="admin-card chatbot-card">
+        <div class="card-icon">
+          <i class="bi bi-robot"></i>
+        </div>
+        <div class="card-content">
+          <h4 class="card-title">Chatbot Analytics</h4>
+          <p class="card-description">Monitor chatbot conversations and user interactions</p>
+          <div class="card-stats">
+            <span class="stat-number">🤖</span>
+            <span class="stat-label">AI Assistant</span>
+          </div>
+        </div>
+        <a href="chatbot_admin.php" class="btn btn-admin">
+          <i class="bi bi-arrow-right"></i>
+          View Conversations
+        </a>
+      </div>
+    </div>
   </div>
   
   <!-- Recent Activity Section -->

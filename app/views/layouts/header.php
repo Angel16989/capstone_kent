@@ -20,6 +20,9 @@ require_once dirname(__DIR__, 3) . '/config/config.php';
   <!-- Page Transitions CSS -->
   <link href="<?php echo BASE_URL; ?>assets/css/page-transitions.css" rel="stylesheet">
   
+  <!-- Chatbot CSS -->
+  <link href="<?php echo BASE_URL; ?>assets/css/chatbot.css" rel="stylesheet">
+  
   <!-- Dynamic Effects JavaScript -->
   <script src="<?php echo BASE_URL; ?>assets/js/dynamic-effects.js"></script>
   

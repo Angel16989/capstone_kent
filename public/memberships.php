@@ -99,7 +99,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $current_membership = $stmt->fetch();
   }
   
-  $plans = $pdo->query('SELECT * FROM membership_plans WHERE is_active=1 ORDER BY price ASC')->fetchAll(); 
+  // Get exactly 3 membership plans, no duplicates
+  $plans = $pdo->query('SELECT DISTINCT name, description, duration_days, price, id FROM membership_plans WHERE is_active=1 ORDER BY price ASC LIMIT 3')->fetchAll(); 
   ?>
   
   <?php if ($current_membership): ?>
@@ -115,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <?php endif; ?>
   
   <div class="row g-4 justify-content-center">
-    <?php if(!empty($plans)): ?>
+    <?php if(!empty($plans) && count($plans) >= 3): ?>
       <?php foreach($plans as $index => $p): ?>
         <div class="col-lg-4 col-md-6">
           <div class="membership-card <?php echo $index === 1 ? 'featured' : ''; ?>">
@@ -125,17 +126,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             <div class="card-header">
               <div class="plan-icon">
-                <?php if($p['name'] === 'Monthly'): ?>
+                <?php if($index === 0): // Monthly Beast ?>
                   <svg width="32" height="32" fill="currentColor" class="bi bi-calendar-month">
                     <path d="M2.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1H2zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5z"/>
                     <path d="M2.5 7.5A.5.5 0 0 1 3 7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5v-1zM3 10.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
                   </svg>
-                <?php elseif($p['name'] === 'Quarterly'): ?>
+                <?php elseif($index === 1): // Quarterly Savage ?>
                   <svg width="32" height="32" fill="currentColor" class="bi bi-speedometer2">
                     <path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z"/>
                     <path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z"/>
                   </svg>
-                <?php else: ?>
+                <?php else: // Yearly Champion ?>
                   <svg width="32" height="32" fill="currentColor" class="bi bi-gem">
                     <path d="M3.1.7a.5.5 0 0 1 .4-.2h9a.5.5 0 0 1 .4.2l2.976 3.974c.149.185.156.45.01.644L8.4 15.3a.5.5 0 0 1-.8 0L.1 5.3a.5.5 0 0 1 0-.6l3-4zm11.386 3.785-1.806-2.41-.776 2.413 2.582-.003zm-3.633.004.961-2.989H4.186l.963 2.995 5.704-.006zM5.47 5.495 8 13.366l2.532-7.876-5.062.005zm-1.371-.999-.78-2.422-1.818 2.425 2.598-.003zM1.499 5.5l5.113 6.817-2.192-6.82L1.5 5.5zm7.889 6.817 5.123-6.83-2.928.002L8.388 12.317z"/>
                   </svg>
@@ -153,24 +154,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <p class="plan-description"><?php echo nl2br(htmlspecialchars($p['description'])); ?></p>
               
               <ul class="feature-list">
-                <?php if($p['name'] === 'Monthly'): ?>
+                <?php if($index === 0): // Monthly Beast ?>
                   <li><i class="bi bi-check-circle-fill"></i> Full battle ground access</li>
                   <li><i class="bi bi-check-circle-fill"></i> Beast training sessions</li>
                   <li><i class="bi bi-check-circle-fill"></i> Warrior locker room</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Essential weapons</li>
-                <?php elseif($p['name'] === 'Quarterly'): ?>
-                  <li><i class="bi bi-check-circle-fill"></i> Everything in Monthly</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Essential war machines</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Basic nutrition guide</li>
+                <?php elseif($index === 1): // Quarterly Savage ?>
+                  <li><i class="bi bi-check-circle-fill"></i> Everything in Monthly Beast</li>
                   <li><i class="bi bi-check-circle-fill"></i> Premium war machines</li>
                   <li><i class="bi bi-check-circle-fill"></i> Recovery chambers</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Nutrition warfare plan</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Bring your squad (2/month)</li>
-                <?php else: ?>
-                  <li><i class="bi bi-check-circle-fill"></i> Everything in Quarterly</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Advanced nutrition plan</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Bring your squad (2 guests/month)</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Priority class booking</li>
+                <?php else: // Yearly Champion ?>
+                  <li><i class="bi bi-check-circle-fill"></i> Everything in Quarterly Savage</li>
                   <li><i class="bi bi-check-circle-fill"></i> Personal destroyer coaching</li>
                   <li><i class="bi bi-check-circle-fill"></i> Unlimited army passes</li>
                   <li><i class="bi bi-check-circle-fill"></i> VIP battle priority</li>
                   <li><i class="bi bi-check-circle-fill"></i> 24/7 beast mode access</li>
-                  <li><i class="bi bi-check-circle-fill"></i> Recovery warrior discount</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Premium recovery discounts</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Champion merchandise</li>
                 <?php endif; ?>
               </ul>
 
