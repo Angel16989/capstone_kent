@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Test</title>
+    <link href="assets/css/chatbot.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f0f23);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .test-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #00bfff, #8a2be2, #ff1493);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .test-info {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.8;
+        }
+        .status-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+        .status-item {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(0, 191, 255, 0.1);
+        }
+        .success { background: rgba(0, 255, 136, 0.2) !important; }
+        .error { background: rgba(255, 20, 147, 0.2) !important; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1 class="test-title">🚀 Quantum Chatbot Test</h1>
+        <p class="test-info">Testing the most advanced AI chatbot ever created!</p>
+        
+        <div class="status-box">
+            <h3>🔧 System Status</h3>
+            <div class="status-item" id="cssStatus">CSS Loading...</div>
+            <div class="status-item" id="jsStatus">JavaScript Loading...</div>
+            <div class="status-item" id="chatbotStatus">Chatbot Initializing...</div>
+            <div class="status-item" id="visibilityStatus">Chatbot Visibility...</div>
+        </div>
+        
+        <div class="status-box">
+            <h3>🎯 Instructions</h3>
+            <p>Look for the floating quantum chatbot button in the bottom-right corner!</p>
+            <p>It should have rainbow borders, pulse animations, and quantum effects.</p>
+            <button onclick="debugChatbot()" style="background: var(--quantum-primary, #00bfff); color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; margin: 10px;">
+                🔍 Debug Chatbot
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Test script loading
+        document.getElementById('jsStatus').textContent = '✅ JavaScript Loaded Successfully';
+        document.getElementById('jsStatus').className = 'status-item success';
+        
+        // Test CSS loading
+        const testElement = document.createElement('div');
+        testElement.className = 'chatbot-container';
+        document.body.appendChild(testElement);
+        const computedStyle = window.getComputedStyle(testElement);
+        
+        if (computedStyle.position === 'fixed') {
+            document.getElementById('cssStatus').textContent = '✅ CSS Loaded Successfully';
+            document.getElementById('cssStatus').className = 'status-item success';
+        } else {
+            document.getElementById('cssStatus').textContent = '❌ CSS Not Loaded';
+            document.getElementById('cssStatus').className = 'status-item error';
+        }
+        
+        document.body.removeChild(testElement);
+        
+        // Debug function
+        function debugChatbot() {
+            console.log('🔍 Debugging Chatbot...');
+            console.log('Chatbot instance:', window.quantumChatbot);
+            
+            const container = document.querySelector('.chatbot-container');
+            console.log('Chatbot container found:', !!container);
+            
+            const toggle = document.getElementById('chatbotToggle');
+            console.log('Chatbot toggle found:', !!toggle);
+            
+            if (container) {
+                console.log('Container styles:', window.getComputedStyle(container));
+                container.style.border = '3px solid red';
+                container.style.background = 'yellow';
+                console.log('Added debug styling to container');
+            }
+            
+            // Try to create chatbot manually if it doesn't exist
+            if (!window.quantumChatbot) {
+                console.log('Creating chatbot manually...');
+                try {
+                    window.quantumChatbot = new QuantumChatbot();
+                    console.log('✅ Manual chatbot creation successful!');
+                } catch (error) {
+                    console.error('❌ Manual chatbot creation failed:', error);
+                }
+            }
+        }
+        
+        // Check chatbot after page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                if (window.quantumChatbot) {
+                    document.getElementById('chatbotStatus').textContent = '✅ Chatbot Initialized Successfully';
+                    document.getElementById('chatbotStatus').className = 'status-item success';
+                } else {
+                    document.getElementById('chatbotStatus').textContent = '❌ Chatbot Not Found';
+                    document.getElementById('chatbotStatus').className = 'status-item error';
+                }
+                
+                const container = document.querySelector('.chatbot-container');
+                if (container) {
+                    document.getElementById('visibilityStatus').textContent = '✅ Chatbot Container Found';
+                    document.getElementById('visibilityStatus').className = 'status-item success';
+                } else {
+                    document.getElementById('visibilityStatus').textContent = '❌ Chatbot Container Missing';
+                    document.getElementById('visibilityStatus').className = 'status-item error';
+                }
+            }, 2000);
+        });
+    </script>
+    
+    <!-- Load the quantum chatbot -->
+    <script src="assets/js/chatbot.js"></script>
+</body>
+</html>
