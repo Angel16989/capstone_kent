@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L9 Fitness Chatbot Debug</title>
+    <link href="assets/css/chatbot.css" rel="stylesheet">
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            background: #1a1a1a; 
+            color: white; 
+        }
+        .debug-info {
+            background: #333;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        .test-button {
+            background: #FF4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎯 L9 Fitness Chatbot Debug Page</h1>
+    
+    <div class="debug-info">
+        <h3>Debug Information:</h3>
+        <div id="debugOutput">Loading...</div>
+    </div>
+    
+    <div class="debug-info">
+        <h3>Manual Tests:</h3>
+        <button class="test-button" onclick="testChatbotLoad()">Test Chatbot Load</button>
+        <button class="test-button" onclick="testChatbotOpen()">Open Chatbot</button>
+        <button class="test-button" onclick="testAPI()">Test API</button>
+        <button class="test-button" onclick="forceInit()">Force Initialize</button>
+    </div>
+
+    <script>
+        // Debug output function
+        function updateDebug(message) {
+            const output = document.getElementById('debugOutput');
+            output.innerHTML += '<br>' + new Date().toLocaleTimeString() + ': ' + message;
+        }
+
+        // Test functions
+        function testChatbotLoad() {
+            updateDebug('Testing chatbot load...');
+            updateDebug('SimpleChatbot class exists: ' + (typeof SimpleChatbot !== 'undefined'));
+            updateDebug('window.simpleChatbot exists: ' + (typeof window.simpleChatbot !== 'undefined'));
+            
+            const chatToggle = document.getElementById('chatToggle');
+            updateDebug('Chat toggle element exists: ' + (chatToggle !== null));
+            
+            const chatWindow = document.getElementById('chatWindow');
+            updateDebug('Chat window element exists: ' + (chatWindow !== null));
+        }
+
+        function testChatbotOpen() {
+            updateDebug('Attempting to open chatbot...');
+            if (window.simpleChatbot) {
+                window.simpleChatbot.openChat();
+                updateDebug('Chatbot open command sent');
+            } else {
+                updateDebug('❌ No chatbot instance found');
+            }
+        }
+
+        async function testAPI() {
+            updateDebug('Testing AI API...');
+            try {
+                const response = await fetch('/chatbot_api.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: 'Hello test' })
+                });
+                const data = await response.json();
+                updateDebug('✅ API Response: ' + JSON.stringify(data));
+            } catch (error) {
+                updateDebug('❌ API Error: ' + error.message);
+            }
+        }
+
+        function forceInit() {
+            updateDebug('Force initializing chatbot...');
+            try {
+                if (typeof SimpleChatbot !== 'undefined') {
+                    window.simpleChatbot = new SimpleChatbot();
+                    updateDebug('✅ Chatbot force initialized');
+                } else {
+                    updateDebug('❌ SimpleChatbot class not found');
+                }
+            } catch (error) {
+                updateDebug('❌ Force init error: ' + error.message);
+            }
+        }
+
+        // Initialize debug
+        updateDebug('🚀 Debug page loaded');
+        updateDebug('Document ready state: ' + document.readyState);
+        
+        // Wait for chatbot script to load
+        setTimeout(() => {
+            testChatbotLoad();
+        }, 1000);
+    </script>
+    
+    <!-- Load chatbot script -->
+    <script src="assets/js/chatbot.js"></script>
+</body>
+</html>

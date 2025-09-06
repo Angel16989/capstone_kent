@@ -10,7 +10,7 @@
 return [
     // ChatGPT API Configuration
     'openai_api_key' => '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',  // REPLACE THIS WITH YOUR API KEY
-    'openai_model' => 'gpt-4o-mini',  // or 'gpt-4' for even better responses
+    'openai_model' => 'gpt-4.1',  // or 'gpt-4' for even better responses
     'max_tokens' => 500,
     'temperature' => 0.7,
     

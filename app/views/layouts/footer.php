@@ -32,7 +32,7 @@
   };
   <?php endif; ?>
 </script>
-<script src="<?php echo BASE_URL; ?>assets/js/chatbot.js"></script>
+<script src="<?php echo BASE_URL; ?>assets/js/chatbot.js?v=<?php echo time(); ?>"></script>
 
 </body>
 </html>

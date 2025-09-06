@@ -1,199 +1,167 @@
-// === L9 FITNESS SIMPLE AI CHATBOT - BULLETPROOF VERSION === //
-
-console.log('🚀 Loading Simple Chatbot...');
+// L9 Fitness AI Chatbot - Clean Version
+console.log('🚀 Loading L9 Fitness AI Chatbot...');
 
 class SimpleChatbot {
   constructor() {
-    console.log('🎯 SimpleChatbot constructor called');
+    console.log('🎯 L9 Fitness AI Chatbot constructor called');
     
     this.isOpen = false;
     this.conversationHistory = [];
     
-    // Simple knowledge base
-    this.responses = {
-      greetings: [
-        "🔥 Welcome to L9 Fitness! How can I help you dominate today?",
-        "⚡ Hey there, warrior! Ready to crush your fitness goals?",
-        "💪 What's up, champion! How can I assist you today?"
-      ],
-      hours: [
-        "🕐 L9 Fitness is open 24/7! Staff hours: Mon-Fri 6AM-10PM, Weekends 8AM-8PM.",
-        "⏰ We're always open! 24/7 access for members. Staff available during peak hours."
-      ],
-      membership: [
-        "💎 Our memberships: Monthly Beast ($49), Quarterly Savage ($129), Yearly Champion ($399)!",
-        "🏆 Check out our amazing membership plans on our Memberships page!"
-      ],
-      classes: [
-        "🔥 We offer HIIT, Yoga, Strength Training, Cardio, and more!",
-        "⚡ Visit our Classes page to see schedules and book sessions!"
-      ]
-    };
-    
-    console.log('✅ Properties initialized, creating interface...');
+    console.log('✅ L9 Fitness AI Chatbot initialized');
     this.createInterface();
   }
 
   createInterface() {
-    console.log('🎨 Creating chatbot interface...');
+    console.log('🎨 Creating L9 Fitness chatbot interface...');
     
     const chatbotHTML = `
-      <div id="simpleChatbot" style="position: fixed; bottom: 30px; right: 30px; z-index: 999999; font-family: Arial, sans-serif;">
-        <!-- Toggle Button -->
-        <button id="chatToggle" style="
-          width: 80px; 
-          height: 80px; 
-          border-radius: 50%; 
-          border: none; 
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-          color: white; 
-          font-size: 24px; 
-          cursor: pointer; 
-          box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: all 0.3s ease;
-        ">
-          🤖
+      <div id="simpleChatbot">
+        <!-- L9 Fitness Toggle Button -->
+        <button id="chatToggle" class="l9-glow">
+          <span>💬</span>
         </button>
         
-        <!-- Chat Window -->
-        <div id="chatWindow" style="
-          position: absolute;
-          bottom: 90px;
-          right: 0;
-          width: 350px;
-          height: 500px;
-          background: white;
-          border-radius: 15px;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-          display: none;
-          flex-direction: column;
-          overflow: hidden;
-        ">
-          <!-- Header -->
-          <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center;">
-            <div style="font-weight: bold; font-size: 16px;">🤖 L9 AI Assistant</div>
-            <button id="chatClose" style="background: none; border: none; color: white; font-size: 20px; cursor: pointer; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">×</button>
+        <!-- L9 Fitness Chat Window -->
+        <div id="chatWindow" style="display: none !important;">
+          <!-- L9 Header -->
+          <div class="chat-header l9-shine-effect">
+            <div class="title">💬 L9 Fitness Assistant</div>
+            <button id="chatClose">×</button>
           </div>
           
-          <!-- Messages -->
-          <div id="chatMessages" style="flex: 1; padding: 20px; overflow-y: auto; background: #f8f9fa;">
-            <div style="background: #e3f2fd; padding: 10px; border-radius: 10px; margin-bottom: 10px;">
-              <strong>🤖 AI:</strong> Hey there! Welcome to L9 Fitness! How can I help you today?
+          <!-- Messages Area -->
+          <div id="chatMessages">
+            <div class="chat-message bot">
+              <strong>L9 Fitness:</strong> Welcome to L9 Fitness! 💪 I'm here to help with memberships, classes, and gym info. How can I assist you today?
             </div>
           </div>
           
-          <!-- Input -->
-          <div style="padding: 15px; border-top: 1px solid #eee; background: white;">
-            <div style="display: flex; gap: 10px;">
-              <input id="chatInput" type="text" placeholder="Ask me anything..." style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 20px; outline: none;">
-              <button id="chatSend" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 10px 15px; border-radius: 20px; cursor: pointer;">Send</button>
-            </div>
+          <!-- Input Area -->
+          <div class="chat-input-container">
+            <input type="text" id="chatInput" placeholder="Ask about memberships, classes, hours..." />
+            <button id="chatSend">Send</button>
           </div>
         </div>
       </div>
     `;
     
     document.body.insertAdjacentHTML('beforeend', chatbotHTML);
-    console.log('✅ Interface created, binding events...');
-    
-    // Bind events immediately
-    setTimeout(() => {
-      this.bindEvents();
-    }, 100);
+    this.attachEventListeners();
+    console.log('✅ L9 Fitness interface created successfully');
   }
 
-  bindEvents() {
-    console.log('🔗 Binding events...');
+  attachEventListeners() {
+    console.log('🔗 Attaching L9 Fitness event listeners...');
     
-    const toggle = document.getElementById('chatToggle');
-    const close = document.getElementById('chatClose');
-    const send = document.getElementById('chatSend');
-    const input = document.getElementById('chatInput');
-    
-    console.log('🔍 Found elements:', { toggle: !!toggle, close: !!close, send: !!send, input: !!input });
-    
-    if (toggle) {
-      toggle.addEventListener('click', () => {
-        console.log('🎯 Toggle clicked!');
-        this.toggleChat();
-      });
+    try {
+      const toggleBtn = document.getElementById('chatToggle');
+      const closeBtn = document.getElementById('chatClose');
+      const sendBtn = document.getElementById('chatSend');
+      const input = document.getElementById('chatInput');
       
-      // Add hover effect
-      toggle.addEventListener('mouseenter', () => {
-        toggle.style.transform = 'scale(1.1)';
-      });
-      toggle.addEventListener('mouseleave', () => {
-        toggle.style.transform = 'scale(1)';
-      });
-    }
-    
-    if (close) {
-      close.addEventListener('click', () => {
-        console.log('❌ Close clicked!');
-        this.closeChat();
-      });
-    }
-    
-    if (send) {
-      send.addEventListener('click', () => {
-        console.log('📤 Send clicked!');
-        this.sendMessage();
-      });
-    }
-    
-    if (input) {
-      input.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-          console.log('⌨️ Enter pressed!');
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log('🔘 Toggle button clicked');
+          this.toggleChat();
+        });
+        console.log('✅ Toggle button listener attached');
+      } else {
+        console.error('❌ Toggle button not found');
+      }
+      
+      if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log('🔘 Close button clicked');
+          this.closeChat();
+        });
+        console.log('✅ Close button listener attached');
+      }
+      
+      if (sendBtn) {
+        sendBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log('🔘 Send button clicked');
           this.sendMessage();
-        }
-      });
+        });
+        console.log('✅ Send button listener attached');
+      }
+      
+      if (input) {
+        input.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            console.log('🔘 Enter key pressed');
+            this.sendMessage();
+          }
+        });
+        console.log('✅ Input listener attached');
+      }
+      
+    } catch (error) {
+      console.error('❌ Error attaching event listeners:', error);
     }
-    
-    console.log('✅ All events bound successfully!');
   }
 
   toggleChat() {
-    console.log('🔄 Toggling chat, current state:', this.isOpen);
+    console.log('🔄 Toggling L9 Fitness chat...');
+    const chatWindow = document.getElementById('chatWindow');
+    if (!chatWindow) {
+      console.error('❌ Chat window not found!');
+      return;
+    }
     
-    const window = document.getElementById('chatWindow');
-    const toggle = document.getElementById('chatToggle');
+    this.isOpen = !this.isOpen;
     
-    if (window && toggle) {
-      this.isOpen = !this.isOpen;
+    if (this.isOpen) {
+      // Show chat window with !important to override CSS
+      chatWindow.style.setProperty('display', 'flex', 'important');
+      console.log('✅ Chat window opened');
       
-      if (this.isOpen) {
-        console.log('📖 Opening chat...');
-        window.style.display = 'flex';
-        toggle.innerHTML = '×';
-        toggle.style.background = 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)';
-        
-        // Focus input
+      // Focus on input after a short delay
+      setTimeout(() => {
         const input = document.getElementById('chatInput');
-        if (input) {
-          setTimeout(() => input.focus(), 200);
-        }
-      } else {
-        this.closeChat();
-      }
+        if (input) input.focus();
+      }, 100);
+    } else {
+      // Hide chat window
+      chatWindow.style.setProperty('display', 'none', 'important');
+      console.log('✅ Chat window closed');
     }
   }
 
-  closeChat() {
-    console.log('📖 Closing chat...');
-    
-    const window = document.getElementById('chatWindow');
-    const toggle = document.getElementById('chatToggle');
-    
-    if (window && toggle) {
-      window.style.display = 'none';
-      toggle.innerHTML = '🤖';
-      toggle.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-      this.isOpen = false;
+  openChat() {
+    console.log('📖 Opening L9 Fitness chat...');
+    const chatWindow = document.getElementById('chatWindow');
+    if (!chatWindow) {
+      console.error('❌ Chat window not found!');
+      return;
     }
+    
+    this.isOpen = true;
+    chatWindow.style.setProperty('display', 'flex', 'important');
+    
+    setTimeout(() => {
+      const input = document.getElementById('chatInput');
+      if (input) input.focus();
+    }, 100);
+  }
+
+  closeChat() {
+    console.log('📕 Closing L9 Fitness chat...');
+    const chatWindow = document.getElementById('chatWindow');
+    if (!chatWindow) {
+      console.error('❌ Chat window not found!');
+      return;
+    }
+    
+    this.isOpen = false;
+    chatWindow.style.setProperty('display', 'none', 'important');
   }
 
   sendMessage() {
@@ -201,16 +169,62 @@ class SimpleChatbot {
     if (!input || !input.value.trim()) return;
     
     const message = input.value.trim();
-    console.log('📤 Sending message:', message);
+    console.log('📤 Sending message to L9 Fitness AI:', message);
     
     this.addUserMessage(message);
     input.value = '';
     
-    // Generate response
-    setTimeout(() => {
-      const response = this.generateResponse(message);
-      this.addBotMessage(response);
-    }, 500);
+    // Call AI API instead of local responses
+    this.callAIAPI(message);
+  }
+
+  async callAIAPI(message) {
+    try {
+      console.log('🤖 Calling L9 Fitness AI API with message:', message);
+      
+      // Show typing indicator
+      this.addBotMessage('⏳ L9 Fitness Assistant is typing...');
+      
+      const response = await         fetch('/simple_chatbot_api.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: message })
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      console.log('✅ L9 Fitness AI Response:', data);
+      
+      // Remove typing indicator
+      const messages = document.getElementById('chatMessages');
+      if (messages && messages.lastElementChild) {
+        messages.removeChild(messages.lastElementChild);
+      }
+      
+      // Add AI response
+      if (data.success && data.response) {
+        this.addBotMessage(data.response);
+      } else {
+        this.addBotMessage('🔧 Sorry, I encountered an issue. Please try again!');
+      }
+      
+    } catch (error) {
+      console.error('❌ L9 Fitness AI API Error:', error);
+      
+      // Remove typing indicator
+      const messages = document.getElementById('chatMessages');
+      if (messages && messages.lastElementChild) {
+        messages.removeChild(messages.lastElementChild);
+      }
+      
+      // Fallback response
+      this.addBotMessage('🔧 I\'m having trouble connecting right now. Please try again in a moment!');
+    }
   }
 
   addUserMessage(message) {
@@ -218,7 +232,7 @@ class SimpleChatbot {
     if (!messagesContainer) return;
     
     const messageDiv = document.createElement('div');
-    messageDiv.style.cssText = 'background: #e1f5fe; padding: 10px; border-radius: 10px; margin-bottom: 10px; text-align: right;';
+    messageDiv.className = 'chat-message user';
     messageDiv.innerHTML = `<strong>You:</strong> ${this.escapeHtml(message)}`;
     
     messagesContainer.appendChild(messageDiv);
@@ -230,47 +244,21 @@ class SimpleChatbot {
     if (!messagesContainer) return;
     
     const messageDiv = document.createElement('div');
-    messageDiv.style.cssText = 'background: #e3f2fd; padding: 10px; border-radius: 10px; margin-bottom: 10px;';
-    messageDiv.innerHTML = `<strong>🤖 AI:</strong> ${message}`;
+    messageDiv.className = 'chat-message bot';
+    
+    // Convert markdown-style formatting to HTML
+    let formattedMessage = message
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // **bold** to <strong>
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')              // *italic* to <em>
+      .replace(/\n/g, '<br>')                            // newlines to <br>
+      .replace(/•/g, '&bull;');                          // bullet points
+    
+    messageDiv.innerHTML = `<strong>L9 Fitness:</strong> ${formattedMessage}`;
     
     messagesContainer.appendChild(messageDiv);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
-  }
-
-  generateResponse(message) {
-    const lowerMessage = message.toLowerCase();
     
-    // Check for keywords
-    if (lowerMessage.includes('hour') || lowerMessage.includes('time') || lowerMessage.includes('open')) {
-      return this.getRandomResponse('hours');
-    }
-    
-    if (lowerMessage.includes('member') || lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('plan')) {
-      return this.getRandomResponse('membership');
-    }
-    
-    if (lowerMessage.includes('class') || lowerMessage.includes('workout') || lowerMessage.includes('training')) {
-      return this.getRandomResponse('classes');
-    }
-    
-    if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
-      return this.getRandomResponse('greetings');
-    }
-    
-    // Default responses
-    const defaultResponses = [
-      "🔥 Great question! I'm here to help with anything about L9 Fitness!",
-      "⚡ Let me help you with that! What specific information do you need?",
-      "💪 I'm your AI fitness assistant! Feel free to ask about hours, memberships, or classes!",
-      "🎯 I can help you with gym information, schedules, and more! What interests you?"
-    ];
-    
-    return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
-  }
-
-  getRandomResponse(category) {
-    const responses = this.responses[category];
-    return responses[Math.floor(Math.random() * responses.length)];
+    console.log('✅ Bot message added:', message.substring(0, 50) + '...');
   }
 
   escapeHtml(text) {
@@ -281,22 +269,55 @@ class SimpleChatbot {
 }
 
 // Initialize when DOM is ready
-console.log('🔧 Setting up DOM ready listener...');
+console.log('🔧 Setting up L9 Fitness DOM ready listener...');
 
 function initializeChatbot() {
-  console.log('🚀 Initializing Simple Chatbot...');
+  console.log('🚀 Initializing L9 Fitness AI Chatbot...');
+  console.log('Document ready state:', document.readyState);
+  console.log('Body exists:', !!document.body);
+  
   try {
+    // Ensure body exists before creating chatbot
+    if (!document.body) {
+      console.log('⏳ Body not ready, waiting...');
+      setTimeout(initializeChatbot, 100);
+      return;
+    }
+    
     window.simpleChatbot = new SimpleChatbot();
-    console.log('✅ Simple Chatbot Ready!');
+    console.log('✅ L9 Fitness AI Chatbot Ready!');
+    
+    // Double-check the button was created
+    setTimeout(() => {
+      const toggleBtn = document.getElementById('chatToggle');
+      if (toggleBtn) {
+        console.log('✅ Chat toggle button confirmed in DOM');
+      } else {
+        console.error('❌ Chat toggle button NOT found in DOM');
+      }
+    }, 500);
+    
   } catch (error) {
-    console.error('❌ Chatbot initialization failed:', error);
+    console.error('❌ L9 Fitness Chatbot initialization failed:', error);
+    console.error('Error details:', error.stack);
   }
 }
 
+// Multiple initialization attempts
 if (document.readyState === 'loading') {
+  console.log('📖 Document still loading, adding DOMContentLoaded listener');
   document.addEventListener('DOMContentLoaded', initializeChatbot);
 } else {
+  console.log('📖 Document already loaded, initializing immediately');
   initializeChatbot();
 }
 
-console.log('📋 Chatbot script loaded successfully!');
+// Backup initialization
+setTimeout(() => {
+  if (!window.simpleChatbot) {
+    console.log('🔄 Backup initialization attempt...');
+    initializeChatbot();
+  }
+}, 2000);
+
+console.log('🎉 L9 Fitness AI Chatbot script loaded!');
