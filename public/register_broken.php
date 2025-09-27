@@ -8,6 +8,8 @@ error_reporting(E_ALL);
 
 require_once __DIR__ . '/../config/config.php';
 
+$debug = [];
+
 $pageTitle = "Register";
 $pageCSS = "assets/css/register.css";
 
@@ -16,6 +18,8 @@ $success = false;
 $old = ['full_name' => '', 'email' => ''];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        $debug[] = 'Form data: ' . json_encode(['full_name' => $old['full_name'], 'email' => $old['email'], 'password_len' => strlen($password), 'accept_terms' => $accept]);
     try {
         // Get form data
         $old['full_name'] = trim($_POST['full_name'] ?? '');
@@ -37,6 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors['password'] = 'Password must be at least 8 characters.';
         }
         
+
+        $debug[] = 'Validation errors: ' . json_encode($errors);
         if ($password !== $confirm) {
             $errors['confirm_password'] = 'Passwords do not match.';
         }
@@ -44,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$accept) {
             $errors['accept_terms'] = 'You must accept the terms.';
         }
+                $debug[] = 'Email already exists.';
 
         // Check if email exists
         if (!$errors) {
@@ -54,20 +61,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
+            $debug[] = 'Attempting DB insert: ' . json_encode([$first_name, $last_name, $old['email'], '[hash]']);
+
         // Create account
         if (!$errors) {
             $hash = password_hash($password, PASSWORD_DEFAULT);
             $name_parts = explode(' ', $old['full_name'], 2);
             $first_name = $name_parts[0];
             $last_name = $name_parts[1] ?? '';
+                $debug[] = 'Account created successfully.';
 
             $stmt = $pdo->prepare('INSERT INTO users (role_id, first_name, last_name, email, password_hash, created_at) VALUES (4, ?, ?, ?, ?, NOW())');
+                $debug[] = 'DB insert failed: ' . json_encode($stmt->errorInfo());
             $result = $stmt->execute([$first_name, $last_name, $old['email'], $hash]);
             
             if ($result) {
                 $success = true;
                 $old = ['full_name' => '', 'email' => ''];
             } else {
+        $debug[] = 'Exception: ' . $e->getMessage();
                 $errors['general'] = 'Failed to create account. Please try again.';
             }
         }
@@ -101,6 +113,13 @@ include __DIR__ . '/../app/views/layouts/header.php';
       <ul class="l9-cta-points list-unstyled small text-light">
         <li>• Personalized programs & PB tracking</li>
         <li>• Class reminders & waitlist auto-join</li>
+
+      <?php if (!empty($debug)): ?>
+        <div class="alert alert-warning small" style="white-space: pre-wrap;">
+          <strong>Debug Info:</strong><br>
+          <?= htmlspecialchars(implode("\n", $debug)) ?>
+        </div>
+      <?php endif; ?>
         <li>• Exclusive challenges & rewards</li>
       </ul>
     </div>

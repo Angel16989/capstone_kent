@@ -2,10 +2,11 @@
 // AI Configuration for L9 Fitness Chatbot
 
 // AI Provider Configuration
-define('AI_PROVIDER', 'huggingface'); // Using free Hugging Face API for real AI responses
+define('AI_PROVIDER', 'openai'); // Using OpenAI for intelligent responses
 define('USE_AI_FALLBACK', true); // Enable fallback for backup
 
-// OpenAI Configuration (if using OpenAI)
+// OpenAI Configuration
+// To use OpenAI, get your API key from: https://platform.openai.com/account/api-keys
 define('OPENAI_API_KEY', ''); // Add your OpenAI API key here
 define('OPENAI_MODEL', 'gpt-3.5-turbo');
 

@@ -20,10 +20,18 @@ $message = trim($input['message']);
 // Try to load AI service for intelligent responses
 try {
     require_once '../app/services/AIService.php';
-    $response = AIService::generateResponse($message, null);
-    $ai_powered = true;
+    $result = AIService::generateResponse($message, null);
+    
+    // Check if result is array with status info or just a string
+    if (is_array($result)) {
+        $response = $result['response'];
+        $ai_powered = $result['ai_powered'] ?? false;
+    } else {
+        $response = $result;
+        $ai_powered = true; // Assume AI if it's just a string response
+    }
 } catch (Exception $e) {
-    // Fallback to intelligent pattern matching if AI fails
+    // Fallback to intelligent pattern matching if AI fails completely
     $response = getIntelligentResponse($message);
     $ai_powered = false;
 }
