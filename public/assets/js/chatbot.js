@@ -185,7 +185,7 @@ class SimpleChatbot {
       // Show typing indicator
       this.addBotMessage('⏳ L9 Fitness Assistant is typing...');
       
-      const response = await         fetch('/simple_chatbot_api.php', {
+      const response = await fetch('simple_chatbot_api.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
