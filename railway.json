@@ -1,0 +1,17 @@
+{
+  "build": {
+    "builder": "PHP",
+    "buildCommand": "echo 'PHP application ready'"
+  },
+  "deploy": {
+    "startCommand": "php -S 0.0.0.0:$PORT -t public"
+  },
+  "environments": {
+    "production": {
+      "variables": {
+        "APP_ENV": "production",
+        "NODE_ENV": "production"
+      }
+    }
+  }
+}
