@@ -1,0 +1,355 @@
+/* Text Visibility Enhancement CSS - Specific Pages Only */
+
+/* Only apply to specific page classes to avoid breaking main pages */
+.contact-container,
+.success-container,
+.legal-container {
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+
+/* Only enhance text on specific cards and containers */
+.contact-form-card p,
+.contact-form-card span,
+.contact-form-card div,
+.contact-form-card label,
+.contact-form-card li,
+.contact-info-card p,
+.contact-info-card span,
+.contact-info-card div,
+.contact-info-card label,
+.contact-info-card li,
+.payment-details-card p,
+.payment-details-card span,
+.payment-details-card div,
+.payment-details-card label,
+.payment-details-card li,
+.whats-next-card p,
+.whats-next-card span,
+.whats-next-card div,
+.whats-next-card label,
+.whats-next-card li,
+.legal-content p,
+.legal-content span,
+.legal-content div,
+.legal-content label,
+.legal-content li,
+.toc-card p,
+.toc-card span,
+.toc-card div,
+.toc-card label,
+.toc-card li {
+    color: #1a1a1a !important;
+    font-weight: 600 !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Make headings super bold and visible - ONLY on specific pages */
+.contact-form-card h1,
+.contact-form-card h2,
+.contact-form-card h3,
+.contact-form-card h4,
+.contact-form-card h5,
+.contact-form-card h6,
+.contact-info-card h1,
+.contact-info-card h2,
+.contact-info-card h3,
+.contact-info-card h4,
+.contact-info-card h5,
+.contact-info-card h6,
+.payment-details-card h1,
+.payment-details-card h2,
+.payment-details-card h3,
+.payment-details-card h4,
+.payment-details-card h5,
+.payment-details-card h6,
+.whats-next-card h1,
+.whats-next-card h2,
+.whats-next-card h3,
+.whats-next-card h4,
+.whats-next-card h5,
+.whats-next-card h6,
+.legal-content h1,
+.legal-content h2,
+.legal-content h3,
+.legal-content h4,
+.legal-content h5,
+.legal-content h6,
+.toc-card h1,
+.toc-card h2,
+.toc-card h3,
+.toc-card h4,
+.toc-card h5,
+.toc-card h6 {
+    color: #1a1a1a !important;
+    font-weight: 900 !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Form elements visibility - ONLY on contact, legal, and success pages */
+.contact-container .form-control,
+.contact-container input,
+.contact-container textarea,
+.contact-container select,
+.legal-container .form-control,
+.legal-container input,
+.legal-container textarea,
+.legal-container select,
+.success-container .form-control,
+.success-container input,
+.success-container textarea,
+.success-container select {
+    color: #1a1a1a !important;
+    font-weight: 700 !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 3px solid #e1e8f0 !important;
+}
+
+.contact-container .form-control::placeholder,
+.legal-container .form-control::placeholder,
+.success-container .form-control::placeholder {
+    color: #666666 !important;
+    font-weight: 600 !important;
+}
+
+.contact-container .form-label,
+.legal-container .form-label,
+.success-container .form-label {
+    color: #1a1a1a !important;
+    font-weight: 800 !important;
+    font-size: 1.1rem !important;
+}
+
+/* Button text visibility - ONLY on specific pages */
+.contact-container .btn,
+.legal-container .btn,
+.success-container .btn {
+    font-weight: 800 !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Card backgrounds for better contrast - ONLY specific cards */
+.payment-details-card,
+.whats-next-card,
+.contact-form-card,
+.contact-info-card,
+.legal-content,
+.toc-card,
+.legal-header {
+    background: rgba(255, 255, 255, 0.98) !important;
+    border: 2px solid rgba(255, 255, 255, 0.6) !important;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Table text visibility - ONLY on specific pages */
+.contact-container table,
+.contact-container td,
+.contact-container th,
+.legal-container table,
+.legal-container td,
+.legal-container th,
+.success-container table,
+.success-container td,
+.success-container th {
+    color: #1a1a1a !important;
+    font-weight: 600 !important;
+}
+
+/* Link visibility - ONLY on specific pages */
+.contact-container a,
+.legal-container a,
+.success-container a {
+    color: #667eea !important;
+    font-weight: 700 !important;
+    text-decoration: underline !important;
+}
+
+.contact-container a:hover,
+.legal-container a:hover,
+.success-container a:hover {
+    color: #4f5fd8 !important;
+    font-weight: 800 !important;
+}
+
+/* Alert text visibility - ONLY on specific pages */
+.contact-container .alert,
+.legal-container .alert,
+.success-container .alert {
+    color: #1a1a1a !important;
+    font-weight: 700 !important;
+}
+
+/* List text visibility - ONLY on specific pages */
+.contact-container ul li,
+.contact-container ol li,
+.legal-container ul li,
+.legal-container ol li,
+.success-container ul li,
+.success-container ol li {
+    color: #1a1a1a !important;
+    font-weight: 600 !important;
+    line-height: 1.8 !important;
+}
+
+/* Don't override main navigation or footer */
+
+/* Make sure white text on colored backgrounds stays white */
+.bg-primary,
+.bg-secondary,
+.bg-success,
+.bg-danger,
+.bg-warning,
+.bg-info,
+.bg-dark,
+.card-header,
+.btn-primary,
+.btn-secondary,
+.btn-success,
+.btn-danger,
+.btn-warning,
+.btn-info,
+.btn-dark {
+    color: #ffffff !important;
+}
+
+.bg-primary *,
+.bg-secondary *,
+.bg-success *,
+.bg-danger *,
+.bg-warning *,
+.bg-info *,
+.bg-dark *,
+.card-header *,
+.btn-primary *,
+.btn-secondary *,
+.btn-success *,
+.btn-danger *,
+.btn-warning *,
+.btn-info *,
+.btn-dark * {
+    color: #ffffff !important;
+}
+
+/* Success page specific */
+.success-title {
+    color: #ffffff !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+.success-subtitle {
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Contact page hero text */
+.contact-hero h1 {
+    color: #ffffff !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4) !important;
+}
+
+.contact-hero .lead {
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Legal page hero text */
+.legal-header h1 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.legal-header .lead {
+    color: #666666 !important;
+    font-weight: 600 !important;
+}
+
+/* Only override transparent text on specific pages */
+.contact-container *,
+.legal-container *,
+.success-container * {
+    -webkit-text-fill-color: initial;
+    background-clip: initial;
+}
+
+/* Special override for gradient text that should stay gradient - ONLY on specific pages */
+.success-container .success-title,
+.legal-container .legal-header h1,
+.contact-container .form-header h2 {
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    filter: contrast(1.5) saturate(1.2) !important;
+}
+
+/* Responsive text sizing */
+@media (max-width: 768px) {
+    p, span, div, label, li {
+        font-size: 1rem !important;
+    }
+    
+    h1 { font-size: 2.2rem !important; }
+    h2 { font-size: 1.8rem !important; }
+    h3 { font-size: 1.5rem !important; }
+    h4 { font-size: 1.3rem !important; }
+    h5 { font-size: 1.2rem !important; }
+    h6 { font-size: 1.1rem !important; }
+}
+
+/* High contrast mode for accessibility - ONLY on specific pages */
+@media (prefers-contrast: high) {
+    .contact-container *,
+    .legal-container *,
+    .success-container * {
+        text-shadow: none !important;
+        font-weight: 900 !important;
+        color: #000000 !important;
+    }
+    
+    .contact-container .bg-primary,
+    .contact-container .bg-secondary,
+    .contact-container .bg-success,
+    .contact-container .bg-danger,
+    .contact-container .bg-warning,
+    .contact-container .bg-info,
+    .contact-container .bg-dark,
+    .contact-container .card-header,
+    .contact-container .btn-primary,
+    .contact-container .btn-secondary,
+    .contact-container .btn-success,
+    .contact-container .btn-danger,
+    .contact-container .btn-warning,
+    .contact-container .btn-info,
+    .contact-container .btn-dark,
+    .legal-container .bg-primary,
+    .legal-container .bg-secondary,
+    .legal-container .bg-success,
+    .legal-container .bg-danger,
+    .legal-container .bg-warning,
+    .legal-container .bg-info,
+    .legal-container .bg-dark,
+    .legal-container .card-header,
+    .legal-container .btn-primary,
+    .legal-container .btn-secondary,
+    .legal-container .btn-success,
+    .legal-container .btn-danger,
+    .legal-container .btn-warning,
+    .legal-container .btn-info,
+    .legal-container .btn-dark,
+    .success-container .bg-primary,
+    .success-container .bg-secondary,
+    .success-container .bg-success,
+    .success-container .bg-danger,
+    .success-container .bg-warning,
+    .success-container .bg-info,
+    .success-container .bg-dark,
+    .success-container .card-header,
+    .success-container .btn-primary,
+    .success-container .btn-secondary,
+    .success-container .btn-success,
+    .success-container .btn-danger,
+    .success-container .btn-warning,
+    .success-container .btn-info,
+    .success-container .btn-dark {
+        color: #ffffff !important;
+    }
+}

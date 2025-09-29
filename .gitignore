@@ -1,0 +1,113 @@
+# L9 Fitness Gym - .gitignore
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# PHP
+/vendor/
+/composer.lock
+
+# Node.js (if any)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Database files (local development only)
+*.sql.bak
+*.sql.tmp
+
+# Logs
+*.log
+logs/
+error_log
+
+# Cache and temp files
+/cache/
+/tmp/
+/temp/
+
+# Upload directories (local development)
+/public/uploads/
+/uploads/
+
+# Session files
+/session/
+
+# XAMPP specific
+/xampp/
+
+# Windows executables
+*.exe
+*.bat.tmp
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Screenshots and exports
+screenshots/
+exports/
+
+# Local development files
+local-*
+dev-*
+test-*
+
+# Railway deployment files (generated)
+.railway/
+
+# Build artifacts
+/dist/
+/build/
+
+# Testing
+/tests/
+/phpunit.xml
+
+# Documentation builds
+/docs/build/
+/docs/.doctrees/
+
+# Python (if any virtual environments)
+venv/
+env/
+ENV/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# Temporary files
+*.tmp
+*.temp

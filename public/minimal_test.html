@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Minimal Chatbot Test</title>
+    <style>
+        body { background: #000; color: white; padding: 20px; font-family: Arial; }
+        .info { background: #333; padding: 10px; margin: 10px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>L9 Fitness Minimal Chatbot Test</h1>
+    
+    <div class="info">
+        This page tests if we can create a simple chatbot button at all.
+        Check the bottom-right corner for a test button.
+    </div>
+    
+    <div class="info" id="status">Loading...</div>
+    
+    <script>
+        document.getElementById('status').innerHTML = 'Page loaded, loading minimal chatbot...';
+    </script>
+    
+    <!-- Load minimal test script -->
+    <script src="assets/js/chatbot_minimal_test.js"></script>
+    
+    <script>
+        setTimeout(() => {
+            const status = document.getElementById('status');
+            const testButton = document.getElementById('testChatButton');
+            
+            if (testButton) {
+                status.innerHTML = '✅ Test button found! Check bottom-right corner.';
+            } else {
+                status.innerHTML = '❌ Test button not found. Check console for errors.';
+            }
+        }, 2000);
+    </script>
+</body>
+</html>

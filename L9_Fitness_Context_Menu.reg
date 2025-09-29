@@ -1,0 +1,11 @@
+Windows Registry Editor Version 5.00
+
+; This will create a "Launch L9 Fitness" context menu option
+; Right-click this file and select "Merge" to install
+
+[HKEY_CLASSES_ROOT\Directory\shell\LaunchL9Fitness]
+@="🏋️ Launch L9 Fitness Website"
+"Icon"="C:\\Windows\\System32\\shell32.dll,14"
+
+[HKEY_CLASSES_ROOT\Directory\shell\LaunchL9Fitness\command]
+@="cmd.exe /c start \"L9 Fitness\" \"http://localhost/Capstone-latest/public/\""

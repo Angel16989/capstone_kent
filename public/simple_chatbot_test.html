@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Chatbot Test</title>
+    <link href="assets/css/chatbot.css" rel="stylesheet">
+    <style>
+        body { background: #000; color: white; padding: 20px; }
+        .status { background: #333; padding: 10px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>L9 Fitness Chatbot Test</h1>
+    
+    <div class="status" id="status1">1. Page loaded</div>
+    <div class="status" id="status2">2. Waiting for chatbot script...</div>
+    <div class="status" id="status3">3. Waiting for initialization...</div>
+    
+    <button onclick="manualTest()">Manual Test</button>
+    
+    <script>
+        function manualTest() {
+            console.log('=== MANUAL TEST START ===');
+            
+            // Check if SimpleChatbot class exists
+            console.log('SimpleChatbot class:', typeof SimpleChatbot);
+            document.getElementById('status2').innerHTML = '2. SimpleChatbot class: ' + typeof SimpleChatbot;
+            
+            // Check if instance exists
+            console.log('window.simpleChatbot:', typeof window.simpleChatbot);
+            document.getElementById('status3').innerHTML = '3. Instance: ' + typeof window.simpleChatbot;
+            
+            // Check DOM elements
+            const toggle = document.getElementById('chatToggle');
+            const container = document.getElementById('simpleChatbot');
+            console.log('Toggle button:', toggle);
+            console.log('Container:', container);
+            
+            // Try to create manually if needed
+            if (typeof SimpleChatbot !== 'undefined' && !window.simpleChatbot) {
+                try {
+                    console.log('Creating chatbot manually...');
+                    window.simpleChatbot = new SimpleChatbot();
+                    document.getElementById('status3').innerHTML = '3. Manually created chatbot!';
+                } catch (error) {
+                    console.error('Manual creation failed:', error);
+                    document.getElementById('status3').innerHTML = '3. Manual creation failed: ' + error.message;
+                }
+            }
+        }
+        
+        // Test after script loads
+        setTimeout(manualTest, 2000);
+    </script>
+    
+    <!-- Load the chatbot script -->
+    <script src="assets/js/chatbot.js"></script>
+    
+    <script>
+        // Immediate check after script tag
+        setTimeout(() => {
+            document.getElementById('status2').innerHTML = '2. Script loaded, SimpleChatbot: ' + typeof SimpleChatbot;
+        }, 100);
+    </script>
+</body>
+</html>

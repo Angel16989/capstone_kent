@@ -1,0 +1,758 @@
+/**
+ * L9 Fitness Hardcore Checkout - Australian Edition
+ * Matching Main Website Styling - PHP 8+ & W3C Compliant
+ */
+
+:root {
+  /* Hardcore gym color palette */
+  --l9-primary: #FF4444;        /* Aggressive red */
+  --l9-accent: #FFD700;         /* Victory gold */
+  --l9-secondary: #00CCFF;      /* Electric blue */
+  --l9-success: #00e676;
+  --l9-dark: #0a0a0a;           /* Deep black */
+  --l9-darker: #050505;         /* Pitch black */
+  --l9-surface: rgba(255,255,255,.03);
+  --l9-surface-strong: rgba(255,68,68,.06);
+  --l9-border: rgba(255,255,255,.08);
+  --l9-border-strong: rgba(255,68,68,.12);
+  --l9-text-primary: #ffffff;
+  --l9-text-secondary: #e0e0e0;
+  --l9-text-muted: #b0b0b0;
+  --l9-shadow: rgba(0,0,0,.6);
+  --l9-glow-red: rgba(255,68,68,.5);
+  --l9-glow-gold: rgba(255,215,0,.4);
+  --l9-primary-rgb: 255, 68, 68;
+  --l9-accent-rgb: 255, 215, 0;
+}
+
+/* Hardcore Gym Main Layout - Matching Main Website */
+.checkout-container {
+  min-height: 100vh;
+  background: 
+    radial-gradient(circle at 20% 10%, rgba(255,68,68,.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 90%, rgba(255,215,0,.05) 0%, transparent 50%),
+    linear-gradient(135deg, var(--l9-darker) 0%, #111111 25%, #0a0a0a 50%, #050505 100%);
+  color: var(--l9-text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 500;
+  line-height: 1.6;
+  padding: 2rem 0;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+/* Enhanced Progress Steps */
+.checkout-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+  padding: 0 1rem;
+  background: rgba(255,255,255,.05);
+  border-radius: 50px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255,255,255,.1);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1.5rem 2rem;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.step-number {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.1);
+  border: 2px solid rgba(255,255,255,.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.step.active .step-number {
+    background: linear-gradient(135deg, var(--l9-primary), #ff6666);
+    color: white;
+    transform: scale(1.15);
+    box-shadow: 0 8px 25px rgba(var(--l9-primary-rgb), 0.4);
+    border-color: var(--l9-primary);
+}
+
+.step.completed .step-number {
+    background: var(--l9-success);
+    color: white;
+}
+
+.step-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #6c757d;
+}
+
+.step.active .step-text,
+.step.completed .step-text {
+    color: var(--l9-primary);
+}
+
+.step-line {
+    height: 2px;
+    width: 60px;
+    background: #e9ecef;
+    margin: 0 10px;
+    align-self: flex-start;
+    margin-top: 20px;
+}
+
+.step-line.completed {
+    background: var(--l9-success);
+}
+
+/* Hardcore Glass Cards - Matching Main Website */
+.checkout-form-card,
+.order-summary-card {
+    background: var(--l9-surface) !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--l9-border) !important;
+    border-radius: 16px !important;
+    transition: all 0.4s ease;
+    overflow: hidden;
+    padding: 2.5rem;
+    color: var(--l9-text-primary) !important;
+    margin-bottom: 2rem;
+    box-shadow: 0 15px 35px rgba(0,0,0,.2);
+}
+
+.checkout-form-card:hover,
+.order-summary-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 25px 50px rgba(0,0,0,.3);
+    border-color: rgba(255,68,68,.3) !important;
+}
+
+.checkout-form-card {
+    min-height: 600px;
+}
+
+.order-summary-card {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+}
+
+.section-header {
+    margin: 2rem 0 1.5rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f8f9fa;
+}
+
+.section-header h4 {
+    color: var(--l9-primary);
+    font-weight: 700;
+}
+
+.payment-methods {
+    display: grid;
+    gap: 1rem;
+}
+
+.payment-option {
+    margin: 0;
+}
+
+.payment-option .form-check-label {
+    width: 100%;
+    padding: 1.5rem;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.payment-option .form-check-label:hover {
+    border-color: var(--l9-primary);
+    background: rgba(var(--l9-primary-rgb), 0.05);
+}
+
+.payment-option .form-check-input:checked + .form-check-label {
+    border-color: var(--l9-primary);
+    background: rgba(var(--l9-primary-rgb), 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(var(--l9-primary-rgb), 0.2);
+}
+
+.payment-method-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.payment-method-content i {
+    font-size: 1.5rem;
+    color: var(--l9-primary);
+}
+
+.card-logos {
+    display: flex;
+    gap: 8px;
+}
+
+.card-logo {
+    height: 24px;
+    width: auto;
+}
+
+.card-details {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    border-left: 4px solid var(--l9-primary);
+}
+
+/* Hardcore Terminal-Style Form Controls - Matching Main Website */
+.form-control, 
+.form-select {
+    background: rgba(5,5,5,0.9) !important;
+    border: 2px solid rgba(255,68,68,0.3) !important;
+    color: var(--l9-text-primary) !important;
+    transition: all 0.3s ease;
+    font-family: 'Courier New', monospace !important;
+    font-weight: 600;
+    text-shadow: 0 0 5px rgba(255,68,68,0.3);
+    border-radius: 12px !important;
+    padding: 12px 16px !important;
+}
+
+/* Dangerous typing animation on focus */
+.form-control:focus, 
+.form-select:focus {
+    border-color: var(--l9-primary) !important;
+    box-shadow: 
+        0 0 20px rgba(255,68,68,0.6), 
+        0 0 40px rgba(255,215,0,0.4),
+        inset 0 0 15px rgba(255,68,68,0.1) !important;
+    background: rgba(20,5,5,0.95) !important;
+    outline: none !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px !important;
+    text-shadow: 
+        0 0 5px rgba(255,68,68,0.8), 
+        0 0 10px rgba(255,215,0,0.5),
+        0 0 15px rgba(0,204,255,0.3) !important;
+}
+
+.form-control::placeholder {
+    color: rgba(255,68,68,0.6) !important;
+    font-family: 'Courier New', monospace !important;
+    font-weight: 600;
+    text-shadow: 0 0 3px rgba(255,68,68,0.4);
+}
+
+.form-control-lg {
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+}
+
+.form-label {
+    color: var(--l9-text-secondary) !important;
+    font-weight: 600;
+    margin-bottom: 8px !important;
+}
+
+/* Hardcore Button Styling - Matching Main Website */
+.btn {
+    font-weight: 600;
+    border-radius: 12px !important;
+    padding: 12px 24px !important;
+    transition: all 0.3s ease;
+    text-transform: none;
+    letter-spacing: 0.3px;
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, var(--l9-primary), #5dd8ff) !important;
+    border: none !important;
+    box-shadow: 0 6px 20px rgba(255,68,68,.3);
+    color: white !important;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05) translateY(-2px) !important;
+    box-shadow: 
+        0 0 20px rgba(255,68,68,0.6), 
+        0 0 40px rgba(255,215,0,0.4) !important;
+    text-shadow: 
+        0 0 5px rgba(255,255,255,0.8), 
+        0 0 10px rgba(255,68,68,0.6) !important;
+    background: linear-gradient(90deg, #ff6666, #5dd8ff) !important;
+}
+
+.order-summary-card {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+}
+
+.plan-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1.5rem 0;
+    border-bottom: 2px solid #f8f9fa;
+    margin-bottom: 1rem;
+}
+
+.plan-info {
+    flex: 1;
+}
+
+.plan-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--l9-dark);
+    margin-bottom: 0.5rem;
+}
+
+.plan-description {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.plan-duration {
+    background: var(--l9-primary);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.plan-price {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--l9-primary);
+    text-align: right;
+}
+
+.pricing-breakdown {
+    margin: 1.5rem 0;
+}
+
+.pricing-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.pricing-row:last-child {
+    border-bottom: none;
+}
+
+.pricing-row.total {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--l9-primary);
+    border-top: 2px solid var(--l9-primary);
+    margin-top: 1rem;
+    padding-top: 1rem;
+}
+
+.benefits-list h6 {
+    color: var(--l9-primary);
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.benefits-list ul {
+    margin: 0;
+    padding: 0;
+}
+
+.benefits-list li {
+    padding: 0.5rem 0;
+    color: #495057;
+    font-size: 0.9rem;
+}
+
+.guarantee-badge {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 12px;
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+.security-info {
+    background: #e8f5e8;
+    color: #155724;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border-left: 4px solid #28a745;
+}
+
+/* Form Validation States */
+.was-validated .form-control:valid {
+    border-color: #28a745;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='m2.3 6.73.4.4 4.4-4.4-.8-.8-3.6 3.6L.4 3.73l-.8.8 2.7 2.7z'/%3e%3c/svg%3e");
+}
+
+.was-validated .form-control:invalid {
+    border-color: #dc3545;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath d='m5.8 7.2L7.2 5.8M5.8 5.8l1.4 1.4'/%3e%3c/svg%3e");
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .checkout-progress {
+        padding: 1rem;
+    }
+    
+    .step {
+        min-width: 80px;
+    }
+    
+    .step-text {
+        font-size: 0.8rem;
+    }
+    
+    .step-line {
+        width: 30px;
+    }
+    
+    .checkout-form-card,
+    .order-summary-card {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .order-summary-card {
+        position: static;
+        top: auto;
+    }
+    
+    .plan-summary {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .plan-price {
+        text-align: center;
+        margin-top: 1rem;
+    }
+}
+
+/* Animation Effects */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.checkout-form-card,
+.order-summary-card {
+    animation: slideInUp 0.6s ease-out;
+}
+
+/* Loading States */
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* Custom Form Controls */
+.form-check-input:checked {
+    background-color: var(--l9-primary);
+    border-color: var(--l9-primary);
+}
+
+.form-select:focus {
+    border-color: var(--l9-primary);
+    box-shadow: 0 0 0 0.25rem rgba(var(--l9-primary-rgb), 0.25);
+}
+
+/* Enhanced Payment Method Styles */
+.payment-method-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.payment-info {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+.payment-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.card-logos,
+.paypal-logo,
+.apple-pay-logo,
+.google-pay-logo,
+.afterpay-logo,
+.klarna-logo,
+.venmo-logo,
+.bank-logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.card-logo {
+    height: 24px;
+    width: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Payment Details Sections */
+.payment-details-section {
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 16px;
+    padding: 25px;
+    margin: 20px 0;
+    transition: all 0.3s ease;
+}
+
+.card-details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+.card-details-header h5 {
+    margin: 0;
+    color: var(--l9-accent);
+    font-weight: 700;
+}
+
+.security-badges {
+    display: flex;
+    gap: 8px;
+}
+
+.security-badges .badge {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+}
+
+/* Card Type Indicator */
+#card-type-indicator {
+    background: rgba(255,255,255,.05);
+    border-color: rgba(255,255,255,.2);
+    color: #fff;
+}
+
+#card-type-indicator img {
+    width: 24px;
+    height: auto;
+}
+
+/* Afterpay Installment Breakdown */
+.afterpay-info h5 {
+    color: #b2fce4;
+    margin-bottom: 20px;
+}
+
+.installment-breakdown {
+    background: rgba(178, 252, 228, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 15px 0;
+}
+
+.installment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(178, 252, 228, 0.2);
+}
+
+.installment-item:last-child {
+    border-bottom: none;
+}
+
+.installment-item .amount {
+    font-weight: 700;
+    color: #b2fce4;
+}
+
+/* Bank Transfer Info */
+.bank-transfer-info h5 {
+    color: #28a745;
+    margin-bottom: 20px;
+}
+
+.bank-transfer-info .alert-info {
+    background: rgba(40, 167, 69, 0.1);
+    border-color: rgba(40, 167, 69, 0.3);
+    color: rgba(255,255,255,.9);
+}
+
+/* Payment Method Specific Icons */
+.payment-method-content i.bi-credit-card {
+    color: #007bff;
+}
+
+.payment-method-content i.bi-paypal {
+    color: #0070ba;
+}
+
+.payment-method-content i.bi-apple {
+    color: #000000;
+}
+
+.payment-method-content i.bi-google {
+    color: #4285f4;
+}
+
+.payment-method-content i.bi-calendar-event {
+    color: #b2fce4;
+}
+
+.payment-method-content i.bi-credit-card-2-front {
+    color: #ffb3c7;
+}
+
+.payment-method-content i.bi-phone {
+    color: #3d95ce;
+}
+
+.payment-method-content i.bi-bank {
+    color: #28a745;
+}
+
+/* Card number input styling */
+#card_number {
+    font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Courier New', monospace;
+    letter-spacing: 1px;
+    font-size: 1.1rem;
+}
+
+/* Enhanced hover effects for payment options */
+.payment-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.payment-option .form-check-input:checked + .form-check-label {
+    background: linear-gradient(135deg, rgba(var(--l9-primary-rgb), 0.1), rgba(var(--l9-accent-rgb), 0.05));
+    border-color: var(--l9-accent);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(var(--l9-primary-rgb), 0.25);
+}
+
+/* Security Features */
+.payment-security-info h6 {
+    color: var(--l9-accent);
+    font-weight: 700;
+}
+
+.security-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.security-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,.8);
+    padding: 4px 0;
+}
+
+.security-item i {
+    font-size: 0.9rem;
+}
+
+/* Payment message animations */
+.payment-message {
+    animation: slideInRight 0.3s ease;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive adjustments for payment methods */
+@media (max-width: 768px) {
+    .payment-method-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .card-logos,
+    .paypal-logo,
+    .apple-pay-logo,
+    .google-pay-logo,
+    .afterpay-logo,
+    .klarna-logo,
+    .venmo-logo {
+        align-self: flex-end;
+    }
+    
+    .card-details-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .security-badges {
+        align-self: flex-start;
+    }
+    
+    .security-features {
+        grid-template-columns: 1fr;
+    }
+}

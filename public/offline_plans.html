@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L9 Fitness - Offline Plans</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #050505 0%, #0a0a0a 25%, #111111 50%, #000000 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar {
+            background: rgba(0, 0, 0, 0.9) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(255, 68, 68, 0.2);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: #FF4444 !important;
+        }
+        
+        .offline-indicator {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .plan-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 68, 68, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+        
+        .plan-card:hover {
+            border-color: rgba(255, 68, 68, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 68, 68, 0.2);
+        }
+        
+        .plan-header {
+            background: linear-gradient(135deg, rgba(255, 68, 68, 0.2), rgba(255, 215, 0, 0.2));
+            border-radius: 18px 18px 0 0;
+            padding: 1.5rem;
+        }
+        
+        .plan-body {
+            padding: 1.5rem;
+        }
+        
+        .exercise-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .exercise-item:hover {
+            background: rgba(255, 68, 68, 0.1);
+            border-color: rgba(255, 68, 68, 0.3);
+        }
+        
+        .meal-item {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #FF4444, #FFD700);
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+        }
+        
+        .btn-outline-light {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            font-weight: 600;
+        }
+        
+        .btn-outline-light:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #FF4444;
+        }
+        
+        .sync-status {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 1050;
+            max-width: 300px;
+        }
+        
+        .progress-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 4px solid #FF4444;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-tabs .nav-link {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border-radius: 25px 25px 0 0;
+            margin-right: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .nav-tabs .nav-link.active {
+            background: linear-gradient(135deg, #FF4444, #FFD700);
+            border-color: transparent;
+            color: #000000;
+        }
+        
+        .tab-content {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0 20px 20px 20px;
+            padding: 2rem;
+        }
+        
+        .loading-spinner {
+            text-align: center;
+            padding: 3rem;
+        }
+        
+        .spinner-border {
+            width: 3rem;
+            height: 3rem;
+            border-width: 4px;
+            border-color: #FF4444;
+            border-right-color: transparent;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: rgba(255, 68, 68, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-dumbbell"></i> L9 FITNESS
+            </a>
+            
+            <div class="d-flex align-items-center">
+                <div class="offline-indicator me-3">
+                    <i class="fas fa-wifi-slash"></i> Offline Mode
+                </div>
+                <button class="btn btn-outline-light btn-sm" onclick="tryReconnect()">
+                    <i class="fas fa-sync"></i> Reconnect
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sync Status Alert -->
+    <div id="syncStatus" class="sync-status d-none">
+        <div class="alert alert-info alert-dismissible fade show">
+            <i class="fas fa-cloud-download-alt"></i>
+            <span id="syncMessage">Checking connection...</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="text-center mb-4">
+                    <h1 class="display-6 fw-bold">
+                        <span style="background: linear-gradient(135deg, #FF4444, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                            Your Fitness Plans
+                        </span>
+                    </h1>
+                    <p class="text-muted">Access your workout and diet plans offline</p>
+                    <div id="lastSyncInfo" class="small text-muted"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="loading-spinner">
+            <div class="spinner-border" role="status"></div>
+            <div class="mt-3">Loading your plans...</div>
+        </div>
+
+        <!-- Plans Content -->
+        <div id="plansContent" class="d-none">
+            <!-- Navigation Tabs -->
+            <ul class="nav nav-tabs" id="plansTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="workout-tab" data-bs-toggle="tab" data-bs-target="#workout-plans" type="button" role="tab">
+                        <i class="fas fa-dumbbell"></i> Workout Plans
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="diet-tab" data-bs-toggle="tab" data-bs-target="#diet-plans" type="button" role="tab">
+                        <i class="fas fa-apple-alt"></i> Diet Plans
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="progress-tab" data-bs-toggle="tab" data-bs-target="#progress" type="button" role="tab">
+                        <i class="fas fa-chart-line"></i> Progress
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab">
+                        <i class="fas fa-user"></i> Profile
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="plansTabContent">
+                <!-- Workout Plans Tab -->
+                <div class="tab-pane fade show active" id="workout-plans" role="tabpanel">
+                    <div id="workoutPlansContainer">
+                        <div class="empty-state">
+                            <i class="fas fa-dumbbell"></i>
+                            <h4>No Workout Plans Found</h4>
+                            <p>Your workout plans will appear here when available.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Diet Plans Tab -->
+                <div class="tab-pane fade" id="diet-plans" role="tabpanel">
+                    <div id="dietPlansContainer">
+                        <div class="empty-state">
+                            <i class="fas fa-apple-alt"></i>
+                            <h4>No Diet Plans Found</h4>
+                            <p>Your nutrition plans will appear here when available.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Tab -->
+                <div class="tab-pane fade" id="progress" role="tabpanel">
+                    <div id="progressContainer">
+                        <div class="empty-state">
+                            <i class="fas fa-chart-line"></i>
+                            <h4>No Progress Data</h4>
+                            <p>Your fitness progress will be shown here.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Tab -->
+                <div class="tab-pane fade" id="profile" role="tabpanel">
+                    <div id="profileContainer">
+                        <div class="empty-state">
+                            <i class="fas fa-user"></i>
+                            <h4>Profile Information</h4>
+                            <p>Your profile details will be displayed here.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error State -->
+        <div id="errorState" class="d-none">
+            <div class="text-center py-5">
+                <i class="fas fa-exclamation-triangle text-warning" style="font-size: 4rem;"></i>
+                <h3 class="mt-3">No Plans Available</h3>
+                <p class="text-muted">Connect to the internet to sync your plans, or make sure you have plans assigned in your account.</p>
+                <button class="btn btn-primary" onclick="tryReconnect()">
+                    <i class="fas fa-sync"></i> Try Again
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        class OfflinePlansManager {
+            constructor() {
+                this.isOnline = navigator.onLine;
+                this.lastSyncTime = localStorage.getItem('l9_last_sync');
+                this.cachedData = null;
+                
+                this.init();
+            }
+            
+            async init() {
+                // Check for cached data
+                await this.loadCachedData();
+                
+                // Set up event listeners
+                window.addEventListener('online', () => this.handleOnline());
+                window.addEventListener('offline', () => this.handleOffline());
+                
+                // Try to load fresh data if online
+                if (this.isOnline) {
+                    await this.syncData();
+                } else {
+                    this.displayCachedData();
+                }
+            }
+            
+            async loadCachedData() {
+                try {
+                    const cached = localStorage.getItem('l9_plans_data');
+                    if (cached) {
+                        this.cachedData = JSON.parse(cached);
+                        console.log('Loaded cached plans data');
+                    }
+                } catch (error) {
+                    console.error('Failed to load cached data:', error);
+                }
+            }
+            
+            async syncData() {
+                try {
+                    this.showSyncStatus('Syncing plans data...', 'info');
+                    
+                    const response = await fetch('/Capstone-latest/public/api/offline_plans.php?action=all');
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        this.cachedData = data.data;
+                        localStorage.setItem('l9_plans_data', JSON.stringify(data.data));
+                        localStorage.setItem('l9_last_sync', Date.now().toString());
+                        this.lastSyncTime = Date.now().toString();
+                        
+                        this.displayData();
+                        this.showSyncStatus('Plans updated successfully!', 'success');
+                        
+                        setTimeout(() => this.hideSyncStatus(), 3000);
+                    } else {
+                        throw new Error(data.error || 'Failed to sync data');
+                    }
+                } catch (error) {
+                    console.error('Sync failed:', error);
+                    this.showSyncStatus('Sync failed - using cached data', 'warning');
+                    this.displayCachedData();
+                    
+                    setTimeout(() => this.hideSyncStatus(), 5000);
+                }
+            }
+            
+            displayCachedData() {
+                if (this.cachedData) {
+                    this.displayData();
+                } else {
+                    this.showError();
+                }
+            }
+            
+            displayData() {
+                const data = this.cachedData;
+                if (!data) {
+                    this.showError();
+                    return;
+                }
+                
+                // Hide loading, show content
+                document.getElementById('loadingState').classList.add('d-none');
+                document.getElementById('plansContent').classList.remove('d-none');
+                document.getElementById('errorState').classList.add('d-none');
+                
+                // Update last sync info
+                this.updateLastSyncInfo();
+                
+                // Display workout plans
+                this.displayWorkoutPlans(data.workout_plans || []);
+                
+                // Display diet plans
+                this.displayDietPlans(data.diet_plans || []);
+                
+                // Display progress
+                this.displayProgress(data.recent_progress || []);
+                
+                // Display profile
+                this.displayProfile(data.user_profile);
+            }
+            
+            displayWorkoutPlans(plans) {
+                const container = document.getElementById('workoutPlansContainer');
+                
+                if (!plans || plans.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-dumbbell"></i>
+                            <h4>No Workout Plans Found</h4>
+                            <p>Your workout plans will appear here when available.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let html = '';
+                plans.forEach(plan => {
+                    html += `
+                        <div class="plan-card">
+                            <div class="plan-header">
+                                <h4 class="mb-2">
+                                    <i class="fas fa-dumbbell text-danger"></i>
+                                    ${plan.template_name || 'Custom Workout Plan'}
+                                </h4>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="badge bg-primary">${plan.difficulty_level || 'Intermediate'}</span>
+                                    <small class="text-muted">
+                                        Created: ${new Date(plan.created_at).toLocaleDateString()}
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="plan-body">
+                                ${plan.description ? `<p class="text-muted mb-3">${plan.description}</p>` : ''}
+                                <h6 class="mb-3">Exercises:</h6>
+                                <div class="exercises-list">
+                                    ${this.renderExercises(plan.exercises || [])}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                container.innerHTML = html;
+            }
+            
+            renderExercises(exercises) {
+                if (!exercises || exercises.length === 0) {
+                    return '<p class="text-muted">No exercises found for this plan.</p>';
+                }
+                
+                let html = '';
+                exercises.forEach(exercise => {
+                    html += `
+                        <div class="exercise-item">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-1">${exercise.exercise_name}</h6>
+                                    <div class="text-muted small mb-2">
+                                        ${exercise.sets} sets × ${exercise.reps} reps
+                                        ${exercise.weight ? ` @ ${exercise.weight}kg` : ''}
+                                    </div>
+                                    ${exercise.description ? `<p class="small text-muted mb-0">${exercise.description}</p>` : ''}
+                                </div>
+                                <span class="badge bg-secondary">${exercise.muscle_groups || 'Full Body'}</span>
+                            </div>
+                            ${exercise.instructions ? `
+                                <div class="mt-2">
+                                    <small class="text-info">
+                                        <i class="fas fa-info-circle"></i> ${exercise.instructions}
+                                    </small>
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                });
+                
+                return html;
+            }
+            
+            displayDietPlans(plans) {
+                const container = document.getElementById('dietPlansContainer');
+                
+                if (!plans || plans.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-apple-alt"></i>
+                            <h4>No Diet Plans Found</h4>
+                            <p>Your nutrition plans will appear here when available.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let html = '';
+                plans.forEach(plan => {
+                    html += `
+                        <div class="plan-card">
+                            <div class="plan-header">
+                                <h4 class="mb-2">
+                                    <i class="fas fa-apple-alt text-warning"></i>
+                                    ${plan.meal_plan_name || 'Custom Nutrition Plan'}
+                                </h4>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="badge bg-warning text-dark">
+                                        ${plan.daily_calories || 0} cal/day
+                                    </span>
+                                    <small class="text-muted">
+                                        Updated: ${new Date(plan.updated_at || plan.created_at).toLocaleDateString()}
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="plan-body">
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <div class="text-center">
+                                            <div class="fw-bold text-primary">${plan.protein_target || 0}g</div>
+                                            <small class="text-muted">Protein</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="text-center">
+                                            <div class="fw-bold text-success">${plan.carb_target || 0}g</div>
+                                            <small class="text-muted">Carbs</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="text-center">
+                                            <div class="fw-bold text-warning">${plan.fat_target || 0}g</div>
+                                            <small class="text-muted">Fats</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                ${plan.meals && plan.meals.length > 0 ? `
+                                    <h6 class="mb-3">Meals:</h6>
+                                    <div class="meals-list">
+                                        ${this.renderMeals(plan.meals)}
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                container.innerHTML = html;
+            }
+            
+            renderMeals(meals) {
+                if (!meals || meals.length === 0) {
+                    return '<p class="text-muted">No meals found for this plan.</p>';
+                }
+                
+                let html = '';
+                meals.forEach(meal => {
+                    html += `
+                        <div class="meal-item">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-1">${meal.food_name}</h6>
+                                    <div class="text-muted small mb-1">
+                                        ${meal.meal_type} • ${meal.quantity}g
+                                    </div>
+                                    <div class="small">
+                                        <span class="badge bg-info me-1">${Math.round((meal.calories_per_100g * meal.quantity) / 100)} cal</span>
+                                        <span class="text-muted">
+                                            P: ${Math.round((meal.protein_per_100g * meal.quantity) / 100)}g |
+                                            C: ${Math.round((meal.carbs_per_100g * meal.quantity) / 100)}g |
+                                            F: ${Math.round((meal.fat_per_100g * meal.quantity) / 100)}g
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                return html;
+            }
+            
+            displayProgress(progress) {
+                const container = document.getElementById('progressContainer');
+                
+                if (!progress || progress.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-chart-line"></i>
+                            <h4>No Progress Data</h4>
+                            <p>Your fitness progress will be shown here.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let html = '<h5 class="mb-3">Recent Weight Progress</h5>';
+                progress.forEach(entry => {
+                    html += `
+                        <div class="progress-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>${entry.weight} kg</strong>
+                                    <div class="small text-muted">${new Date(entry.recorded_date).toLocaleDateString()}</div>
+                                </div>
+                                <i class="fas fa-weight text-danger"></i>
+                            </div>
+                            ${entry.notes ? `<div class="small text-muted mt-1">${entry.notes}</div>` : ''}
+                        </div>
+                    `;
+                });
+                
+                container.innerHTML = html;
+            }
+            
+            displayProfile(profile) {
+                const container = document.getElementById('profileContainer');
+                
+                if (!profile) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-user"></i>
+                            <h4>Profile Information</h4>
+                            <p>Your profile details will be displayed here.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                container.innerHTML = `
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="plan-card">
+                                <div class="plan-header">
+                                    <h5><i class="fas fa-user"></i> Personal Information</h5>
+                                </div>
+                                <div class="plan-body">
+                                    <div class="mb-2"><strong>Name:</strong> ${profile.first_name} ${profile.last_name}</div>
+                                    <div class="mb-2"><strong>Email:</strong> ${profile.email}</div>
+                                    <div class="mb-2"><strong>Age:</strong> ${profile.age || 'Not set'}</div>
+                                    <div class="mb-2"><strong>Gender:</strong> ${profile.gender || 'Not set'}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="plan-card">
+                                <div class="plan-header">
+                                    <h5><i class="fas fa-target"></i> Fitness Goals</h5>
+                                </div>
+                                <div class="plan-body">
+                                    <div class="mb-2"><strong>Goal:</strong> ${profile.fitness_goal || 'Not set'}</div>
+                                    <div class="mb-2"><strong>Current Weight:</strong> ${profile.current_weight || 'Not set'} kg</div>
+                                    <div class="mb-2"><strong>Target Weight:</strong> ${profile.target_weight || 'Not set'} kg</div>
+                                    <div class="mb-2"><strong>Activity Level:</strong> ${profile.activity_level || 'Not set'}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            showError() {
+                document.getElementById('loadingState').classList.add('d-none');
+                document.getElementById('plansContent').classList.add('d-none');
+                document.getElementById('errorState').classList.remove('d-none');
+            }
+            
+            showSyncStatus(message, type) {
+                const statusDiv = document.getElementById('syncStatus');
+                const messageSpan = document.getElementById('syncMessage');
+                const alertDiv = statusDiv.querySelector('.alert');
+                
+                // Update message
+                messageSpan.textContent = message;
+                
+                // Update alert class
+                alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+                
+                // Show status
+                statusDiv.classList.remove('d-none');
+            }
+            
+            hideSyncStatus() {
+                document.getElementById('syncStatus').classList.add('d-none');
+            }
+            
+            updateLastSyncInfo() {
+                const infoDiv = document.getElementById('lastSyncInfo');
+                if (this.lastSyncTime) {
+                    const lastSync = new Date(parseInt(this.lastSyncTime));
+                    infoDiv.textContent = `Last synced: ${lastSync.toLocaleString()}`;
+                } else {
+                    infoDiv.textContent = 'No sync data available';
+                }
+            }
+            
+            handleOnline() {
+                this.isOnline = true;
+                console.log('Connection restored');
+                this.syncData();
+            }
+            
+            handleOffline() {
+                this.isOnline = false;
+                console.log('Connection lost');
+                this.showSyncStatus('Connection lost - using cached data', 'warning');
+                setTimeout(() => this.hideSyncStatus(), 3000);
+            }
+        }
+        
+        // Global functions
+        function tryReconnect() {
+            if (navigator.onLine) {
+                window.plansManager.syncData();
+            } else {
+                alert('No internet connection detected. Please check your connection and try again.');
+            }
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            window.plansManager = new OfflinePlansManager();
+        });
+        
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/Capstone-latest/public/sw.js')
+                .then(registration => {
+                    console.log('Service Worker registered successfully');
+                })
+                .catch(error => {
+                    console.error('Service Worker registration failed:', error);
+                });
+        }
+    </script>
+</body>
+</html>
