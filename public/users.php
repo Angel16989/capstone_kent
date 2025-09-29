@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Get all users with role information
 $stmt = $pdo->prepare('
-    SELECT u.*, ur.name as role_name 
+    SELECT u.*, ur.name as role_name, CONCAT(u.first_name, " ", u.last_name) as full_name
     FROM users u 
     LEFT JOIN user_roles ur ON u.role_id = ur.id 
     ORDER BY u.created_at DESC

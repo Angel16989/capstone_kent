@@ -1,0 +1,515 @@
+/* Enhanced Dashboard Styles for Fitness Tracking */
+
+/* Progress Overview */
+.progress-overview {
+  background: rgba(255,255,255,.02);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(255,68,68,.1);
+}
+
+.progress-stat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(255,255,255,.02);
+  border-radius: 8px;
+  border: 1px solid rgba(255,68,68,.08);
+}
+
+.progress-icon {
+  font-size: 1.5rem;
+  filter: drop-shadow(0 0 8px rgba(255,215,0,.3));
+}
+
+.progress-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--l9-accent);
+}
+
+.progress-label {
+  font-size: 0.8rem;
+  color: var(--l9-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Enhanced Card Styles */
+.dashboard-card {
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,68,68,.1);
+  border-radius: 16px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,68,68,.3);
+  box-shadow: 0 8px 32px rgba(255,68,68,.15);
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.card-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--l9-primary), var(--l9-accent));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(255,68,68,.3);
+}
+
+.card-title-section {
+  flex: 1;
+}
+
+.card-title {
+  color: var(--l9-text-primary);
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 1.1rem;
+}
+
+.card-description {
+  color: var(--l9-text-muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.card-body {
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.card-footer {
+  margin-top: auto;
+}
+
+/* Personal Information Styles */
+.info-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-item label {
+  font-size: 0.8rem;
+  color: var(--l9-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.info-value {
+  color: var(--l9-text-primary);
+  font-weight: 400;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,68,68,.1);
+}
+
+/* Fitness Profile Styles */
+.fitness-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.fitness-stat {
+  text-align: center;
+  padding: 12px;
+  background: rgba(255,255,255,.02);
+  border-radius: 8px;
+  border: 1px solid rgba(255,68,68,.08);
+}
+
+.fitness-stat .stat-value {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--l9-accent);
+  display: block;
+}
+
+.fitness-stat .stat-label {
+  font-size: 0.8rem;
+  color: var(--l9-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+}
+
+.progress-section {
+  background: rgba(255,255,255,.02);
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid rgba(255,68,68,.08);
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.progress-percentage {
+  color: var(--l9-accent);
+  font-weight: 600;
+}
+
+.progress {
+  background: rgba(255,255,255,.05);
+  border-radius: 4px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  transition: width 0.6s ease;
+}
+
+/* Nutrition Styles */
+.nutrition-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.plan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.plan-header h6 {
+  color: var(--l9-text-primary);
+  margin: 0;
+}
+
+.diet-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.diet-vegetarian {
+  background: rgba(34,197,94,.2);
+  color: #22c55e;
+  border: 1px solid rgba(34,197,94,.3);
+}
+
+.diet-vegan {
+  background: rgba(101,163,13,.2);
+  color: #65a30d;
+  border: 1px solid rgba(101,163,13,.3);
+}
+
+.diet-standard {
+  background: rgba(59,130,246,.2);
+  color: #3b82f6;
+  border: 1px solid rgba(59,130,246,.3);
+}
+
+.nutrition-macros {
+  background: rgba(255,255,255,.02);
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid rgba(255,68,68,.08);
+}
+
+.macro-stat {
+  text-align: center;
+}
+
+.macro-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--l9-accent);
+  display: block;
+}
+
+.macro-label {
+  font-size: 0.7rem;
+  color: var(--l9-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+.meals-info {
+  text-align: center;
+  color: var(--l9-text-muted);
+}
+
+/* Goals Styles */
+.goals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.goal-item {
+  background: rgba(255,255,255,.02);
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid rgba(255,68,68,.08);
+}
+
+.goal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.goal-title {
+  color: var(--l9-text-primary);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.goal-priority {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.priority-high {
+  background: rgba(239,68,68,.2);
+  color: #ef4444;
+  border: 1px solid rgba(239,68,68,.3);
+}
+
+.priority-medium {
+  background: rgba(245,158,11,.2);
+  color: #f59e0b;
+  border: 1px solid rgba(245,158,11,.3);
+}
+
+.priority-low {
+  background: rgba(34,197,94,.2);
+  color: #22c55e;
+  border: 1px solid rgba(34,197,94,.3);
+}
+
+.goal-progress {
+  margin-bottom: 8px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+}
+
+.goal-deadline {
+  text-align: right;
+}
+
+/* Workout Cards */
+.workout-card {
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,68,68,.08);
+  border-radius: 12px;
+  padding: 16px;
+  transition: all 0.3s ease;
+}
+
+.workout-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255,68,68,.2);
+  box-shadow: 0 4px 16px rgba(255,68,68,.1);
+}
+
+.workout-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.workout-type-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,.05);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.workout-info h6 {
+  color: var(--l9-text-primary);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.workout-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: var(--l9-text-muted);
+}
+
+.detail-item strong {
+  color: var(--l9-text-primary);
+}
+
+.workout-notes {
+  padding-top: 8px;
+  border-top: 1px solid rgba(255,68,68,.08);
+  color: var(--l9-text-muted);
+  font-style: italic;
+}
+
+/* Empty States */
+.empty-state {
+  color: var(--l9-text-muted);
+}
+
+.empty-state i {
+  opacity: 0.3;
+}
+
+.empty-state h6 {
+  color: var(--l9-text-secondary);
+  margin-bottom: 8px;
+}
+
+/* Button Styles */
+.btn-dashboard {
+  background: linear-gradient(135deg, var(--l9-primary), #e53e3e);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.btn-dashboard:hover {
+  background: linear-gradient(135deg, #e53e3e, var(--l9-primary));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(255,68,68,.3);
+  color: white;
+}
+
+/* Modal Styles */
+.modal-content {
+  background: var(--l9-darker);
+  border: 1px solid rgba(255,68,68,.2);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.modal-header {
+  border-bottom: 1px solid rgba(255,68,68,.1);
+  color: var(--l9-text-primary);
+}
+
+.modal-title {
+  color: var(--l9-text-primary);
+  font-weight: 600;
+}
+
+.modal-body {
+  color: var(--l9-text-primary);
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(255,68,68,.1);
+}
+
+.form-label {
+  color: var(--l9-text-secondary);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.form-control {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,68,68,.2);
+  border-radius: 8px;
+  color: var(--l9-text-primary);
+  padding: 10px 12px;
+}
+
+.form-control:focus {
+  background: rgba(255,255,255,.08);
+  border-color: var(--l9-primary);
+  box-shadow: 0 0 0 0.2rem rgba(255,68,68,.25);
+  color: var(--l9-text-primary);
+}
+
+.form-control::placeholder {
+  color: var(--l9-text-muted);
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  .progress-overview .row {
+    gap: 12px;
+  }
+  
+  .card-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .info-grid {
+    gap: 12px;
+  }
+  
+  .goals-list {
+    gap: 12px;
+  }
+  
+  .workout-details {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,253 @@
+/* === FORM VISIBILITY FIX - ALL PAGES === */
+/* Fixes black text on black background issues */
+
+/* Form validation text - Ultra high specificity */
+.form-text,
+div.form-text,
+span.form-text,
+.invalid-feedback,
+.valid-feedback,
+.form-help,
+.help-text,
+.text-muted,
+.small,
+body .form-text,
+body .text-muted {
+    color: #b0b0b0 !important;
+    font-weight: 500 !important;
+    font-size: 0.875rem !important;
+    opacity: 0.9 !important;
+    background: transparent !important;
+    text-shadow: none !important;
+}
+
+/* Error messages - make them red and visible */
+.invalid-feedback,
+.text-danger,
+.alert-danger,
+.error-message {
+    color: #ff6b6b !important;
+    font-weight: 600 !important;
+    background: rgba(255, 107, 107, 0.1) !important;
+    padding: 0.25rem 0.5rem !important;
+    border-radius: 4px !important;
+    border-left: 3px solid #ff6b6b !important;
+}
+
+/* Success messages - make them green and visible */
+.valid-feedback,
+.text-success,
+.alert-success,
+.success-message {
+    color: #51cf66 !important;
+    font-weight: 600 !important;
+    background: rgba(81, 207, 102, 0.1) !important;
+    padding: 0.25rem 0.5rem !important;
+    border-radius: 4px !important;
+    border-left: 3px solid #51cf66 !important;
+}
+
+/* Form labels - ensure they're visible */
+.form-label,
+label {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.5rem !important;
+}
+
+/* Form input placeholders */
+.form-control::placeholder,
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+    color: #6c757d !important;
+    opacity: 0.7 !important;
+}
+
+/* Character count and form help text */
+.character-count,
+.form-text.text-muted {
+    color: #adb5bd !important;
+    font-size: 0.8rem !important;
+    margin-top: 0.25rem !important;
+}
+
+/* Bootstrap text utilities - fix for dark theme */
+.text-secondary {
+    color: #adb5bd !important;
+}
+
+.text-light {
+    color: #f8f9fa !important;
+}
+
+/* Alert improvements */
+.alert {
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+}
+
+.alert-info {
+    color: #74c0fc !important;
+    background: rgba(116, 192, 252, 0.1) !important;
+    border-color: #74c0fc !important;
+}
+
+.alert-warning {
+    color: #ffd43b !important;
+    background: rgba(255, 212, 59, 0.1) !important;
+    border-color: #ffd43b !important;
+}
+
+/* Form validation states */
+.was-validated .form-control:invalid {
+    border-color: #ff6b6b !important;
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 107, 0.25) !important;
+}
+
+.was-validated .form-control:valid {
+    border-color: #51cf66 !important;
+    box-shadow: 0 0 0 0.2rem rgba(81, 207, 102, 0.25) !important;
+}
+
+/* Password strength indicators */
+.password-strength {
+    margin-top: 0.5rem !important;
+}
+
+.password-strength .strength-bar {
+    height: 4px !important;
+    background: #343a40 !important;
+    border-radius: 2px !important;
+    overflow: hidden !important;
+}
+
+.password-strength .strength-fill {
+    height: 100% !important;
+    border-radius: 2px !important;
+    transition: all 0.3s ease !important;
+}
+
+.password-strength.weak .strength-fill {
+    width: 25% !important;
+    background: #ff6b6b !important;
+}
+
+.password-strength.fair .strength-fill {
+    width: 50% !important;
+    background: #ffd43b !important;
+}
+
+.password-strength.good .strength-fill {
+    width: 75% !important;
+    background: #74c0fc !important;
+}
+
+.password-strength.strong .strength-fill {
+    width: 100% !important;
+    background: #51cf66 !important;
+}
+
+/* Terms and conditions text */
+.form-check-label {
+    color: #dee2e6 !important;
+    font-weight: 500 !important;
+}
+
+.form-check-label a {
+    color: #74c0fc !important;
+    text-decoration: underline !important;
+}
+
+.form-check-label a:hover {
+    color: #4dabf7 !important;
+}
+
+/* Small text and footnotes */
+.small,
+small {
+    color: #adb5bd !important;
+    font-size: 0.8rem !important;
+    line-height: 1.4 !important;
+}
+
+/* Form dividers and separators */
+.divider-with-text {
+    position: relative !important;
+    text-align: center !important;
+    margin: 1.5rem 0 !important;
+}
+
+.divider-with-text::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 1px !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.divider-with-text span {
+    background: #1a1a1a !important;
+    padding: 0 1rem !important;
+    color: #adb5bd !important;
+    font-size: 0.9rem !important;
+    position: relative !important;
+}
+
+/* Loading states */
+.loading-text {
+    color: #74c0fc !important;
+    font-style: italic !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .form-text,
+    .invalid-feedback,
+    .valid-feedback {
+        font-size: 0.8rem !important;
+    }
+    
+    .form-label {
+        font-size: 0.95rem !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .form-text,
+    .text-muted {
+        color: #ffffff !important;
+        font-weight: 700 !important;
+    }
+    
+    .invalid-feedback,
+    .text-danger {
+        color: #ff3333 !important;
+        background: rgba(255, 51, 51, 0.2) !important;
+    }
+    
+    .valid-feedback,
+    .text-success {
+        color: #00cc00 !important;
+        background: rgba(0, 204, 0, 0.2) !important;
+    }
+}
+
+/* Dark theme specific overrides */
+@media (prefers-color-scheme: dark) {
+    .form-text,
+    .text-muted {
+        color: #b0b0b0 !important;
+    }
+    
+    .form-label {
+        color: #f8f9fa !important;
+    }
+    
+    .text-secondary {
+        color: #adb5bd !important;
+    }
+}

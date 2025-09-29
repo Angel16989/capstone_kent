@@ -4,8 +4,9 @@ require_once __DIR__ . '/../app/helpers/auth.php';
 require_once __DIR__ . '/../app/helpers/settings.php';
 
 if (!is_admin()) { 
-    http_response_code(403); 
-    exit('Admins only.'); 
+    // Redirect to admin login page
+    header('Location: /Capstone-latest/public/login.php?admin=1&redirect=' . urlencode($_SERVER['REQUEST_URI'])); 
+    exit(); 
 }
 
 $pageTitle = "Admin Settings";

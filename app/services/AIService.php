@@ -24,18 +24,10 @@ class AIService {
             error_log("AI Service Error: " . $e->getMessage());
 
             if (USE_AI_FALLBACK) {
-                return [
-                    'response' => self::getSmartFallbackResponse($message, $user_context),
-                    'ai_powered' => false,
-                    'fallback_reason' => 'AI service unavailable'
-                ];
+                return self::getSmartFallbackResponse($message, $user_context);
             }
 
-            return [
-                'response' => "I'm having trouble connecting to my AI brain right now. Please contact our staff at (555) 123-4567 for assistance!",
-                'ai_powered' => false,
-                'fallback_reason' => 'AI service failed'
-            ];
+            return "I'm having trouble connecting to my AI brain right now. Please contact our staff at (555) 123-4567 for assistance!";
         }
     }
     
@@ -69,11 +61,7 @@ class AIService {
         );
         
         if (isset($response['choices'][0]['message']['content'])) {
-            return [
-                'response' => trim($response['choices'][0]['message']['content']),
-                'ai_powered' => true,
-                'provider' => 'OpenAI'
-            ];
+            return trim($response['choices'][0]['message']['content']);
         }
 
         throw new Exception("Invalid OpenAI response format");

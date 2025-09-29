@@ -156,6 +156,9 @@ include __DIR__ . '/../app/views/layouts/header.php';
   </div>
 </div>
 
+<!-- WAKI AI Assistant Promo -->
+<?php include __DIR__ . '/../app/views/components/waki-promo.php'; ?>
+
 <!-- CTA Section -->
 <div class="cta-section">
   <div class="container text-center py-5">

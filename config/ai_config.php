@@ -5,10 +5,12 @@
 define('AI_PROVIDER', 'openai'); // Using OpenAI for intelligent responses
 define('USE_AI_FALLBACK', true); // Enable fallback for backup
 
-// OpenAI Configuration
-// To use OpenAI, get your API key from: https://platform.openai.com/account/api-keys
-define('OPENAI_API_KEY', ''); // Add your OpenAI API key here
-define('OPENAI_MODEL', 'gpt-3.5-turbo');
+// OpenAI Configuration - PRIORITY AI PROVIDER
+// API key configured and active for L9 Fitness
+define('OPENAI_API_KEY', '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');
+define('OPENAI_MODEL', 'gpt-4o'); // Latest GPT-4o model - most powerful and intelligent
+define('OPENAI_MODEL_FALLBACK', 'gpt-4o-mini'); // Fast fallback model
+define('OPENAI_MODEL_FALLBACK2', 'gpt-3.5-turbo'); // Final fallback if others fail
 
 // Groq Configuration (Free AI API)
 define('GROQ_API_KEY', ''); // Add your free Groq API key here (get from console.groq.com)

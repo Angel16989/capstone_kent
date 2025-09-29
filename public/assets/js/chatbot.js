@@ -16,36 +16,43 @@ class SimpleChatbot {
     console.log('🎨 Creating L9 Fitness chatbot interface...');
     
     const chatbotHTML = `
-      <div id="simpleChatbot">
+      <!-- Welcome Message Popup -->
+      <div id="wakiWelcome" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000000; background: linear-gradient(135deg, #FF4444, #FFD700); padding: 20px; border-radius: 15px; color: white; font-weight: bold; font-size: 16px; box-shadow: 0 20px 40px rgba(255,68,68,0.6); opacity: 0; animation: welcomePopup 4s ease-out forwards; pointer-events: none;">
+        🏋️‍♂️ Hi! Welcome to L9 Fitness! I'm your chatbot named <strong>WAKI</strong> and I'll help you out! 💪✨
+      </div>
+      
+      <div id="simpleChatbot" style="display: block !important; visibility: visible !important;">
         <!-- L9 Fitness Toggle Button -->
-        <button id="chatToggle" class="l9-glow">
-          <span>💬</span>
+        <button id="chatToggle" class="l9-glow" style="display: flex !important;">
+          <span>🤖</span>
+          <div class="chatbot-name">WAKI</div>
         </button>
         
         <!-- L9 Fitness Chat Window -->
         <div id="chatWindow" style="display: none !important;">
           <!-- L9 Header -->
           <div class="chat-header l9-shine-effect">
-            <div class="title">💬 L9 Fitness Assistant</div>
+            <div class="title">🤖 WAKI - Your L9 Fitness Assistant</div>
             <button id="chatClose">×</button>
           </div>
           
           <!-- Messages Area -->
           <div id="chatMessages">
             <div class="chat-message bot">
-              <strong>L9 Fitness:</strong> Welcome to L9 Fitness! 💪 I'm here to help with memberships, classes, and gym info. How can I assist you today?
+              <strong>WAKI:</strong> Hey there! 🏋️‍♂️ I'm WAKI, your personal L9 Fitness assistant! I'm here to help with memberships, classes, gym info, and anything else you need. What can I help you with today? 💪
             </div>
           </div>
           
           <!-- Input Area -->
           <div class="chat-input-container">
-            <input type="text" id="chatInput" placeholder="Ask about memberships, classes, hours..." />
+            <input type="text" id="chatInput" placeholder="Ask WAKI about memberships, classes, hours..." />
             <button id="chatSend">Send</button>
           </div>
         </div>
       </div>
     `;
     
+    // Always add to body for fixed positioning
     document.body.insertAdjacentHTML('beforeend', chatbotHTML);
     this.attachEventListeners();
     console.log('✅ L9 Fitness interface created successfully');
@@ -103,9 +110,106 @@ class SimpleChatbot {
         console.log('✅ Input listener attached');
       }
       
+      // Add scroll behavior for better chatbot integration
+      this.setupScrollBehavior();
+      
     } catch (error) {
       console.error('❌ Error attaching event listeners:', error);
     }
+  }
+  
+  setupScrollBehavior() {
+    console.log('📜 Setting up WAKI floating behavior...');
+    
+    const chatbotContainer = document.getElementById('simpleChatbot');
+    const welcomeMessage = document.getElementById('wakiWelcome');
+    
+    if (!chatbotContainer) {
+      console.error('❌ WAKI container not found for scroll setup!');
+      return;
+    }
+    
+    // Setup WAKI welcome sequence
+    this.setupWakiWelcome(welcomeMessage);
+    
+    // Force visibility
+    chatbotContainer.style.display = 'block';
+    chatbotContainer.style.visibility = 'visible';
+    
+    // Add smooth scroll class to html
+    document.documentElement.classList.add('chatbot-scroll-smooth');
+    
+    let lastScrollY = window.scrollY;
+    let scrollTimeout;
+    
+    // WAKI floating behavior - always sticks to bottom-right
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      const scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
+      
+      if (chatbotContainer) {
+        // Ensure WAKI stays visible and floating at viewport bottom
+        chatbotContainer.style.display = 'block';
+        chatbotContainer.style.visibility = 'visible';
+        chatbotContainer.style.position = 'fixed';
+        chatbotContainer.style.bottom = '20px';
+        chatbotContainer.style.right = '20px';
+        chatbotContainer.style.zIndex = '999999';
+        
+        // Keep WAKI fixed at viewport bottom with subtle scale animation only
+        if (scrollDirection === 'down') {
+          chatbotContainer.style.transform = 'scale(0.98)';
+        } else {
+          chatbotContainer.style.transform = 'scale(1.02)';
+        }
+        
+        // Clear timeout and reset to normal size - STAY AT VIEWPORT BOTTOM
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          if (chatbotContainer) {
+            chatbotContainer.style.transform = 'scale(1)';
+            // Force viewport bottom positioning
+            chatbotContainer.style.position = 'fixed';
+            chatbotContainer.style.bottom = '20px';
+            chatbotContainer.style.right = '20px';
+            chatbotContainer.style.zIndex = '999999';
+          }
+        }, 150);
+      }
+      
+      lastScrollY = currentScrollY;
+    }, { passive: true });
+    
+    // Ensure WAKI is always floating after entrance
+    setTimeout(() => {
+      if (chatbotContainer) {
+        chatbotContainer.style.display = 'block';
+        chatbotContainer.style.visibility = 'visible';
+        chatbotContainer.style.opacity = '1';
+        chatbotContainer.style.position = 'fixed';
+        console.log('✅ WAKI is now floating and ready!');
+      }
+    }, 4000);
+    
+    console.log('✅ WAKI floating behavior activated!');
+  }
+  
+  setupWakiWelcome(welcomeMessage) {
+    if (!welcomeMessage) return;
+    
+    // Show welcome message after chatbot entrance
+    setTimeout(() => {
+      console.log('👋 WAKI says hello!');
+      // Welcome message animation handles itself via CSS
+    }, 2000);
+    
+    // Remove welcome message after animation
+    setTimeout(() => {
+      if (welcomeMessage) {
+        welcomeMessage.remove();
+        console.log('✅ Welcome message completed!');
+      }
+    }, 6000);
   }
 
   toggleChat() {

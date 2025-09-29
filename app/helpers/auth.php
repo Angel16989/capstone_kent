@@ -1,13 +1,29 @@
 <?php
+require_once __DIR__ . '/session.php';
+
 function require_login(): void { 
-    if (!isset($_SESSION['user'])) { 
+    // Check if session is expired or invalid
+    if (!SessionManager::isLoggedIn() || SessionManager::isSessionExpired()) {
+        // Store the intended URL for after login
+        if (!isset($_SESSION['intended_url'])) {
+            $_SESSION['intended_url'] = $_SERVER['REQUEST_URI'] ?? '';
+        }
+        
+        // Destroy expired session
+        if (SessionManager::isSessionExpired()) {
+            SessionManager::destroySession();
+        }
+        
         header('Location: login.php'); 
         exit; 
     } 
+    
+    // Extend session on page access
+    SessionManager::extendSession();
 }
 
 function is_logged_in(): bool {
-    return isset($_SESSION['user']);
+    return SessionManager::isLoggedIn() && !SessionManager::isSessionExpired();
 }
 
 function login_user(array $u): void { 
@@ -29,7 +45,7 @@ function login_user(array $u): void {
 }
 
 function logout_user(): void { 
-    session_destroy(); 
+    SessionManager::destroySession();
     header('Location: index.php'); 
     exit; 
 }

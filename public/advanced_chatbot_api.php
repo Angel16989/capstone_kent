@@ -23,7 +23,7 @@ if (!isset($input['message'])) {
 }
 
 $message = trim($input['message']);
-$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+$user_id = isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : null;
 $conversation_context = isset($input['context']) ? $input['context'] : [];
 
 // Initialize the Advanced AI Chatbot

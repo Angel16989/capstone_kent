@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L9 Fitness - Payment Test</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #00ff88;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ff88;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #00ff88;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+        
+        .test-section {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid #00ff88;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .test-section h3 {
+            color: #00ff88;
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #00ff88;
+            font-weight: bold;
+        }
+        
+        select, input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #00ff88;
+            border-radius: 8px;
+            color: #00ff88;
+            font-size: 16px;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            color: #000;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+        
+        button:hover {
+            background: linear-gradient(135deg, #00cc6a, #00ff88);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+        }
+        
+        .result {
+            background: rgba(0, 0, 0, 0.5);
+            border-left: 4px solid #00ff88;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .success { border-left-color: #28a745; color: #28a745; }
+        .error { border-left-color: #dc3545; color: #dc3545; }
+        .warning { border-left-color: #ffc107; color: #ffc107; }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        
+        .step {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid #00ff88;
+            margin: 0 5px;
+            border-radius: 5px;
+        }
+        
+        .step.active {
+            background: rgba(0, 255, 136, 0.3);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏋️ L9 FITNESS PAYMENT TEST SYSTEM 🏋️</h1>
+        
+        <div class="step-indicator">
+            <div class="step" id="step1">1. Select User</div>
+            <div class="step" id="step2">2. Choose Plan</div>
+            <div class="step" id="step3">3. Process Payment</div>
+            <div class="step" id="step4">4. Book Class</div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🧪 Step 1: Test User Selection</h3>
+            <div class="form-group">
+                <label for="test_user">Select Test User:</label>
+                <select id="test_user" name="test_user">
+                    <option value="">Select a user...</option>
+                </select>
+                <button onclick="createTestUser()">Create New Test User</button>
+                <button onclick="loadUsers()">Refresh Users</button>
+            </div>
+            <div id="user_result" class="result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>💳 Step 2: Membership Plan Selection</h3>
+            <div class="form-group">
+                <label for="membership_plan">Choose Membership Plan:</label>
+                <select id="membership_plan" name="membership_plan">
+                    <option value="">Select a plan...</option>
+                </select>
+                <button onclick="loadPlans()">Load Plans</button>
+            </div>
+            <div id="plan_result" class="result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🔥 Step 3: Payment Processing Test</h3>
+            <button onclick="processTestPayment()" class="primary">💰 Process Test Payment</button>
+            <div id="payment_result" class="result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>📅 Step 4: Class Booking Test</h3>
+            <div class="form-group">
+                <label for="class_selection">Available Classes:</label>
+                <select id="class_selection" name="class_selection">
+                    <option value="">Select a class...</option>
+                </select>
+                <button onclick="loadClasses()">Load Classes</button>
+            </div>
+            <button onclick="testClassBooking()">🏋️ Test Class Booking</button>
+            <div id="booking_result" class="result" style="display: none;"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>📊 System Status</h3>
+            <button onclick="checkSystemStatus()">Check Full System Status</button>
+            <div id="status_result" class="result" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentUser = null;
+        let currentPlan = null;
+        
+        // Load users
+        function loadUsers() {
+            fetch('test_payment_api.php?action=get_users')
+                .then(response => response.json())
+                .then(data => {
+                    const select = document.getElementById('test_user');
+                    select.innerHTML = '<option value="">Select a user...</option>';
+                    
+                    if (data.success) {
+                        data.users.forEach(user => {
+                            const option = document.createElement('option');
+                            option.value = user.id;
+                            option.textContent = `${user.first_name} ${user.last_name} (${user.email})`;
+                            select.appendChild(option);
+                        });
+                        showResult('user_result', 'success', `Loaded ${data.users.length} users`);
+                    } else {
+                        showResult('user_result', 'error', data.message);
+                    }
+                });
+        }
+        
+        // Create test user
+        function createTestUser() {
+            const email = 'test_' + Date.now() + '@l9fitness.com';
+            const data = {
+                action: 'create_user',
+                email: email,
+                first_name: 'Test',
+                last_name: 'Warrior',
+                password: 'password123'
+            };
+            
+            fetch('test_payment_api.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showResult('user_result', 'success', `Created test user: ${email}`);
+                    loadUsers();
+                } else {
+                    showResult('user_result', 'error', data.message);
+                }
+            });
+        }
+        
+        // Load membership plans
+        function loadPlans() {
+            fetch('test_payment_api.php?action=get_plans')
+                .then(response => response.json())
+                .then(data => {
+                    const select = document.getElementById('membership_plan');
+                    select.innerHTML = '<option value="">Select a plan...</option>';
+                    
+                    if (data.success) {
+                        data.plans.forEach(plan => {
+                            const option = document.createElement('option');
+                            option.value = plan.id;
+                            option.textContent = `${plan.name} - $${plan.price} (${plan.duration_days} days)`;
+                            select.appendChild(option);
+                        });
+                        showResult('plan_result', 'success', `Loaded ${data.plans.length} membership plans`);
+                    } else {
+                        showResult('plan_result', 'error', data.message);
+                    }
+                });
+        }
+        
+        // Process test payment
+        function processTestPayment() {
+            const userId = document.getElementById('test_user').value;
+            const planId = document.getElementById('membership_plan').value;
+            
+            if (!userId || !planId) {
+                showResult('payment_result', 'error', 'Please select both a user and a membership plan');
+                return;
+            }
+            
+            const data = {
+                action: 'process_payment',
+                user_id: userId,
+                plan_id: planId
+            };
+            
+            fetch('test_payment_api.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showResult('payment_result', 'success', `Payment processed! Membership ID: ${data.membership_id}, Invoice: ${data.invoice_no}`);
+                    document.getElementById('step3').classList.add('active');
+                } else {
+                    showResult('payment_result', 'error', data.message);
+                }
+            });
+        }
+        
+        // Load classes
+        function loadClasses() {
+            fetch('test_payment_api.php?action=get_classes')
+                .then(response => response.json())
+                .then(data => {
+                    const select = document.getElementById('class_selection');
+                    select.innerHTML = '<option value="">Select a class...</option>';
+                    
+                    if (data.success) {
+                        data.classes.forEach(cls => {
+                            const option = document.createElement('option');
+                            option.value = cls.id;
+                            option.textContent = `${cls.title} - ${cls.instructor_name || 'L9 Trainer'} (${cls.start_time})`;
+                            select.appendChild(option);
+                        });
+                        showResult('booking_result', 'success', `Loaded ${data.classes.length} classes`);
+                    } else {
+                        showResult('booking_result', 'error', data.message);
+                    }
+                });
+        }
+        
+        // Test class booking
+        function testClassBooking() {
+            const userId = document.getElementById('test_user').value;
+            const classId = document.getElementById('class_selection').value;
+            
+            if (!userId || !classId) {
+                showResult('booking_result', 'error', 'Please select both a user and a class');
+                return;
+            }
+            
+            const data = {
+                action: 'test_booking',
+                user_id: userId,
+                class_id: classId
+            };
+            
+            fetch('test_payment_api.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showResult('booking_result', 'success', data.message);
+                    document.getElementById('step4').classList.add('active');
+                } else {
+                    showResult('booking_result', 'error', data.message);
+                }
+            });
+        }
+        
+        // Check system status
+        function checkSystemStatus() {
+            fetch('test_payment_api.php?action=system_status')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        let status = '<h4>System Status:</h4>';
+                        status += `<p>✅ Users: ${data.status.users}</p>`;
+                        status += `<p>✅ Active Plans: ${data.status.plans}</p>`;
+                        status += `<p>✅ Classes: ${data.status.classes}</p>`;
+                        status += `<p>✅ Active Memberships: ${data.status.memberships}</p>`;
+                        status += `<p>✅ Completed Payments: ${data.status.payments}</p>`;
+                        status += `<p>✅ Class Bookings: ${data.status.bookings}</p>`;
+                        showResult('status_result', 'success', status);
+                    } else {
+                        showResult('status_result', 'error', data.message);
+                    }
+                });
+        }
+        
+        function showResult(elementId, type, message) {
+            const element = document.getElementById(elementId);
+            element.className = `result ${type}`;
+            element.innerHTML = message;
+            element.style.display = 'block';
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadUsers();
+            loadPlans();
+            loadClasses();
+            document.getElementById('step1').classList.add('active');
+        });
+    </script>
+</body>
+</html>

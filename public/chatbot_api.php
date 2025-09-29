@@ -37,7 +37,7 @@ if (!isset($input['message'])) {
 }
 
 $message = trim($input['message']);
-$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+$user_id = isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : null;
 
 // Get user context for personalized responses
 $user_context = null;

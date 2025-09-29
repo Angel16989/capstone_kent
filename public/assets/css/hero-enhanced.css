@@ -1,0 +1,230 @@
+/* Amazing L9 Fitness Hero Image Styles */
+.hero-section {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%);
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        /* Modern geometric pattern */
+        radial-gradient(circle at 25% 25%, rgba(255, 68, 68, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(255, 102, 102, 0.1) 0%, transparent 50%),
+        /* Grid overlay */
+        linear-gradient(90deg, rgba(51, 51, 51, 0.3) 1px, transparent 1px),
+        linear-gradient(rgba(51, 51, 51, 0.3) 1px, transparent 1px);
+    background-size: 
+        600px 600px,
+        800px 800px,
+        40px 40px,
+        40px 40px;
+    opacity: 0.6;
+    z-index: 1;
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><filter id="glow"><feGaussianBlur stdDeviation="3"/></filter></defs><g opacity="0.4"><circle cx="200" cy="150" r="3" fill="%23FF4444"/><circle cx="400" cy="300" r="2" fill="%23FF6666"/><circle cx="800" cy="200" r="4" fill="%23FF4422"/><circle cx="1000" cy="400" r="2" fill="%23FF4444"/><circle cx="300" cy="600" r="3" fill="%23FF6666"/><circle cx="600" cy="500" r="2" fill="%23FF4422"/><circle cx="900" cy="650" r="3" fill="%23FF4444"/><circle cx="1100" cy="100" r="2" fill="%23FF6666"/></g></svg>') no-repeat center center;
+    background-size: cover;
+    z-index: 2;
+}
+
+.hero-visual {
+    position: relative;
+    height: 600px;
+    z-index: 3;
+}
+
+/* Dynamic Fitness Figure */
+.hero-visual::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 500px;
+    background: 
+        /* Athlete silhouette */
+        radial-gradient(ellipse 120px 80px at 50% 20%, rgba(255, 68, 68, 0.8) 0%, transparent 70%),
+        radial-gradient(ellipse 80px 120px at 50% 40%, rgba(51, 51, 51, 0.9) 0%, transparent 70%),
+        radial-gradient(ellipse 60px 100px at 30% 60%, rgba(255, 68, 68, 0.6) 0%, transparent 70%),
+        radial-gradient(ellipse 60px 100px at 70% 60%, rgba(255, 68, 68, 0.6) 0%, transparent 70%),
+        radial-gradient(ellipse 40px 80px at 35% 85%, rgba(51, 51, 51, 0.8) 0%, transparent 70%),
+        radial-gradient(ellipse 40px 80px at 65% 85%, rgba(51, 51, 51, 0.8) 0%, transparent 70%);
+    z-index: 1;
+    animation: heroFloat 6s ease-in-out infinite;
+}
+
+/* Barbell/Weights */
+.hero-visual::after {
+    content: '';
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 20px;
+    background: 
+        linear-gradient(90deg, 
+            #FF4444 0px, #FF4444 40px,
+            #333333 40px, #333333 260px,
+            #FF4422 260px, #FF4422 300px
+        );
+    border-radius: 10px;
+    box-shadow: 
+        0 0 20px rgba(255, 68, 68, 0.5),
+        0 0 40px rgba(255, 68, 68, 0.3);
+    z-index: 2;
+    animation: barbellGlow 3s ease-in-out infinite alternate;
+}
+
+/* Floating Fitness Elements */
+.floating-card {
+    position: absolute;
+    background: rgba(51, 51, 51, 0.9);
+    border: 2px solid #FF4444;
+    border-radius: 15px;
+    padding: 15px 20px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(255, 68, 68, 0.3);
+    backdrop-filter: blur(10px);
+    z-index: 4;
+}
+
+.floating-card-1 {
+    top: 15%;
+    right: 10%;
+    animation: floatUpDown 4s ease-in-out infinite;
+}
+
+.floating-card-2 {
+    bottom: 25%;
+    right: 15%;
+    animation: floatUpDown 5s ease-in-out infinite 1s;
+}
+
+.floating-card-3 {
+    top: 60%;
+    left: 5%;
+    animation: floatUpDown 4.5s ease-in-out infinite 2s;
+}
+
+.floating-card i {
+    color: #FF4444;
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+
+/* Hero Shapes */
+.hero-shape {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 68, 68, 0.1);
+    z-index: 1;
+}
+
+.hero-shape-1 {
+    width: 200px;
+    height: 200px;
+    top: 10%;
+    left: 15%;
+    background: radial-gradient(circle, rgba(255, 68, 68, 0.2) 0%, transparent 70%);
+    animation: pulse 8s ease-in-out infinite;
+}
+
+.hero-shape-2 {
+    width: 150px;
+    height: 150px;
+    bottom: 20%;
+    right: 20%;
+    background: radial-gradient(circle, rgba(255, 102, 102, 0.15) 0%, transparent 70%);
+    animation: pulse 6s ease-in-out infinite 2s;
+}
+
+.hero-shape-3 {
+    width: 100px;
+    height: 100px;
+    top: 50%;
+    left: 5%;
+    background: radial-gradient(circle, rgba(255, 68, 34, 0.2) 0%, transparent 70%);
+    animation: pulse 4s ease-in-out infinite 1s;
+}
+
+/* Animations */
+@keyframes heroFloat {
+    0%, 100% { transform: translate(-50%, -50%) translateY(0px); }
+    50% { transform: translate(-50%, -50%) translateY(-20px); }
+}
+
+@keyframes barbellGlow {
+    0% { 
+        box-shadow: 
+            0 0 20px rgba(255, 68, 68, 0.5),
+            0 0 40px rgba(255, 68, 68, 0.3);
+    }
+    100% { 
+        box-shadow: 
+            0 0 30px rgba(255, 68, 68, 0.8),
+            0 0 60px rgba(255, 68, 68, 0.5);
+    }
+}
+
+@keyframes floatUpDown {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.1); opacity: 0.5; }
+}
+
+/* Enhanced Hero Content */
+.hero-content {
+    z-index: 5;
+    position: relative;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, #FF4444 0%, #FF6666 50%, #FF4422 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-visual {
+        height: 400px;
+    }
+    
+    .hero-visual::before {
+        width: 300px;
+        height: 350px;
+    }
+    
+    .hero-visual::after {
+        width: 200px;
+    }
+    
+    .floating-card {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+}

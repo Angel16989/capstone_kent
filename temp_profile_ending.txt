@@ -1,0 +1,3 @@
+    </section>
+
+<?php include '../app/views/layouts/footer.php'; ?>

@@ -1,46 +1,95 @@
-/* Checkout Page Styles */
-.checkout-container {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
+/**
+ * L9 Fitness Hardcore Checkout - Australian Edition
+ * Matching Main Website Styling - PHP 8+ & W3C Compliant
+ */
+
+:root {
+  /* Hardcore gym color palette */
+  --l9-primary: #FF4444;        /* Aggressive red */
+  --l9-accent: #FFD700;         /* Victory gold */
+  --l9-secondary: #00CCFF;      /* Electric blue */
+  --l9-success: #00e676;
+  --l9-dark: #0a0a0a;           /* Deep black */
+  --l9-darker: #050505;         /* Pitch black */
+  --l9-surface: rgba(255,255,255,.03);
+  --l9-surface-strong: rgba(255,68,68,.06);
+  --l9-border: rgba(255,255,255,.08);
+  --l9-border-strong: rgba(255,68,68,.12);
+  --l9-text-primary: #ffffff;
+  --l9-text-secondary: #e0e0e0;
+  --l9-text-muted: #b0b0b0;
+  --l9-shadow: rgba(0,0,0,.6);
+  --l9-glow-red: rgba(255,68,68,.5);
+  --l9-glow-gold: rgba(255,215,0,.4);
+  --l9-primary-rgb: 255, 68, 68;
+  --l9-accent-rgb: 255, 215, 0;
 }
 
+/* Hardcore Gym Main Layout - Matching Main Website */
+.checkout-container {
+  min-height: 100vh;
+  background: 
+    radial-gradient(circle at 20% 10%, rgba(255,68,68,.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 90%, rgba(255,215,0,.05) 0%, transparent 50%),
+    linear-gradient(135deg, var(--l9-darker) 0%, #111111 25%, #0a0a0a 50%, #050505 100%);
+  color: var(--l9-text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 500;
+  line-height: 1.6;
+  padding: 2rem 0;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+/* Enhanced Progress Steps */
 .checkout-progress {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 2rem;
-    padding: 2rem 0;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+  padding: 0 1rem;
+  background: rgba(255,255,255,.05);
+  border-radius: 50px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255,255,255,.1);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1.5rem 2rem;
 }
 
 .step {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
 }
 
 .step-number {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    margin-bottom: 8px;
-    background: #e9ecef;
-    color: #6c757d;
-    transition: all 0.3s ease;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.1);
+  border: 2px solid rgba(255,255,255,.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
 .step.active .step-number {
-    background: var(--l9-primary);
+    background: linear-gradient(135deg, var(--l9-primary), #ff6666);
     color: white;
-    transform: scale(1.1);
+    transform: scale(1.15);
+    box-shadow: 0 8px 25px rgba(var(--l9-primary-rgb), 0.4);
+    border-color: var(--l9-primary);
 }
 
 .step.completed .step-number {
@@ -72,14 +121,38 @@
     background: var(--l9-success);
 }
 
+/* Hardcore Glass Cards - Matching Main Website */
 .checkout-form-card,
 .order-summary-card {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
+    background: var(--l9-surface) !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--l9-border) !important;
+    border-radius: 16px !important;
+    transition: all 0.4s ease;
+    overflow: hidden;
     padding: 2.5rem;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--l9-text-primary) !important;
+    margin-bottom: 2rem;
+    box-shadow: 0 15px 35px rgba(0,0,0,.2);
+}
+
+.checkout-form-card:hover,
+.order-summary-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 25px 50px rgba(0,0,0,.3);
+    border-color: rgba(255,68,68,.3) !important;
+}
+
+.checkout-form-card {
+    min-height: 600px;
+}
+
+.order-summary-card {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
 }
 
 .section-header {
@@ -153,14 +226,82 @@
     border-left: 4px solid var(--l9-primary);
 }
 
-.form-control:focus {
-    border-color: var(--l9-primary);
-    box-shadow: 0 0 0 0.25rem rgba(var(--l9-primary-rgb), 0.25);
+/* Hardcore Terminal-Style Form Controls - Matching Main Website */
+.form-control, 
+.form-select {
+    background: rgba(5,5,5,0.9) !important;
+    border: 2px solid rgba(255,68,68,0.3) !important;
+    color: var(--l9-text-primary) !important;
+    transition: all 0.3s ease;
+    font-family: 'Courier New', monospace !important;
+    font-weight: 600;
+    text-shadow: 0 0 5px rgba(255,68,68,0.3);
+    border-radius: 12px !important;
+    padding: 12px 16px !important;
+}
+
+/* Dangerous typing animation on focus */
+.form-control:focus, 
+.form-select:focus {
+    border-color: var(--l9-primary) !important;
+    box-shadow: 
+        0 0 20px rgba(255,68,68,0.6), 
+        0 0 40px rgba(255,215,0,0.4),
+        inset 0 0 15px rgba(255,68,68,0.1) !important;
+    background: rgba(20,5,5,0.95) !important;
+    outline: none !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px !important;
+    text-shadow: 
+        0 0 5px rgba(255,68,68,0.8), 
+        0 0 10px rgba(255,215,0,0.5),
+        0 0 15px rgba(0,204,255,0.3) !important;
+}
+
+.form-control::placeholder {
+    color: rgba(255,68,68,0.6) !important;
+    font-family: 'Courier New', monospace !important;
+    font-weight: 600;
+    text-shadow: 0 0 3px rgba(255,68,68,0.4);
 }
 
 .form-control-lg {
     padding: 0.8rem 1.2rem;
     font-size: 1rem;
+}
+
+.form-label {
+    color: var(--l9-text-secondary) !important;
+    font-weight: 600;
+    margin-bottom: 8px !important;
+}
+
+/* Hardcore Button Styling - Matching Main Website */
+.btn {
+    font-weight: 600;
+    border-radius: 12px !important;
+    padding: 12px 24px !important;
+    transition: all 0.3s ease;
+    text-transform: none;
+    letter-spacing: 0.3px;
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, var(--l9-primary), #5dd8ff) !important;
+    border: none !important;
+    box-shadow: 0 6px 20px rgba(255,68,68,.3);
+    color: white !important;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05) translateY(-2px) !important;
+    box-shadow: 
+        0 0 20px rgba(255,68,68,0.6), 
+        0 0 40px rgba(255,215,0,0.4) !important;
+    text-shadow: 
+        0 0 5px rgba(255,255,255,0.8), 
+        0 0 10px rgba(255,68,68,0.6) !important;
+    background: linear-gradient(90deg, #ff6666, #5dd8ff) !important;
 }
 
 .order-summary-card {
@@ -361,17 +502,257 @@
     box-shadow: 0 0 0 0.25rem rgba(var(--l9-primary-rgb), 0.25);
 }
 
-/* Card number input styling */
-#card_number {
-    font-family: 'Courier New', monospace;
-    letter-spacing: 1px;
+/* Enhanced Payment Method Styles */
+.payment-method-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
 }
 
-/* Payment method icons */
+.payment-info {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+.payment-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.card-logos,
+.paypal-logo,
+.apple-pay-logo,
+.google-pay-logo,
+.afterpay-logo,
+.klarna-logo,
+.venmo-logo,
+.bank-logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.card-logo {
+    height: 24px;
+    width: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Payment Details Sections */
+.payment-details-section {
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 16px;
+    padding: 25px;
+    margin: 20px 0;
+    transition: all 0.3s ease;
+}
+
+.card-details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+.card-details-header h5 {
+    margin: 0;
+    color: var(--l9-accent);
+    font-weight: 700;
+}
+
+.security-badges {
+    display: flex;
+    gap: 8px;
+}
+
+.security-badges .badge {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+}
+
+/* Card Type Indicator */
+#card-type-indicator {
+    background: rgba(255,255,255,.05);
+    border-color: rgba(255,255,255,.2);
+    color: #fff;
+}
+
+#card-type-indicator img {
+    width: 24px;
+    height: auto;
+}
+
+/* Afterpay Installment Breakdown */
+.afterpay-info h5 {
+    color: #b2fce4;
+    margin-bottom: 20px;
+}
+
+.installment-breakdown {
+    background: rgba(178, 252, 228, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 15px 0;
+}
+
+.installment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(178, 252, 228, 0.2);
+}
+
+.installment-item:last-child {
+    border-bottom: none;
+}
+
+.installment-item .amount {
+    font-weight: 700;
+    color: #b2fce4;
+}
+
+/* Bank Transfer Info */
+.bank-transfer-info h5 {
+    color: #28a745;
+    margin-bottom: 20px;
+}
+
+.bank-transfer-info .alert-info {
+    background: rgba(40, 167, 69, 0.1);
+    border-color: rgba(40, 167, 69, 0.3);
+    color: rgba(255,255,255,.9);
+}
+
+/* Payment Method Specific Icons */
 .payment-method-content i.bi-credit-card {
     color: #007bff;
 }
 
 .payment-method-content i.bi-paypal {
     color: #0070ba;
+}
+
+.payment-method-content i.bi-apple {
+    color: #000000;
+}
+
+.payment-method-content i.bi-google {
+    color: #4285f4;
+}
+
+.payment-method-content i.bi-calendar-event {
+    color: #b2fce4;
+}
+
+.payment-method-content i.bi-credit-card-2-front {
+    color: #ffb3c7;
+}
+
+.payment-method-content i.bi-phone {
+    color: #3d95ce;
+}
+
+.payment-method-content i.bi-bank {
+    color: #28a745;
+}
+
+/* Card number input styling */
+#card_number {
+    font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Courier New', monospace;
+    letter-spacing: 1px;
+    font-size: 1.1rem;
+}
+
+/* Enhanced hover effects for payment options */
+.payment-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.payment-option .form-check-input:checked + .form-check-label {
+    background: linear-gradient(135deg, rgba(var(--l9-primary-rgb), 0.1), rgba(var(--l9-accent-rgb), 0.05));
+    border-color: var(--l9-accent);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(var(--l9-primary-rgb), 0.25);
+}
+
+/* Security Features */
+.payment-security-info h6 {
+    color: var(--l9-accent);
+    font-weight: 700;
+}
+
+.security-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.security-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,.8);
+    padding: 4px 0;
+}
+
+.security-item i {
+    font-size: 0.9rem;
+}
+
+/* Payment message animations */
+.payment-message {
+    animation: slideInRight 0.3s ease;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive adjustments for payment methods */
+@media (max-width: 768px) {
+    .payment-method-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .card-logos,
+    .paypal-logo,
+    .apple-pay-logo,
+    .google-pay-logo,
+    .afterpay-logo,
+    .klarna-logo,
+    .venmo-logo {
+        align-self: flex-end;
+    }
+    
+    .card-details-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .security-badges {
+        align-self: flex-start;
+    }
+    
+    .security-features {
+        grid-template-columns: 1fr;
+    }
 }

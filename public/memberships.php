@@ -3,7 +3,7 @@ require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../app/helpers/auth.php';
 
 $pageTitle = "Membership Plans";
-$pageCSS = "/assets/css/membership.css";
+$pageCSS = ["/assets/css/membership.css", "/assets/css/chatbot.css"];
 
 // Handle membership purchase
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -277,47 +277,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const planName = this.dataset.planName;
       const planPrice = this.dataset.planPrice;
       
-      // Show confirmation modal
-      if (confirm(`Purchase ${planName} membership for $${planPrice}?`)) {
-        // Show loading state
-        const originalContent = this.innerHTML;
-        this.innerHTML = '<span class="btn-text">Processing...</span><i class="bi bi-arrow-clockwise spin"></i>';
-        this.disabled = true;
-        
-        // Create form data
-        const formData = new FormData();
-        formData.append('plan_id', planId);
-        formData.append('action', 'purchase');
-        formData.append('csrf_token', '<?php echo $_SESSION['csrf_token'] ?? ''; ?>');
-        
-        // Send request
-        fetch(window.location.href, {
-          method: 'POST',
-          body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            showMessage(data.message, 'success');
-            
-            // Redirect to dashboard after 2 seconds
-            setTimeout(() => {
-              window.location.href = '<?php echo BASE_URL; ?>dashboard.php';
-            }, 2000);
-            
-          } else {
-            showMessage(data.message, 'error');
-            this.innerHTML = originalContent;
-            this.disabled = false;
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          showMessage('An error occurred. Please try again.', 'error');
-          this.innerHTML = originalContent;
-          this.disabled = false;
-        });
-      }
+      // Redirect to checkout page for secure payment processing
+      window.location.href = '<?php echo BASE_URL; ?>checkout.php?plan_id=' + planId + '&plan_name=' + encodeURIComponent(planName) + '&plan_price=' + planPrice;
     });
   });
   

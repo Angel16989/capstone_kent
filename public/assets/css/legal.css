@@ -1,54 +1,163 @@
-/* Legal Pages Styles (Terms & Privacy) */
+/* Legal Pages - Ultra Modern & Luxurious Design */
+:root {
+  --legal-primary: #667eea;
+  --legal-secondary: #764ba2;
+  --legal-accent: #f093fb;
+  --legal-dark: #2c3e50;
+  --legal-text: #495057;
+  --legal-muted: #6c757d;
+  --legal-surface: rgba(255,255,255,0.95);
+  --legal-border: rgba(102, 126, 234, 0.2);
+  --legal-glow: rgba(102, 126, 234, 0.3);
+}
+
 .legal-container {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    color: var(--legal-text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
     min-height: 100vh;
     padding: 2rem 0;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.legal-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="legal-pattern" width="60" height="60" patternUnits="userSpaceOnUse"><circle cx="30" cy="30" r="1.5" fill="%23ffffff" opacity="0.1"/><circle cx="10" cy="50" r="1" fill="%23ffffff" opacity="0.08"/><circle cx="50" cy="10" r="1.2" fill="%23ffffff" opacity="0.12"/></pattern></defs><rect width="100" height="100" fill="url(%23legal-pattern)"/></svg>') repeat;
+    animation: legalFloat 30s ease-in-out infinite;
+    opacity: 0.4;
 }
 
 .legal-header {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 3rem;
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    animation: slideInDown 0.6s ease-out;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 25px;
+    transition: all 0.6s ease;
+    overflow: hidden;
+    padding: 50px;
+    color: #1a1a1a;
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.25),
+        0 10px 20px rgba(0, 0, 0, 0.15),
+        inset 0 2px 0 rgba(255, 255, 255, 0.8);
+    animation: slideInDown 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+}
+
+.legal-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+    transform: rotate(45deg);
+    animation: headerShimmer 4s ease-in-out infinite;
+}
+
+.legal-header:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 35px 70px rgba(0, 0, 0, 0.2),
+        0 15px 30px rgba(0, 0, 0, 0.15),
+        inset 0 2px 0 rgba(255, 255, 255, 0.8);
 }
 
 .legal-header h1 {
-    background: linear-gradient(135deg, var(--l9-primary), var(--l9-secondary));
+    background: linear-gradient(135deg, var(--legal-primary) 0%, var(--legal-secondary) 50%, var(--legal-accent) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    letter-spacing: -1px;
     font-weight: 800;
     margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+.legal-header .lead {
+    color: var(--legal-muted);
+    font-size: 1.1rem;
+    position: relative;
+    z-index: 2;
 }
 
 .header-divider {
-    width: 100px;
+    width: 120px;
     height: 4px;
-    background: linear-gradient(135deg, var(--l9-primary), var(--l9-secondary));
+    background: linear-gradient(135deg, var(--legal-primary), var(--legal-secondary), var(--legal-accent));
     border-radius: 2px;
     margin: 2rem auto 0;
+    position: relative;
+    z-index: 2;
+    animation: dividerGlow 2s ease-in-out infinite alternate;
 }
 
 .toc-card {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    padding: 2.5rem;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    animation: slideInLeft 0.6s ease-out;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 25px;
+    padding: 40px;
+    backdrop-filter: blur(20px);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.2),
+        0 10px 20px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    animation: slideInLeft 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: sticky;
     top: 2rem;
     z-index: 100;
+    transition: all 0.4s ease;
+    overflow: hidden;
+    color: #1a1a1a;
+}
+
+.toc-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.08), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+    opacity: 0;
+}
+
+.toc-card:hover::before {
+    opacity: 1;
+    animation: tocShimmer 2s ease-in-out;
+}
+
+.toc-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.15),
+        0 15px 30px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .toc-card h4 {
-    color: var(--l9-primary);
+    color: var(--legal-dark);
     font-weight: 700;
     margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--legal-primary) 0%, var(--legal-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    z-index: 2;
 }
 
 .toc-grid {
@@ -59,73 +168,157 @@
 
 .toc-item {
     display: block;
-    padding: 0.75rem 1rem;
-    color: #6c757d;
+    padding: 15px 20px;
+    color: #1a1a1a;
     text-decoration: none;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    font-weight: 500;
-    border-left: 3px solid transparent;
+    border-radius: 15px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-weight: 700;
+    font-size: 1.05rem;
+    border-left: 4px solid transparent;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.toc-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.toc-item:hover::before {
+    left: 100%;
 }
 
 .toc-item:hover {
-    background: rgba(var(--l9-primary-rgb), 0.1);
-    color: var(--l9-primary);
-    border-left-color: var(--l9-primary);
-    transform: translateX(5px);
+    background: rgba(102, 126, 234, 0.08);
+    color: var(--legal-primary);
+    border-left-color: var(--legal-primary);
+    transform: translateX(8px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.15);
 }
 
 .toc-item.active {
-    background: rgba(var(--l9-primary-rgb), 0.15);
-    color: var(--l9-primary);
-    border-left-color: var(--l9-primary);
+    background: rgba(102, 126, 234, 0.12);
+    color: var(--legal-primary);
+    border-left-color: var(--legal-primary);
     font-weight: 600;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
 }
 
 .legal-content {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    padding: 3rem;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    animation: slideInRight 0.6s ease-out;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 25px;
+    padding: 50px;
+    backdrop-filter: blur(20px);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.2),
+        0 10px 20px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    animation: slideInRight 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both;
+    position: relative;
+    overflow: hidden;
+    color: #1a1a1a;
+}
+
+.legal-content::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.05), transparent);
+    transform: rotate(45deg);
+    animation: contentShimmer 8s ease-in-out infinite;
+}
+
+@keyframes tocShimmer {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+@keyframes contentShimmer {
+    0%, 100% { 
+        transform: translateX(-100%) rotate(45deg); 
+        opacity: 0;
+    }
+    50% { 
+        transform: translateX(0%) rotate(45deg); 
+        opacity: 0.3;
+    }
 }
 
 .legal-section {
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
     scroll-margin-top: 2rem;
-    transition: all 0.3s ease;
-    padding: 2rem;
-    border-radius: 15px;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    padding: 30px;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.legal-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.05), transparent);
+    transition: left 0.8s ease;
+    pointer-events: none;
+}
+
+.legal-section:hover::before {
+    left: 100%;
 }
 
 .legal-section.highlight {
-    background: rgba(var(--l9-primary-rgb), 0.05);
-    border-left: 5px solid var(--l9-primary);
+    background: rgba(102, 126, 234, 0.08);
+    border-left: 5px solid var(--legal-primary);
     transform: scale(1.02);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
 }
 
 .legal-section h2 {
-    color: var(--l9-primary);
+    color: var(--legal-dark);
     font-weight: 700;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
+    position: relative;
+    z-index: 2;
 }
 
 .section-number {
-    background: linear-gradient(135deg, var(--l9-primary), var(--l9-secondary));
+    background: linear-gradient(135deg, var(--legal-primary) 0%, var(--legal-secondary) 50%, var(--legal-accent) 100%);
     color: white;
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 800;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+}
+
+.legal-section:hover .section-number {
+    transform: rotate(5deg) scale(1.1);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
 }
 
 .legal-section h4 {
@@ -143,10 +336,13 @@
 }
 
 .legal-section p {
-    line-height: 1.7;
-    color: #495057;
-    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    color: #1a1a1a;
+    margin-bottom: 1.8rem;
     text-align: justify;
+    font-weight: 600;
+    font-size: 1.05rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .legal-list {
@@ -188,20 +384,49 @@
 .warning-box,
 .agreement-box,
 .compliance-box {
-    border-radius: 15px;
-    padding: 2rem;
-    margin: 2rem 0;
+    border-radius: 20px;
+    padding: 30px;
+    margin: 30px 0;
     border-left: 5px solid;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.info-box::before,
+.warning-box::before,
+.agreement-box::before,
+.compliance-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+    opacity: 0;
+}
+
+.info-box:hover::before,
+.warning-box:hover::before,
+.agreement-box:hover::before,
+.compliance-box:hover::before {
+    opacity: 1;
+    animation: boxShimmer 1.5s ease-in-out;
 }
 
 .info-box {
-    background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.1), rgba(156, 39, 176, 0.05));
     border-left-color: #2196f3;
     color: #1565c0;
 }
 
 .warning-box {
-    background: linear-gradient(135deg, #fff3e0, #ffebee);
+    background: linear-gradient(135deg, rgba(255, 152, 0, 0.1), rgba(244, 67, 54, 0.05));
     border-left-color: #ff9800;
     color: #e65100;
 }
@@ -209,13 +434,27 @@
 .warning-box h4,
 .warning-box h5 {
     color: #e65100;
+    font-weight: 700;
 }
 
 .agreement-box,
 .compliance-box {
-    background: linear-gradient(135deg, #e8f5e8, #f0f7ff);
-    border-left-color: #28a745;
-    color: #155724;
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(102, 126, 234, 0.05));
+    border-left-color: #4CAF50;
+    color: #2E7D32;
+}
+
+@keyframes boxShimmer {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+.info-box:hover,
+.warning-box:hover,
+.agreement-box:hover,
+.compliance-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
 .info-box h5,
@@ -277,6 +516,50 @@
 }
 
 /* Animation Classes */
+@keyframes legalFloat {
+    0%, 100% { 
+        transform: translateX(0) translateY(0) rotate(0deg); 
+        opacity: 0.4;
+    }
+    33% { 
+        transform: translateX(-20px) translateY(-10px) rotate(1deg); 
+        opacity: 0.6;
+    }
+    66% { 
+        transform: translateX(10px) translateY(-15px) rotate(-1deg); 
+        opacity: 0.5;
+    }
+}
+
+@keyframes headerShimmer {
+    0%, 100% { 
+        transform: translateX(-100%) rotate(45deg); 
+        opacity: 0;
+    }
+    50% { 
+        transform: translateX(0%) rotate(45deg); 
+        opacity: 0.3;
+    }
+}
+
+@keyframes titleGlow {
+    0%, 100% { 
+        filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.3));
+    }
+    50% { 
+        filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5)) drop-shadow(0 0 30px rgba(118, 75, 162, 0.3));
+    }
+}
+
+@keyframes dividerGlow {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(102, 126, 234, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(102, 126, 234, 0.6), 0 0 30px rgba(240, 147, 251, 0.4);
+    }
+}
+
 @keyframes slideInDown {
     from {
         opacity: 0;

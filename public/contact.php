@@ -4,7 +4,7 @@ require_once __DIR__ . '/../app/helpers/validator.php';
 require_once __DIR__ . '/../app/helpers/csrf.php';
 
 $pageTitle = "Contact Us";
-$pageCSS = "/assets/css/contact.css";
+$pageCSS = ["/assets/css/contact.css", "/assets/css/chatbot.css"];
 
 $errors = [];
 $success = '';

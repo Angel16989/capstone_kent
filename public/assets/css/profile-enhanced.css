@@ -1,0 +1,377 @@
+/* Enhanced Profile Styles */
+
+.profile-hero {
+  background: 
+    radial-gradient(1000px 600px at 30% 0%, rgba(255,68,68,.08), transparent 60%),
+    radial-gradient(800px 400px at 70% 100%, rgba(255,215,0,.06), transparent 60%);
+  min-height: 100vh;
+  color: var(--l9-text-primary);
+}
+
+.profile-sidebar {
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,68,68,.1);
+  border-radius: 16px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+  height: fit-content;
+  position: sticky;
+  top: 20px;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--l9-primary), var(--l9-accent));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+  margin: 0 auto;
+  box-shadow: 0 4px 20px rgba(255,68,68,.3);
+}
+
+.membership-badge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 12px;
+}
+
+.membership-badge.active {
+  background: rgba(34,197,94,.2);
+  color: #22c55e;
+  border: 1px solid rgba(34,197,94,.3);
+}
+
+.membership-badge.inactive {
+  background: rgba(245,158,11,.2);
+  color: #f59e0b;
+  border: 1px solid rgba(245,158,11,.3);
+}
+
+.profile-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 12px;
+  background: rgba(255,255,255,.02);
+  border-radius: 8px;
+  border: 1px solid rgba(255,68,68,.08);
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--l9-accent);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--l9-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+}
+
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.profile-content {
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,68,68,.1);
+  border-radius: 16px;
+  padding: 0;
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+.profile-tabs .nav-tabs {
+  background: rgba(255,255,255,.02);
+  border-bottom: 1px solid rgba(255,68,68,.1);
+  padding: 0;
+  margin: 0;
+}
+
+.profile-tabs .nav-link {
+  background: transparent;
+  border: none;
+  color: var(--l9-text-muted);
+  padding: 16px 20px;
+  font-weight: 500;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.profile-tabs .nav-link:hover {
+  color: var(--l9-text-primary);
+  background: rgba(255,68,68,.05);
+}
+
+.profile-tabs .nav-link.active {
+  color: var(--l9-accent);
+  background: rgba(255,68,68,.08);
+  border-bottom-color: var(--l9-primary);
+}
+
+.profile-card {
+  padding: 24px;
+}
+
+.card-header-modern {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255,68,68,.1);
+}
+
+.card-header-modern h4 {
+  color: var(--l9-text-primary);
+  font-weight: 600;
+  margin: 0;
+}
+
+.card-header-modern p {
+  color: var(--l9-text-muted);
+  margin: 4px 0 0 0;
+  font-size: 0.9rem;
+}
+
+.profile-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.profile-form .form-label {
+  color: var(--l9-text-secondary);
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.profile-form .form-floating {
+  position: relative;
+}
+
+.profile-form .form-floating > label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding: 1rem 0.75rem;
+  pointer-events: none;
+  border: 1px solid transparent;
+  transform-origin: 0 0;
+  transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+  color: var(--l9-text-muted);
+  font-weight: 500;
+  background: transparent;
+  z-index: 2;
+}
+
+.profile-form .form-floating > .form-control {
+  padding: 1rem 0.75rem;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,68,68,.2);
+  border-radius: 8px;
+  color: var(--l9-text-primary);
+  position: relative;
+  z-index: 1;
+}
+
+.profile-form .form-floating > .form-control:focus,
+.profile-form .form-floating > .form-control:not(:placeholder-shown) {
+  padding-top: 1.625rem;
+  padding-bottom: 0.625rem;
+  background: rgba(255,255,255,.08);
+  border-color: var(--l9-primary);
+  box-shadow: 0 0 0 0.2rem rgba(255,68,68,.25);
+}
+
+.profile-form .form-floating > .form-control:focus ~ label,
+.profile-form .form-floating > .form-control:not(:placeholder-shown) ~ label {
+  opacity: 0.65;
+  transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+  background: rgba(0,0,0,.8);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.profile-form .form-control:focus {
+  background: rgba(255,255,255,.08);
+  border-color: var(--l9-primary);
+  box-shadow: 0 0 0 0.2rem rgba(255,68,68,.25);
+  color: var(--l9-text-primary);
+  outline: none;
+}
+
+.profile-form .form-control:disabled {
+  background: rgba(255,255,255,.02);
+  border-color: rgba(255,68,68,.1);
+  color: var(--l9-text-muted);
+  cursor: not-allowed;
+}
+
+.profile-form .form-select {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,68,68,.2);
+  border-radius: 8px;
+  color: var(--l9-text-primary);
+  padding: 12px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.profile-form .form-select:focus {
+  background: rgba(255,255,255,.08);
+  border-color: var(--l9-primary);
+  box-shadow: 0 0 0 0.2rem rgba(255,68,68,.25);
+  outline: none;
+}
+
+.profile-form .form-control::placeholder {
+  color: var(--l9-text-muted);
+}
+
+.profile-form .form-select,
+.profile-form .form-floating > .form-select {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,68,68,.2);
+  color: var(--l9-text-primary);
+  border-radius: 8px;
+  padding: 1rem 0.75rem;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 6 6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+}
+
+.profile-form .form-floating > .form-select:focus,
+.profile-form .form-floating > .form-select:not([size]):not([multiple]) {
+  padding-top: 1.625rem;
+  padding-bottom: 0.625rem;
+  background-color: rgba(255,255,255,.08);
+  border-color: var(--l9-primary);
+}
+
+.profile-form .form-select option {
+  background: var(--l9-darker);
+  color: var(--l9-text-primary);
+}
+
+.alert-modern {
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(10px);
+}
+
+.alert-success.alert-modern {
+  background: rgba(34,197,94,.15);
+  color: #22c55e;
+  border: 1px solid rgba(34,197,94,.2);
+}
+
+.alert-danger.alert-modern {
+  background: rgba(239,68,68,.15);
+  color: #ef4444;
+  border: 1px solid rgba(239,68,68,.2);
+}
+
+.booking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.booking-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,68,68,.08);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.booking-item:hover {
+  background: rgba(255,255,255,.04);
+  border-color: rgba(255,68,68,.15);
+}
+
+.booking-info h5 {
+  color: var(--l9-text-primary);
+  margin: 0 0 4px 0;
+  font-size: 1rem;
+}
+
+.booking-info p {
+  color: var(--l9-text-muted);
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.table-hover tbody tr:hover {
+  background: rgba(255,68,68,.05);
+}
+
+.table th {
+  color: var(--l9-text-primary);
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255,68,68,.2);
+}
+
+.table td {
+  color: var(--l9-text-secondary);
+  border-bottom: 1px solid rgba(255,68,68,.08);
+}
+
+/* Enhanced goal items in profile */
+.goals-list .goal-item {
+  margin-bottom: 20px;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .profile-hero {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+  .profile-sidebar {
+    position: static;
+    margin-bottom: 2rem;
+  }
+  
+  .profile-tabs .nav-link {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+  
+  .profile-card {
+    padding: 16px;
+  }
+  
+  .stat-item {
+    padding: 8px;
+  }
+  
+  .stat-number {
+    font-size: 1.2rem;
+  }
+}
