@@ -3,7 +3,7 @@ require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../app/helpers/auth.php';
 
 $pageTitle = "Membership Plans";
-$pageCSS = ["/assets/css/membership.css", "/assets/css/chatbot.css"];
+$pageCSS = "/assets/css/membership.css";
 
 // Handle membership purchase
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

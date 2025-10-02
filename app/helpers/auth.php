@@ -51,7 +51,21 @@ function logout_user(): void {
 }
 
 function current_user(){ 
-    return $_SESSION['user'] ?? null; 
+    // Check if session is valid and user is logged in
+    if (!isset($_SESSION['user']) || !is_array($_SESSION['user'])) {
+        return null;
+    }
+    
+    // Check if session is expired
+    if (SessionManager::isSessionExpired()) {
+        SessionManager::destroySession();
+        return null;
+    }
+    
+    // Extend session on access
+    SessionManager::extendSession();
+    
+    return $_SESSION['user'];
 }
 
 function is_admin(): bool { 

@@ -91,6 +91,34 @@ Complete relational database with 31+ tables:
 
 ## 🚀 Local Development Setup
 
+### Quick Start Scripts (Recommended)
+
+We provide convenient start scripts for different platforms:
+
+#### Windows (start.bat)
+```cmd
+# Double-click start.bat or run in command prompt
+start.bat
+```
+**What it does:**
+- ✅ Checks PHP and MySQL installation
+- ✅ Sets up database automatically
+- ✅ Loads all dummy data
+- ✅ Starts local development server
+- ✅ Opens browser to your application
+
+#### Linux/Mac (start.sh)
+```bash
+# Make executable and run
+chmod +x start.sh
+./start.sh
+```
+**What it does:**
+- ✅ Detects Railway environment automatically
+- ✅ Configures production settings
+- ✅ Sets up database and loads data
+- ✅ Starts appropriate server for environment
+
 ### Docker Setup (Recommended)
 ```bash
 # 1. Clone the repository
@@ -230,27 +258,13 @@ L9-Fitness-Gym/
 ## 📞 Support & Documentation
 
 - **📚 Railway Deploy:** [RAILWAY_DEPLOYMENT.md](RAILWAY_DEPLOYMENT.md)
-## 🤝 Community & Development
+- **🛠️ Troubleshooting:** Check `setup.bat` output
+- **🐛 Bug Reports:** Open GitHub issues
+- **💡 Feature Requests:** GitHub discussions
 
-### � Contributing
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+## 🏆 Project Status
 
-### 🛡️ Security
-Found a security issue? Please read our [Security Policy](SECURITY.md) before reporting.
-
-### 📜 Code of Conduct
-This project follows a [Code of Conduct](CODE_OF_CONDUCT.md) to ensure a welcoming environment.
-
-### 🐛 Issue Templates
-Use our structured issue templates for:
-- [🐛 Bug Reports](.github/ISSUE_TEMPLATE/bug-report.md)
-- [✨ Feature Requests](.github/ISSUE_TEMPLATE/feature-request.md)
-- [🚀 Deployment Issues](.github/ISSUE_TEMPLATE/deployment-issue.md)
-
-### � Development Standards
-- **EditorConfig:** Consistent coding styles across editors
-- **Docker:** Containerized development environment
-- **Git Flow:** Feature branches and pull requests & Production Ready**
+**Status:** ✅ **Complete & Production Ready**
 **Version:** 1.0.0
 **Last Updated:** September 2025
 **PHP Compatibility:** 8.0+

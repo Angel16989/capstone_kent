@@ -988,7 +988,7 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
-    z-index: 99998 !important;
+    z-index: 9999;
     box-shadow: 0 5px 15px rgba(255,68,68,.3);
 }
 
@@ -1040,35 +1040,22 @@ body {
     overflow-y: auto;
 }
 
-/* Fix any potential z-index issues - PROPER HIERARCHY */
+/* Fix any potential z-index issues */
 .navbar,
 .header {
     z-index: 1030;
 }
 
-/* FOOTER MUST STAY LOW TO NOT TRAP FLOATING ELEMENTS */
-.l9-premium-footer,
-footer,
-.footer-background,
-.footer-content,
-.footer-particles,
-.footer-sparkles {
-    position: relative !important;
-    z-index: 1 !important;
+.chatbot-container {
+    z-index: 1050;
 }
 
-/* FLOATING ELEMENTS MUST BE ABOVE EVERYTHING */
-.chatbot-container,
-#simpleChatbot,
-#chatToggle,
-#chatWindow {
-    z-index: 999999 !important;
-    position: fixed !important;
+.scroll-to-top {
+    z-index: 9999;
 }
 
-.scroll-to-top,
-#goToTop,
-.go-to-top-btn {
-    z-index: 99998 !important;
-    position: fixed !important;
+/* Ensure footer doesn't interfere with other elements */
+.l9-premium-footer {
+    position: relative;
+    z-index: 10;
 }

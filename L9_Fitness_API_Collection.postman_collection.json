@@ -1,0 +1,640 @@
+{
+	"info": {
+		"_postman_id": "l9-fitness-api-2025",
+		"name": "L9 Fitness Gym Management API",
+		"description": "Complete API collection for L9 Fitness Gym Management System - Capstone Project 2025",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "l9fitness"
+	},
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{auth_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "admin@l9fitness.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Admin@123",
+									"type": "text"
+								},
+								{
+									"key": "csrf_token",
+									"value": "{{csrf_token}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/login.php",
+							"host": ["{{base_url}}"],
+							"path": ["login.php"]
+						},
+						"description": "Login endpoint for user authentication"
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "full_name",
+									"value": "John Doe",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "john.doe@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "SecurePass@123",
+									"type": "text"
+								},
+								{
+									"key": "confirm_password",
+									"value": "SecurePass@123",
+									"type": "text"
+								},
+								{
+									"key": "csrf_token",
+									"value": "{{csrf_token}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/register.php",
+							"host": ["{{base_url}}"],
+							"path": ["register.php"]
+						},
+						"description": "Register a new user account"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/logout.php",
+							"host": ["{{base_url}}"],
+							"path": ["logout.php"]
+						},
+						"description": "Logout current user session"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Chatbot APIs",
+			"item": [
+				{
+					"name": "Advanced Chatbot",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"What classes are available today?\",\n    \"context\": []\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/advanced_chatbot_api.php",
+							"host": ["{{base_url}}"],
+							"path": ["advanced_chatbot_api.php"]
+						},
+						"description": "Advanced AI-powered chatbot with context awareness"
+					},
+					"response": []
+				},
+				{
+					"name": "Simple Chatbot",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"Hello, I need help\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/simple_chatbot_api.php",
+							"host": ["{{base_url}}"],
+							"path": ["simple_chatbot_api.php"]
+						},
+						"description": "Simple chatbot for basic queries"
+					},
+					"response": []
+				},
+				{
+					"name": "Main Chatbot",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"What are your gym hours?\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/chatbot_api.php",
+							"host": ["{{base_url}}"],
+							"path": ["chatbot_api.php"]
+						},
+						"description": "Main chatbot API endpoint"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Fitness Profile",
+			"item": [
+				{
+					"name": "Get Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/profile_api.php",
+							"host": ["{{base_url}}"],
+							"path": ["api", "profile_api.php"]
+						},
+						"description": "Retrieve user fitness profile"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Fitness Profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"height\": 175,\n    \"weight\": 75,\n    \"fitness_level\": \"intermediate\",\n    \"fitness_goals\": \"Weight Loss\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/update_fitness_profile.php",
+							"host": ["{{base_url}}"],
+							"path": ["api", "update_fitness_profile.php"]
+						},
+						"description": "Update user fitness profile information"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Goals Management",
+			"item": [
+				{
+					"name": "Create Goal",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"goal_type\": \"weight_loss\",\n    \"target_value\": 70,\n    \"target_date\": \"2025-12-31\",\n    \"description\": \"Lose 5kg by end of year\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/create_goal.php",
+							"host": ["{{base_url}}"],
+							"path": ["api", "create_goal.php"]
+						},
+						"description": "Create a new fitness goal"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Goal Progress",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"goal_id\": 1,\n    \"current_value\": 72,\n    \"notes\": \"Making good progress!\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/update_goal_progress.php",
+							"host": ["{{base_url}}"],
+							"path": ["api", "update_goal_progress.php"]
+						},
+						"description": "Update progress on an existing goal"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Goal",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"goal_id\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/delete_goal.php",
+							"host": ["{{base_url}}"],
+							"path": ["api", "delete_goal.php"]
+						},
+						"description": "Delete a fitness goal"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Workout Tracking",
+			"item": [
+				{
+					"name": "Log Workout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"workout_type\": \"Cardio\",\n    \"duration\": 45,\n    \"calories_burned\": 350,\n    \"intensity\": \"moderate\",\n    \"notes\": \"30 min treadmill + 15 min cycling\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/log_workout.php",
+							"host": ["{{base_url}}"],
+							"path": ["api", "log_workout.php"]
+						},
+						"description": "Log a completed workout session"
+					},
+					"response": []
+				},
+				{
+					"name": "Log Weight",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"weight\": 74.5,\n    \"date\": \"2025-10-02\",\n    \"notes\": \"Morning weight\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/log_weight.php",
+							"host": ["{{base_url}}"],
+							"path": ["api", "log_weight.php"]
+						},
+						"description": "Log daily weight measurement"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Offline Plans",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/offline_plans.php",
+							"host": ["{{base_url}}"],
+							"path": ["api", "offline_plans.php"]
+						},
+						"description": "Get offline workout plans"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Nutrition",
+			"item": [
+				{
+					"name": "Update Nutrition Plan",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"daily_calories\": 2000,\n    \"protein_grams\": 150,\n    \"carbs_grams\": 200,\n    \"fat_grams\": 60,\n    \"meal_frequency\": 5\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/update_nutrition_plan.php",
+							"host": ["{{base_url}}"],
+							"path": ["api", "update_nutrition_plan.php"]
+						},
+						"description": "Update user's nutrition plan"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payments",
+			"item": [
+				{
+					"name": "PayPal Checkout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"membership_plan_id\": 1,\n    \"amount\": 49.99,\n    \"currency\": \"USD\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/paypal_checkout.php",
+							"host": ["{{base_url}}"],
+							"path": ["api", "paypal_checkout.php"]
+						},
+						"description": "Process PayPal payment for membership"
+					},
+					"response": []
+				},
+				{
+					"name": "Download Invoice",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/download_invoice.php?payment_id=1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "download_invoice.php"],
+							"query": [
+								{
+									"key": "payment_id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Download payment invoice as PDF"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Classes & Bookings",
+			"item": [
+				{
+					"name": "Get Classes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/classes.php",
+							"host": ["{{base_url}}"],
+							"path": ["classes.php"]
+						},
+						"description": "Get all available classes"
+					},
+					"response": []
+				},
+				{
+					"name": "Book Class",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "class_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "csrf_token",
+									"value": "{{csrf_token}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/classes.php",
+							"host": ["{{base_url}}"],
+							"path": ["classes.php"]
+						},
+						"description": "Book a fitness class"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Admin Dashboard",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/admin.php",
+							"host": ["{{base_url}}"],
+							"path": ["admin.php"]
+						},
+						"description": "Access admin dashboard (requires admin role)"
+					},
+					"response": []
+				},
+				{
+					"name": "Manage Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users.php",
+							"host": ["{{base_url}}"],
+							"path": ["users.php"]
+						},
+						"description": "Manage system users"
+					},
+					"response": []
+				},
+				{
+					"name": "Chatbot Admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/chatbot_admin.php",
+							"host": ["{{base_url}}"],
+							"path": ["chatbot_admin.php"]
+						},
+						"description": "Admin panel for chatbot configuration"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health Check",
+			"item": [
+				{
+					"name": "Status Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/status_check.php",
+							"host": ["{{base_url}}"],
+							"path": ["status_check.php"]
+						},
+						"description": "Check system health status"
+					},
+					"response": []
+				},
+				{
+					"name": "Debug API",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/debug_api.php",
+							"host": ["{{base_url}}"],
+							"path": ["debug_api.php"]
+						},
+						"description": "Debug API endpoint for testing"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Auto-set CSRF token if available",
+					"if (pm.cookies.has('PHPSESSID')) {",
+					"    console.log('Session cookie found');",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Automatically check response status",
+					"pm.test('Status code is successful', function () {",
+					"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 302]);",
+					"});",
+					"",
+					"// Log response time",
+					"pm.test('Response time is acceptable', function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost/Capstone-latest/public",
+			"type": "string"
+		},
+		{
+			"key": "csrf_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

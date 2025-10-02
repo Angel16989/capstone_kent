@@ -2,70 +2,80 @@
 require_once '../config/config.php';
 require_once '../app/helpers/auth.php';
 
-$user = get_current_user();
+$user = current_user();
 $success_message = '';
 $error_message = '';
 
 // Handle class booking
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_class'])) {
+    // Verify CSRF token
+    require_once '../app/helpers/csrf.php';
+    verify_csrf();
+    
     if (!$user) {
         $error_message = 'Please login to book classes.';
     } else {
-        $class_id = (int)$_POST['class_id'];
-        
-        try {
-            // Check if user has active membership
-            if (!is_array($user) || !isset($user['id'])) {
-                $error_message = 'Invalid user session. Please login again.';
-            } else {
+        // Double-check user session validity
+        if (!is_array($user) || !isset($user['id']) || empty($user['id'])) {
+            $error_message = 'Invalid user session. Please <a href="login.php" style="color: #00ff88;">login again</a>.';
+        } else {
+            $class_id = (int)$_POST['class_id'];
+            
+            try {
+                // Check if user has active membership
                 $stmt = $pdo->prepare("SELECT m.*, mp.name as plan_name FROM memberships m JOIN membership_plans mp ON m.plan_id = mp.id WHERE m.member_id = ? AND m.status = 'active' AND m.end_date > NOW()");
                 $stmt->execute([$user['id']]);
                 $membership = $stmt->fetch();
-            
-            if (!$membership) {
-                $error_message = 'You need an active membership to book classes. <a href="memberships.php" style="color: #00ff88;">Purchase a membership</a>';
-            } else {
-                // Check if class exists
-                $stmt = $pdo->prepare("SELECT c.*, u.first_name, u.last_name FROM classes c JOIN users u ON c.trainer_id = u.id WHERE c.id = ?");
-                $stmt->execute([$class_id]);
-                $class = $stmt->fetch();
                 
-                if (!$class) {
-                    $error_message = 'Class not found.';
+                if (!$membership) {
+                    $error_message = 'You need an active membership to book classes. <a href="memberships.php" style="color: #00ff88;">Purchase a membership</a>';
                 } else {
-                    // Check current bookings
-                    $stmt = $pdo->prepare("SELECT COUNT(*) FROM bookings WHERE class_id = ? AND status = 'booked'");
+                    // Check if class exists
+                    $stmt = $pdo->prepare("SELECT c.*, u.first_name, u.last_name FROM classes c JOIN users u ON c.trainer_id = u.id WHERE c.id = ?");
                     $stmt->execute([$class_id]);
-                    $current_bookings = $stmt->fetchColumn();
+                    $class = $stmt->fetch();
                     
-                    if ($current_bookings >= $class['capacity']) {
-                        $error_message = 'This class is fully booked.';
+                    if (!$class) {
+                        $error_message = 'Class not found.';
                     } else {
-                        // Check if already booked
-                        $stmt = $pdo->prepare("SELECT id FROM bookings WHERE member_id = ? AND class_id = ? AND status != 'cancelled'");
-                        $stmt->execute([$user['id'], $class_id]);
+                        // Check current bookings
+                        $stmt = $pdo->prepare("SELECT COUNT(*) FROM bookings WHERE class_id = ? AND status = 'booked'");
+                        $stmt->execute([$class_id]);
+                        $current_bookings = $stmt->fetchColumn();
                         
-                        if ($stmt->fetch()) {
-                            $error_message = 'You have already booked this class.';
+                        if ($current_bookings >= $class['capacity']) {
+                            $error_message = 'This class is fully booked.';
                         } else {
-                            // Book the class
-                            $stmt = $pdo->prepare("INSERT INTO bookings (member_id, class_id, status, booked_at) VALUES (?, ?, 'booked', NOW())");
+                            // Check if already booked
+                            $stmt = $pdo->prepare("SELECT id FROM bookings WHERE member_id = ? AND class_id = ? AND status != 'cancelled'");
                             $stmt->execute([$user['id'], $class_id]);
                             
-                            $success_message = "Successfully booked '{$class['title']}' on " . date('M j, Y \a\t g:i A', strtotime($class['start_time'])) . "!";
+                            if ($stmt->fetch()) {
+                                $error_message = 'You have already booked this class.';
+                            } else {
+                                // Book the class
+                                $stmt = $pdo->prepare("INSERT INTO bookings (member_id, class_id, status, booked_at) VALUES (?, ?, 'booked', NOW())");
+                                $stmt->execute([$user['id'], $class_id]);
+                                
+                                $success_message = "Successfully booked '{$class['title']}' on " . date('M j, Y \a\t g:i A', strtotime($class['start_time'])) . "!";
+                            }
                         }
                     }
                 }
+            } catch (Exception $e) {
+                error_log("Booking error: " . $e->getMessage());
+                $error_message = 'Booking failed. Please try again.';
             }
-            }
-        } catch (Exception $e) {
-            $error_message = 'Booking failed. Please try again. Error: ' . $e->getMessage();
         }
     }
 }
 
 // Handle cancellation
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cancel_booking'])) {
+    // Verify CSRF token
+    require_once '../app/helpers/csrf.php';
+    verify_csrf();
+    
     if ($user && is_array($user) && isset($user['id'])) {
         $booking_id = (int)$_POST['booking_id'];
         
@@ -816,6 +826,7 @@ h1 {
                         <?php elseif ($is_booked): ?>
                             <span class="status-badge status-booked">✅ Booked</span>
                             <form method="POST" style="display: inline;">
+                                <?php echo csrf_field(); ?>
                                 <input type="hidden" name="booking_id" value="<?= $user_bookings[$class['id']] ?>">
                                 <button type="submit" name="cancel_booking" class="btn btn-danger"
                                         onclick="return confirm('Cancel this booking?')">
@@ -826,6 +837,7 @@ h1 {
                             <span class="status-badge status-full">🚫 Class Full</span>
                         <?php else: ?>
                             <form method="POST" style="display: inline;">
+                                <?php require_once '../app/helpers/csrf.php'; echo csrf_field(); ?>
                                 <input type="hidden" name="class_id" value="<?= $class['id'] ?>">
                                 <button type="submit" name="book_class" class="btn btn-success">💪 Book This Beast</button>
                             </form>

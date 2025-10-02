@@ -11,7 +11,7 @@ require_once __DIR__ . '/../config/google_config.php';
 require_once __DIR__ . '/../app/helpers/validator.php';
 
 $pageTitle = "Login";
-$pageCSS = ["assets/css/login.css", "assets/css/chatbot.css"];
+$pageCSS = "assets/css/login.css";
 
 $error = '';
 $email = '';

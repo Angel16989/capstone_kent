@@ -14,7 +14,7 @@ require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/google_config.php';
 
 $pageTitle = "Register";
-$pageCSS = ["assets/css/register.css", "assets/css/chatbot.css"];
+$pageCSS = "assets/css/register.css";
 
 $errors = [];
 $success = false;
