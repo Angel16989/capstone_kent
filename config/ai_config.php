@@ -6,8 +6,9 @@ define('AI_PROVIDER', 'openai'); // Using OpenAI for intelligent responses
 define('USE_AI_FALLBACK', true); // Enable fallback for backup
 
 // OpenAI Configuration - PRIORITY AI PROVIDER
-// API key configured and active for L9 Fitness
-define('OPENAI_API_KEY', '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');
+// IMPORTANT: Add your API key here (get from https://platform.openai.com/api-keys)
+// For security, use environment variables in production: $_ENV['OPENAI_API_KEY']
+define('OPENAI_API_KEY', getenv('OPENAI_API_KEY') ?: 'your-openai-api-key-here');
 define('OPENAI_MODEL', 'gpt-4o'); // Latest GPT-4o model - most powerful and intelligent
 define('OPENAI_MODEL_FALLBACK', 'gpt-4o-mini'); // Fast fallback model
 define('OPENAI_MODEL_FALLBACK2', 'gpt-3.5-turbo'); // Final fallback if others fail
